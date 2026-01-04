@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ลงทะเบียนรับ อั่งเปา ทีทีบี 2026</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Font (Sarabun) -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body { font-family: 'Sarabun', sans-serif; touch-action: manipulation; }
+        
+        /* Animation Classes */
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        .slide-up { animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .pop-in { animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        /* TTB & Angpao Theme */
+        .bg-angpao-pattern {
+            background-color: #d32f2f;
+            background-image: radial-gradient(#ef5350 15%, transparent 16%), radial-gradient(#ef5350 15%, transparent 16%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+        }
+        
+        .gold-text {
+            color: #d4af37;
+            background: linear-gradient(to right, #d4af37, #f3e5ab, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .gold-btn {
+            background: linear-gradient(to bottom, #fffde7, #fdd835);
+            color: #b7791f;
+            border: 1px solid #fbc02d;
+        }
+        .pt-12 {
+            padding-top: 1rem !important;
+        }
+        .pt-121 {
+            padding-top: 3rem !important;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 h-[100dvh] w-full overflow-hidden relative">
+
+    <!-- VIEW 1: WELCOME SCREEN -->
+    <div id="view-welcome" class="absolute inset-0 flex flex-col items-center justify-between z-10 bg-white transition-opacity duration-500">
+        <div class="absolute inset-0 z-0 overflow-hidden bg-angpao-pattern">
+            <div class="absolute top-10 left-10 w-32 h-32 bg-yellow-400 rounded-full opacity-10 blur-2xl"></div>
+            <div class="absolute bottom-20 right-10 w-40 h-40 bg-orange-500 rounded-full opacity-20 blur-3xl"></div>
+        </div>
+
+        <div class="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6 w-full max-w-md">
+            <div class="bg-white p-6 rounded-full shadow-2xl mb-8 pop-in border-4 border-yellow-100">
+                <i data-lucide="gift" class="w-20 h-20 text-red-600 fill-red-100"></i>
+            </div>
+            
+            <h1 class="text-2xl font-bold text-white mb-2 drop-shadow-lg tracking-wide">อั่งเปา 2026</h1>
+            <p class="text-lg text-red-100 font-light mb-10 opacity-90">จาก ทีทีบี (ttb)</p>
+            
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-lg w-full max-w-xs mx-auto">
+                <p class="text-white text-sm leading-relaxed">ร่วมลุ้นรับของรางวัลสุดพิเศษ<br>จากกิจกรรม อั่งเปา ทีทีบี 2026</p>
+            </div>
+        </div>
+
+        <div class="relative z-10 w-full max-w-md px-6 pb-12 space-y-4">
+            <!-- CEO Message Button -->
+            <button onclick="app.goToCeoMessage()" class="w-full bg-white text-red-600 text-lg font-bold py-3 rounded-2xl shadow-xl shadow-red-900/30 transform transition active:scale-95 flex items-center justify-center gap-2">
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                <span>สารจาก CEO</span>
+            </button>
+
+            <!-- Register Button -->
+            <button onclick="app.goToRegister()" class="w-full bg-white text-red-600 text-lg font-bold py-3 rounded-2xl shadow-xl shadow-red-900/30 transform transition active:scale-95 flex items-center justify-center gap-2">
+                <span>ลงทะเบียน</span>
+                <i data-lucide="arrow-right" class="w-6 h-6"></i>
+            </button>
+            <p class="text-center text-red-200/60 text-xs mt-2 font-light">ธนาคารทหารไทยธนชาต จำกัด (มหาชน)</p>
+        </div>
+    </div>
+
+    <!-- VIEW 1.5: CEO MESSAGE -->
+    <div id="view-ceo" class="hidden absolute inset-0 flex flex-col z-20 bg-white">
+        <div class="bg-angpao-pattern h-32 relative shrink-0">
+            <div class="absolute -bottom-10 left-1/2 -translate-x-1/2">
+                <div class="w-24 h-24 bg-white rounded-full p-1 shadow-lg border-4 border-yellow-400 overflow-hidden">
+                    <img src="./images/CEO.png" style="width: 100%">
+                </div>
+            </div>
+            <button onclick="app.backFromCeo()" class="absolute top-6 left-6 p-2 text-white/80 hover:text-white bg-black/10 rounded-full transition backdrop-blur-sm">
+                <i data-lucide="chevron-left" class="w-6 h-6"></i>
+            </button>
+            <h2 class="text-xl font-bold text-white ml-2 drop-shadow-md" style="padding:30px 0 0 75px;">สาส์นจาก CEO</h2>
+        </div>
+
+        <div class="flex-1 overflow-y-auto pt-14 px-8 pb-8 text-center">
+            <h2 class="text-2xl font-bold text-slate-800 mb-1">สาส์นจาก CEO</h2>
+            <p class="text-sm text-slate-500 mb-6">คุณปิติ ตัณฑเกษม</p>
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 shadow-inner text-left space-y-4">
+                <p class="text-slate-600 leading-relaxed indent-8">
+                    "สวัสดีเพื่อนพนักงานชาวทีทีบีทุกท่าน ในวาระดิถีขึ้นปีใหม่นี้ ผมขอขอบคุณทุกท่านที่ร่วมแรงร่วมใจทำงานกันอย่างเต็มที่ตลอดปีที่ผ่านมา ความสำเร็จของเราเกิดจากความทุ่มเทของทุกคน..."
+                </p>
+                <p class="text-slate-600 leading-relaxed indent-8">
+                    "ขอให้ปีนี้เป็นปีที่ดีของพวกเราทุกคน มีความสุข สุขภาพแข็งแรง และร่วมกันสร้างการเปลี่ยนแปลงที่มีความหมายให้ชีวิตทางการเงินของคนไทยดีขึ้นต่อไปครับ"
+                </p>
+                <div class="mt-4 pt-4 border-t border-slate-200 text-right">
+                    <img src="./images/logo-default.png" alt="ttb" class="h-6 ml-auto">
+                </div>
+            </div>
+        </div>
+
+        <div class="p-6 border-t border-slate-100 bg-white">
+            <button onclick="app.backFromCeo()" class="w-full bg-slate-100 text-slate-600 text-lg font-bold py-3.5 rounded-2xl transition-all active:scale-95">
+                กลับหน้าหลัก
+            </button>
+        </div>
+    </div>
+
+    <!-- VIEW 2: REGISTER INPUT (Redesigned) -->
+    <div id="view-register" class="hidden absolute inset-0 flex flex-col z-20 bg-angpao-pattern">
+        <!-- Header -->
+        <div class="px-6 pt-12 pb-6 flex items-center relative z-10">
+            <button onclick="app.goBack()" class="p-2 -ml-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition">
+                <i data-lucide="chevron-left" class="w-8 h-8"></i>
+            </button>
+            <h2 class="text-xl font-bold text-white ml-2 drop-shadow-md">อั่งเปา จากทีทีบี</h2>
+        </div>
+
+        <!-- Form Card -->
+        <div class="flex-1 bg-white rounded-t-[2.5rem] px-8 pt-10 shadow-[0_-10px_40px_rgba(0,0,0,0.2)] flex flex-col w-full max-w-md mx-auto slide-up">
+            <div class="mb-6 text-center">
+                <div class="w-16 h-1 bg-slate-200 rounded-full mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold text-slate-800">ระบุตัวตน</h3>
+                <p class="text-slate-400 text-sm mt-1">กรุณากรอกข้อมูลเพื่อตรวจสอบสิทธิ์</p>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-3 pl-1">เลขบัตรประชาชน <span class="text-red-500">*</span></label>
+                    <div class="relative group">
+                        <!-- Use same font as body (Sarabun) -->
+                        <input type="tel" id="citizen-id" maxlength="13" placeholder="เลข 13 หลัก" class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-4 py-4 text-lg tracking-[0.15em] text-center text-slate-700 outline-none focus:border-red-400 focus:bg-white focus:ring-4 focus:ring-red-100 transition-all placeholder:text-slate-300 placeholder:tracking-normal shadow-inner font-bold" oninput="app.validateInput(this)">
+                        <div id="validation-icon" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-300 transition-colors">
+                            <i data-lucide="shield" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <p id="error-msg" class="text-red-500 text-xs mt-2 text-center h-4 transition-opacity opacity-0">กรุณากรอกตัวเลขให้ครบ 13 หลัก</p>
+                </div>
+
+                <!-- Updated Warning Message -->
+                <div class="bg-orange-50 border border-orange-100 rounded-xl p-3 flex items-start gap-3">
+                    <i data-lucide="alert-circle" class="w-5 h-5 text-orange-500 shrink-0 mt-0.5"></i>
+                    <p class="text-xs text-orange-700 leading-relaxed">
+                        สมาชิกสามารถใช้ลงทะเบียนเลขบัตรประชาชนได้เพียงครั้งเดียว ขอให้ใส่เฉพาะของตนเองเท่านั้น
+                    </p>
+                </div>
+
+                <button id="btn-check" onclick="app.verifyUser()" disabled class="w-full bg-slate-200 text-slate-400 text-lg font-bold py-3 rounded-2xl transition-all shadow-none cursor-not-allowed mt-2 flex justify-center items-center gap-2">
+                    ตรวจสอบข้อมูล
+                </button>
+            </div>
+            
+            <div class="mt-auto pb-10 text-center">
+                <img src="./images/logo-default.png" alt="ttb logo" class="h-8 mx-auto transition-all">
+            </div>
+        </div>
+        
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="hidden absolute inset-0 bg-white/90 backdrop-blur-sm z-50 flex items-center justify-center flex-col">
+            <div class="relative">
+                <div class="w-16 h-16 border-4 border-red-200 rounded-full animate-spin"></div>
+                <div class="absolute top-0 left-0 w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+            <p class="text-slate-600 font-medium mt-4 animate-pulse">กำลังตรวจสอบข้อมูล...</p>
+        </div>
+    </div>
+
+    <!-- VIEW 3: CONFIRMATION MODAL (Lightbox) -->
+    <div id="view-result-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <div class="bg-white w-full max-w-sm rounded-3xl shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300" id="modal-card">
+            <!-- Header Pattern -->
+            <div class="h-24 bg-angpao-pattern relative flex justify-center items-end pb-0">
+                <div class="w-20 h-20 bg-white rounded-full p-2 absolute -bottom-10 shadow-lg border-4 border-white">
+                    <div class="w-full h-full bg-yellow-100 rounded-full flex items-center justify-center">
+                        <i data-lucide="user-check" class="w-8 h-8 text-yellow-600"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="pt-121 pb-8 px-8 text-center">
+                <h3 class="text-xl font-bold text-slate-800 mb-1" id="modal-title">ข้อมูลถูกต้อง</h3>
+                <p class="text-slate-400 text-xs mb-6">กรุณาตรวจสอบข้อมูลของท่าน</p>
+                
+                <div class="space-y-4">
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                        <p class="text-xs text-slate-400 font-medium uppercase tracking-wider mb-1">ชื่อ-นามสกุล</p>
+                        <p class="text-lg font-bold text-slate-800" id="display-name">-</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                            <p class="text-[10px] text-slate-400 font-medium uppercase mb-1">อายุงาน</p>
+                            <p class="text-sm font-bold text-slate-700" id="display-member">-</p>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                            <p class="text-[10px] text-slate-400 font-medium uppercase mb-1">ฮั่งเปา</p>
+                            <p class="text-xl font-bold text-blue-600 font-mono" id="display-empid">-</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8" id="modal-actions">
+                    <!-- Action for New Registration -->
+                    <div id="action-new">
+                        <button onclick="app.confirmGift()" class="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white text-lg font-bold py-3.5 rounded-xl shadow-lg shadow-red-200 transition-all active:scale-95">
+                            รับทราบ
+                        </button>
+                        <button onclick="app.closeModal()" class="mt-3 text-slate-400 text-sm hover:text-slate-600 font-medium">
+                            ยกเลิก / ตรวจสอบใหม่
+                        </button>
+                    </div>
+
+                    <!-- Action for Existing Registration -->
+                    <div id="action-exist" class="hidden space-y-3">
+                        <div class="w-full bg-green-50 text-green-700 text-sm font-bold py-3.5 rounded-xl border border-green-200 flex items-center justify-center gap-2">
+                            <i data-lucide="check-circle" class="w-4 h-4"></i>
+                            รับทราบเมื่อ: <span id="confirmed-time" class="font-mono"></span>
+                        </div>
+                        <button onclick="app.goBack()" class="w-full bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 text-lg font-bold py-3.5 rounded-xl shadow-sm transition-all active:scale-95">
+                            กลับหน้าหลักxx
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+        import { getFirestore, collection, query, where, getDocs, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+        const isSandboxEnv = typeof __firebase_config !== 'undefined';
+        let firebaseConfig;
+        let finalCollectionPath;
+
+        if (isSandboxEnv) {
+            firebaseConfig = JSON.parse(__firebase_config);
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            finalCollectionPath = `artifacts/${appId}/public/data/coop_registrations`;
+        } else {
+            // Default Config (Fallback)
+            firebaseConfig = {
+                apiKey: "AIzaSyAgWMzWcZPzyzoBu5eQzj2y59nKsxTWurQ",
+                projectId: "ttb-register"
+            };
+            finalCollectionPath = 'Outsources';
+        }
+
+        const appFirebase = initializeApp(firebaseConfig);
+        const auth = getAuth(appFirebase);
+        const db = getFirestore(appFirebase);
+
+        // Hashing Function (SHA-256)
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        // App Logic
+        let currentUserDoc = null; // Store doc reference
+
+        const app = {
+            init: async () => {
+                try {
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                    console.log("Auth Ready");
+                } catch(e) {
+                    console.error("Auth Failed", e);
+                    Swal.fire('Error', 'ไม่สามารถเชื่อมต่อระบบได้', 'error');
+                }
+                if(window.lucide) lucide.createIcons();
+            },
+
+            goToCeoMessage: () => {
+                document.getElementById('view-welcome').classList.add('hidden');
+                document.getElementById('view-ceo').classList.remove('hidden');
+            },
+
+            backFromCeo: () => {
+                document.getElementById('view-ceo').classList.add('hidden');
+                document.getElementById('view-welcome').classList.remove('hidden');
+            },
+
+            goToRegister: () => {
+                document.getElementById('view-welcome').classList.add('hidden');
+                document.getElementById('view-register').classList.remove('hidden');
+                document.getElementById('citizen-id').focus();
+            },
+
+            goBack: () => {
+                // Close modal if open
+                const modal = document.getElementById('view-result-modal');
+                modal.classList.add('hidden');
+                
+                document.getElementById('view-register').classList.add('hidden');
+                document.getElementById('view-welcome').classList.remove('hidden');
+                document.getElementById('citizen-id').value = '';
+                app.validateInput(document.getElementById('citizen-id'));
+                currentUserDoc = null;
+            },
+
+            validateInput: (el) => {
+                el.value = el.value.replace(/[^0-9]/g, '');
+                const val = el.value;
+                const btn = document.getElementById('btn-check');
+                const icon = document.getElementById('validation-icon');
+                const errorMsg = document.getElementById('error-msg');
+
+                if (val.length === 13) {
+                    btn.disabled = false;
+                    btn.className = "w-full bg-red-600 hover:bg-red-700 text-white text-lg font-bold py-4 rounded-2xl transition-all shadow-lg shadow-red-200 transform active:scale-95 flex justify-center items-center gap-2";
+                    icon.innerHTML = '<i data-lucide="check-circle" class="w-6 h-6 text-green-500"></i>';
+                    errorMsg.style.opacity = '0';
+                } else {
+                    btn.disabled = true;
+                    btn.className = "w-full bg-slate-200 text-slate-400 text-lg font-bold py-4 rounded-2xl transition-all shadow-none cursor-not-allowed flex justify-center items-center gap-2";
+                    icon.innerHTML = '<i data-lucide="shield" class="w-6 h-6 text-slate-300"></i>';
+                    if(val.length > 0 && val.length < 13) errorMsg.style.opacity = '1';
+                    else errorMsg.style.opacity = '0';
+                }
+                if(window.lucide) lucide.createIcons();
+            },
+
+            verifyUser: async () => {
+                const citizenId = document.getElementById('citizen-id').value;
+                if(citizenId.length !== 13) return;
+
+                document.getElementById('loading-overlay').classList.remove('hidden');
+
+                try {
+                    const hashedId = await sha256(citizenId);
+                    
+                    // Device Logic Checks
+                    const storedHash = localStorage.getItem('ttb_reg_id');
+                    
+                    // Fetch user from DB
+                    const q = query(collection(db, finalCollectionPath), where('citizenId', '==', hashedId));
+                    const snapshot = await getDocs(q);
+
+                    document.getElementById('loading-overlay').classList.add('hidden');
+
+                    if (snapshot.empty) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'ไม่พบข้อมูล',
+                            text: 'กรุณาตรวจสอบเลขบัตรประชาชน หรือติดต่อเจ้าหน้าที่',
+                            confirmButtonColor: '#d33',
+                            confirmButtonText: 'ตกลง'
+                        });
+                        return;
+                    }
+
+                    // Found User
+                    currentUserDoc = snapshot.docs[0];
+                    const userData = currentUserDoc.data();
+                    const isDbRegistered = userData.ConfirmGift; // Boolean/Timestamp check
+
+                    // === MATRIX LOGIC ===
+                    let allowAccess = false;
+
+                    if (isDbRegistered) {
+                        // User has registered before.
+                        // Allow ONLY if this device was used by this user.
+                        if (storedHash === hashedId) {
+                            allowAccess = true;
+                        } else {
+                            // Block: Registered elsewhere or Device mismatch
+                            allowAccess = false;
+                        }
+                    } else {
+                        // User has NOT registered before.
+                        // Allow ONLY if this device is fresh (never used).
+                        if (!storedHash) {
+                            allowAccess = true;
+                        } else {
+                            // Block: Device already used by someone else
+                            allowAccess = false;
+                        }
+                    }
+
+                    if (!allowAccess) {
+                        // CLEAR DOCUMENT IF NOT ALLOWED TO PREVENT LEAKS
+                        currentUserDoc = null; 
+                        
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'ไม่สามารถทำรายการได้',
+                            text: 'โทรศัพท์เครื่องนี้ได้ทำการลงทะเบียนสมาชิกไปแล้ว ไม่สามารถลงทะเบียนของสมาชิกท่านอื่นได้',
+                            confirmButtonColor: '#d32f2f',
+                            confirmButtonText: 'กลับหน้าแรก',
+                            allowOutsideClick: false
+                        }).then(() => {
+                            app.goBack();
+                        });
+                        return; // CRITICAL: Stop execution here
+                    }
+
+                    // === IF ALLOWED, PROCEED TO SHOW MODAL ===
+
+                    // Populate Modal Fields
+                    document.getElementById('display-name').innerText = userData.EmpName || '-';
+                    document.getElementById('display-empid').innerText = userData.EmpID || '-';
+                    document.getElementById('display-member').innerText = userData.EmpMember || '-';
+
+                    // Setup UI based on status
+                    const actionNew = document.getElementById('action-new');
+                    const actionExist = document.getElementById('action-exist');
+                    const modalTitle = document.getElementById('modal-title');
+
+                    if (isDbRegistered) {
+                        // Already Registered Logic (Re-viewing on same device)
+                        modalTitle.innerText = "ท่านลงทะเบียนแล้ว";
+                        modalTitle.className = "text-xl font-bold text-green-600 mb-1"; 
+                        
+                        actionNew.classList.add('hidden');
+                        actionExist.classList.remove('hidden');
+                        
+                        // Format Date
+                        const date = userData.ConfirmGift.toDate ? userData.ConfirmGift.toDate() : new Date(userData.ConfirmGift);
+                        document.getElementById('confirmed-time').innerText = date.toLocaleString('th-TH', { dateStyle: 'short', timeStyle: 'medium' });
+                    } else {
+                        // New Registration Logic
+                        modalTitle.innerText = "ข้อมูลถูกต้อง";
+                        modalTitle.className = "text-xl font-bold text-slate-800 mb-1";
+                        
+                        actionNew.classList.remove('hidden');
+                        actionExist.classList.add('hidden');
+                    }
+
+                    // Show Modal
+                    const modal = document.getElementById('view-result-modal');
+                    modal.classList.remove('hidden');
+                    if(window.lucide) lucide.createIcons();
+                    
+                    // Small delay for transition
+                    setTimeout(() => {
+                        modal.classList.remove('opacity-0');
+                        document.getElementById('modal-card').classList.replace('scale-95', 'scale-100');
+                    }, 10);
+
+                } catch (error) {
+                    console.error(error);
+                    document.getElementById('loading-overlay').classList.add('hidden');
+                    Swal.fire('Error', 'เกิดข้อผิดพลาดในการเชื่อมต่อ', 'error');
+                }
+            },
+
+            closeModal: () => {
+                const modal = document.getElementById('view-result-modal');
+                modal.classList.add('opacity-0');
+                document.getElementById('modal-card').classList.replace('scale-100', 'scale-95');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    currentUserDoc = null;
+                }, 300);
+            },
+
+            confirmGift: async () => {
+                if(!currentUserDoc) return;
+                
+                const btn = document.querySelector('#action-new button:first-child');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin inline-block mr-2"></div> กำลังบันทึก...';
+                btn.disabled = true;
+
+                try {
+                    // Update ConfirmGift AND CheckIN
+                    await updateDoc(currentUserDoc.ref, {
+                        ConfirmGift: serverTimestamp(),
+                        CheckIN: serverTimestamp(), // Ensure they are marked as present
+                        status: 'Self Register',
+                        deviceUserAgent: navigator.userAgent
+                    });
+
+                    // Set LocalStorage Flag with Hashed ID
+                    const citizenId = document.getElementById('citizen-id').value;
+                    const hashedId = await sha256(citizenId);
+                    localStorage.setItem('ttb_reg_id', hashedId);
+
+                    app.closeModal();
+                    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'บันทึกสำเร็จ!',
+                        html: `ระบบได้บันทึกการรับทราบของท่านแล้ว<br><small class="text-slate-400">${new Date().toLocaleString('th-TH')}</small>`,
+                        confirmButtonColor: '#10b981',
+                        confirmButtonText: 'ตกลง',
+                        timer: 3000,
+                        timerProgressBar: true
+                    }).then(() => {
+                        app.goBack();
+                    });
+                    
+                    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+
+                } catch(e) {
+                    console.error(e);
+                    Swal.fire('Error', 'บันทึกไม่สำเร็จ กรุณาลองใหม่', 'error');
+                } finally {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }
+            }
+        };
+
+        window.app = app;
+        app.init();
+    </script>
+</body>
+</html>
