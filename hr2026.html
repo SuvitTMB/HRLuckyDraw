@@ -24,10 +24,30 @@
         .fade-in { animation: fadeIn 0.5s ease-out forwards; }
         .slide-up { animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .pop-in { animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .shake { animation: shake 2s infinite; }
+        .shake-hard { animation: shakeHard 0.5s infinite; }
         
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            10%, 30%, 50%, 70%, 90% { transform: rotate(-5deg); }
+            20%, 40%, 60%, 80% { transform: rotate(5deg); }
+        }
+        @keyframes shakeHard {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
 
         /* TTB & Angpao Theme */
         .bg-angpao-pattern {
@@ -50,12 +70,11 @@
             color: #b7791f;
             border: 1px solid #fbc02d;
         }
-        .pt-12 {
-            padding-top: 1rem !important;
-        }
-        .pt-121 {
-            padding-top: 3rem !important;
-        }
+        .pt-12 { padding-top: 1rem !important; }
+        .pt-121 { padding-top: 3rem !important; }
+        
+        /* Force font for inputs */
+        input, button { font-family: 'Sarabun', sans-serif !important; }
     </style>
 </head>
 <body class="bg-slate-50 h-[100dvh] w-full overflow-hidden relative">
@@ -81,13 +100,11 @@
         </div>
 
         <div class="relative z-10 w-full max-w-md px-6 pb-12 space-y-4">
-            <!-- CEO Message Button -->
             <button onclick="app.goToCeoMessage()" class="w-full bg-white text-red-600 text-lg font-bold py-3 rounded-2xl shadow-xl shadow-red-900/30 transform transition active:scale-95 flex items-center justify-center gap-2">
                 <i data-lucide="message-circle" class="w-5 h-5"></i>
                 <span>สารจาก CEO</span>
             </button>
 
-            <!-- Register Button -->
             <button onclick="app.goToRegister()" class="w-full bg-white text-red-600 text-lg font-bold py-3 rounded-2xl shadow-xl shadow-red-900/30 transform transition active:scale-95 flex items-center justify-center gap-2">
                 <span>ลงทะเบียน</span>
                 <i data-lucide="arrow-right" class="w-6 h-6"></i>
@@ -101,7 +118,7 @@
         <div class="bg-angpao-pattern h-32 relative shrink-0">
             <div class="absolute -bottom-10 left-1/2 -translate-x-1/2">
                 <div class="w-24 h-24 bg-white rounded-full p-1 shadow-lg border-4 border-yellow-400 overflow-hidden">
-                    <img src="./images/CEO.png" style="width: 100%">
+                    <img src="./images/CEO.png" style="width: 100%" onerror="this.src='https://via.placeholder.com/150?text=CEO'">
                 </div>
             </div>
             <button onclick="app.backFromCeo()" class="absolute top-6 left-6 p-2 text-white/80 hover:text-white bg-black/10 rounded-full transition backdrop-blur-sm">
@@ -111,17 +128,17 @@
         </div>
 
         <div class="flex-1 overflow-y-auto pt-14 px-8 pb-8 text-center">
-            <h2 class="text-2xl font-bold text-slate-800 mb-1">สาส์นจาก CEO</h2>
-            <p class="text-sm text-slate-500 mb-6">คุณปิติ ตัณฑเกษม</p>
+            <h2 class="text-2xl font-bold text-blue-800 mb-1">คุณปิติ ตัณฑเกษม</h2>
+            <p class="text-sm text-slate-500 mb-6">สาส์นจาก CEO</p>
             <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 shadow-inner text-left space-y-4">
                 <p class="text-slate-600 leading-relaxed indent-8">
-                    "สวัสดีเพื่อนพนักงานชาวทีทีบีทุกท่าน ในวาระดิถีขึ้นปีใหม่นี้ ผมขอขอบคุณทุกท่านที่ร่วมแรงร่วมใจทำงานกันอย่างเต็มที่ตลอดปีที่ผ่านมา ความสำเร็จของเราเกิดจากความทุ่มเทของทุกคน..."
+                    "สวัสดีเพื่อนพนักงานชาวทีทีบีทุกท่าน ในวาระดิถีขึ้นปีใหม่นี้ ขอขอบคุณทุกท่านที่ร่วมแรงร่วมใจทำงานกันอย่างเต็มที่ตลอดปีที่ผ่านมา ความสำเร็จของเราเกิดจากความทุ่มเทของทุกคน..."
                 </p>
                 <p class="text-slate-600 leading-relaxed indent-8">
                     "ขอให้ปีนี้เป็นปีที่ดีของพวกเราทุกคน มีความสุข สุขภาพแข็งแรง และร่วมกันสร้างการเปลี่ยนแปลงที่มีความหมายให้ชีวิตทางการเงินของคนไทยดีขึ้นต่อไปครับ"
                 </p>
                 <div class="mt-4 pt-4 border-t border-slate-200 text-right">
-                    <img src="./images/logo-default.png" alt="ttb" class="h-6 ml-auto">
+                    <img src="./images/logo-default.png" alt="ttb" class="h-6 ml-auto" onerror="this.style.display='none'">
                 </div>
             </div>
         </div>
@@ -133,9 +150,8 @@
         </div>
     </div>
 
-    <!-- VIEW 2: REGISTER INPUT (Redesigned) -->
+    <!-- VIEW 2: REGISTER INPUT -->
     <div id="view-register" class="hidden absolute inset-0 flex flex-col z-20 bg-angpao-pattern">
-        <!-- Header -->
         <div class="px-6 pt-12 pb-6 flex items-center relative z-10">
             <button onclick="app.goBack()" class="p-2 -ml-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition">
                 <i data-lucide="chevron-left" class="w-8 h-8"></i>
@@ -143,7 +159,6 @@
             <h2 class="text-xl font-bold text-white ml-2 drop-shadow-md">อั่งเปา จากทีทีบี</h2>
         </div>
 
-        <!-- Form Card -->
         <div class="flex-1 bg-white rounded-t-[2.5rem] px-8 pt-10 shadow-[0_-10px_40px_rgba(0,0,0,0.2)] flex flex-col w-full max-w-md mx-auto slide-up">
             <div class="mb-6 text-center">
                 <div class="w-16 h-1 bg-slate-200 rounded-full mx-auto mb-6"></div>
@@ -155,7 +170,6 @@
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-3 pl-1">เลขบัตรประชาชน <span class="text-red-500">*</span></label>
                     <div class="relative group">
-                        <!-- Use same font as body (Sarabun) -->
                         <input type="tel" id="citizen-id" maxlength="13" placeholder="เลข 13 หลัก" class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-4 py-4 text-lg tracking-[0.15em] text-center text-slate-700 outline-none focus:border-red-400 focus:bg-white focus:ring-4 focus:ring-red-100 transition-all placeholder:text-slate-300 placeholder:tracking-normal shadow-inner font-bold" oninput="app.validateInput(this)">
                         <div id="validation-icon" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-300 transition-colors">
                             <i data-lucide="shield" class="w-6 h-6"></i>
@@ -164,7 +178,6 @@
                     <p id="error-msg" class="text-red-500 text-xs mt-2 text-center h-4 transition-opacity opacity-0">กรุณากรอกตัวเลขให้ครบ 13 หลัก</p>
                 </div>
 
-                <!-- Updated Warning Message -->
                 <div class="bg-orange-50 border border-orange-100 rounded-xl p-3 flex items-start gap-3">
                     <i data-lucide="alert-circle" class="w-5 h-5 text-orange-500 shrink-0 mt-0.5"></i>
                     <p class="text-xs text-orange-700 leading-relaxed">
@@ -172,17 +185,16 @@
                     </p>
                 </div>
 
-                <button id="btn-check" onclick="app.verifyUser()" disabled class="w-full bg-slate-200 text-slate-400 text-lg font-bold py-3 rounded-2xl transition-all shadow-none cursor-not-allowed mt-2 flex justify-center items-center gap-2">
+                <button id="btn-check" onclick="app.verifyUser()" disabled class="w-full bg-slate-200 text-slate-400 text-lg font-bold py-4 rounded-2xl transition-all shadow-none cursor-not-allowed mt-2 flex justify-center items-center gap-2">
                     ตรวจสอบข้อมูล
                 </button>
             </div>
             
             <div class="mt-auto pb-10 text-center">
-                <img src="./images/logo-default.png" alt="ttb logo" class="h-8 mx-auto transition-all">
+                <img src="./images/logo-default.png" alt="ttb logo" class="h-8 mx-auto transition-all" onerror="this.style.display='none'">
             </div>
         </div>
         
-        <!-- Loading Overlay -->
         <div id="loading-overlay" class="hidden absolute inset-0 bg-white/90 backdrop-blur-sm z-50 flex items-center justify-center flex-col">
             <div class="relative">
                 <div class="w-16 h-16 border-4 border-red-200 rounded-full animate-spin"></div>
@@ -192,71 +204,510 @@
         </div>
     </div>
 
-    <!-- VIEW 3: CONFIRMATION MODAL (Lightbox) -->
-    <div id="view-result-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300">
-        <div class="bg-white w-full max-w-sm rounded-3xl shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300" id="modal-card">
-            <!-- Header Pattern -->
-            <div class="h-24 bg-angpao-pattern relative flex justify-center items-end pb-0">
-                <div class="w-20 h-20 bg-white rounded-full p-2 absolute -bottom-10 shadow-lg border-4 border-white">
-                    <div class="w-full h-full bg-yellow-100 rounded-full flex items-center justify-center">
-                        <i data-lucide="user-check" class="w-8 h-8 text-yellow-600"></i>
-                    </div>
+    <!-- VIEW 3: MAIN APP (Pre/Post Game) -->
+    <div id="view-pre-game" class="hidden absolute inset-0 flex flex-col z-20 bg-angpao-pattern">
+        <!-- Removed Header Text from Red Background -->
+        <div class="pt-8 relative z-10 h-16">
+            <!-- Space for top status bar or just padding -->
+        </div>
+
+        <div class="flex-1 bg-white rounded-t-[2.5rem] px-8 pt-10 shadow-[0_-10px_40px_rgba(0,0,0,0.2)] flex flex-col items-center justify-center w-full max-w-md mx-auto slide-up text-center">
+            
+            <!-- STATE: Pre-Game (Randomizer) -->
+            <div id="pre-game-content" class="w-full">
+                <!-- NEW: Header Moved Here -->
+                <div class="mb-6 text-center border-b border-slate-100 pb-4">
+                    <h2 class="text-2xl font-bold text-red-600 drop-shadow-sm">ลุ้นรับอั่งเปา จากทีทีบี</h2>
+                    <p class="text-slate-400 text-xs mt-1">กดปุ่มด้านล่างเพื่อสุ่มรางวัล</p>
+                </div>
+
+                <div class="mb-4">
+                    <p class="text-slate-500 text-sm mb-1">สวัสดีคุณ</p>
+                    <h3 class="text-xl font-bold text-slate-800" id="pre-game-name">-</h3>
+                </div>
+
+                <div class="mb-8 relative flex justify-center">
+                    <div class="absolute inset-0 bg-yellow-200 rounded-full blur-xl opacity-50 animate-pulse"></div>
+                    <button onclick="app.showRandomizer()" class="relative z-10 w-48 h-48 bg-gradient-to-br from-red-500 to-red-700 rounded-full shadow-2xl flex flex-col items-center justify-center border-4 border-yellow-400 transform transition active:scale-95 group hover:scale-105 shake">
+                        <i data-lucide="gift" class="w-20 h-20 text-yellow-100 group-hover:text-white transition-colors"></i>
+                        <span class="text-white font-bold text-xl mt-2 drop-shadow-md">เปิดซอง</span>
+                    </button>
                 </div>
             </div>
-            
-            <!-- Content -->
-            <div class="pt-121 pb-8 px-8 text-center">
-                <h3 class="text-xl font-bold text-slate-800 mb-1" id="modal-title">ข้อมูลถูกต้อง</h3>
-                <p class="text-slate-400 text-xs mb-6">กรุณาตรวจสอบข้อมูลของท่าน</p>
-                
-                <div class="space-y-4">
-                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                        <p class="text-xs text-slate-400 font-medium uppercase tracking-wider mb-1">ชื่อ-นามสกุล</p>
-                        <p class="text-lg font-bold text-slate-800" id="display-name">-</p>
-                    </div>
-                    
-                    <div class="grid grid-cols-2 gap-3">
-                        <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
-                            <p class="text-[10px] text-slate-400 font-medium uppercase mb-1">อายุงาน</p>
-                            <p class="text-sm font-bold text-slate-700" id="display-member">-</p>
-                        </div>
-                        <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
-                            <p class="text-[10px] text-slate-400 font-medium uppercase mb-1">ฮั่งเปา</p>
-                            <p class="text-xl font-bold text-blue-600 font-mono" id="display-empid">-</p>
-                        </div>
-                    </div>
+
+            <!-- STATE: Post-Game (Result - shown inline after ack) -->
+            <div id="post-game-content" class="hidden w-full">
+                <div class="w-24 h-24 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6 border-4 border-red-100">
+                    <i data-lucide="award" class="w-12 h-12 text-red-600"></i>
                 </div>
 
-                <div class="mt-8" id="modal-actions">
-                    <!-- Action for New Registration -->
-                    <div id="action-new">
-                        <button onclick="app.confirmGift()" class="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white text-lg font-bold py-3.5 rounded-xl shadow-lg shadow-red-200 transition-all active:scale-95">
-                            รับทราบ
-                        </button>
-                        <button onclick="app.closeModal()" class="mt-3 text-slate-400 text-sm hover:text-slate-600 font-medium">
-                            ยกเลิก / ตรวจสอบใหม่
-                        </button>
-                    </div>
+                <!-- Changed Title: EmpName + Message -->
+                <h3 class="text-xl font-bold text-red-600 mb-1" id="post-user-name">
+                    -
+                </h3>
+                <p class="text-slate-500 text-sm mb-4">
+                    ได้รับอั่งเปาจาก ทีทีบี
+                </p>
+                
+                <div class="py-2 mb-4">
+                    <span class="text-5xl font-extrabold text-slate-800 drop-shadow-sm" id="final-amount">0</span>
+                    <span class="text-xl font-bold text-slate-500 ml-1">บาท</span>
+                </div>
 
-                    <!-- Action for Existing Registration -->
-                    <div id="action-exist" class="hidden space-y-3">
-                        <div class="w-full bg-green-50 text-green-700 text-sm font-bold py-3.5 rounded-xl border border-green-200 flex items-center justify-center gap-2">
-                            <i data-lucide="check-circle" class="w-4 h-4"></i>
-                            รับทราบเมื่อ: <span id="confirmed-time" class="font-mono"></span>
-                        </div>
-                        <button onclick="app.goBack()" class="w-full bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 text-lg font-bold py-3.5 rounded-xl shadow-sm transition-all active:scale-95">
-                            กลับหน้าหลักxx
-                        </button>
-                    </div>
+                <p class="text-slate-500 text-sm mb-6 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    โดยจะได้รับเงินในวันที่ 24 กุมภาพันธ์ 2569<br>
+                    <span class="text-xs text-slate-400 mt-2 block">ขอขอบคุณสำหรับการเป็นส่วนหนึ่งของ ทีทีบี</span>
+                </p>
+
+                <div class="w-full bg-green-50 text-green-700 text-sm font-bold py-3 rounded-xl border border-green-200 flex items-center justify-center gap-2 mb-4">
+                    <i data-lucide="check-circle" class="w-4 h-4"></i>
+                    รับทราบเมื่อ: <span id="final-confirmed-time" class="font-mono"></span>
+                </div>
+
+                <button onclick="app.goBack()" class="w-full bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 text-lg font-bold py-3.5 rounded-xl shadow-sm transition-all active:scale-95">
+                    กลับหน้าหลัก
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- VIEW 4: RANDOMIZER MODAL (Lightbox) -->
+    <div id="view-result-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 transition-opacity duration-300">
+        <div class="bg-white w-full max-w-sm rounded-3xl shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300 border-4 border-yellow-400 relative" id="modal-card">
+            
+            <!-- Animation Container -->
+            <div id="gift-animation" class="hidden pt-16 pb-16 text-center">
+                <div class="relative w-32 h-32 mx-auto mb-6">
+                    <i data-lucide="gift" class="w-32 h-32 text-red-600 shake-hard"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-800 animate-pulse">กำลังลุ้นรางวัล...</h3>
+            </div>
+
+            <!-- Result Content (Inside Popup - Before Ack) -->
+            <div id="result-content" class="hidden pt-10 pb-8 px-6 text-center">
+                <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6 border-4 border-red-50">
+                    <i data-lucide="award" class="w-10 h-10 text-red-600"></i>
+                </div>
+
+                <h3 class="text-xl font-bold text-slate-800 mb-4 leading-relaxed">
+                    อั่งเปาของคุณ
+                </h3>
+                
+                <div class="py-4">
+                    <span class="text-4xl font-extrabold text-red-600 drop-shadow-sm" id="result-amount">0</span>
+                    <span class="text-xl font-bold text-slate-600 ml-1">บาท</span>
+                </div>
+
+                <p class="text-slate-500 text-sm mb-6 leading-relaxed">
+                    ได้รับอั่งเปาจาก ทีทีบี<br>
+                    <span class="text-xs text-slate-400 mt-2 block">โดยจะได้รับเงินในวันที่ 24 กุมภาพันธ์ 2569</span>
+                </p>
+
+                <div class="mt-6">
+                    <button id="btn-acknowledge" onclick="app.confirmGift()" class="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white text-lg font-bold py-3.5 rounded-xl shadow-lg shadow-red-200 transition-all active:scale-95 mb-3">
+                        รับทราบ
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Confetti Library (loaded via CDN, but function added here for logic) -->
+    <!-- Confetti logic is inside app.fireWorks -->
+
     <!-- Firebase Logic -->
     <script type="module">
-const _0x4c0e48=_0x8973;function _0x3ce5(){const _0x200fc6=['EmpName','value','add','goBack','3246066ZJARhn','2fIYujU','style','opacity-0','view-welcome','className','validateInput','143731jRtbFT','empty','ไม่พบข้อมูล','#10b981','getElementById','app','SHA-256','</small>','ไม่สามารถทำรายการได้','#action-new\x20button:first-child','display-empid','ไม่สามารถเชื่อมต่อระบบได้','84kMbiiT','then','ระบบได้บันทึกการรับทราบของท่านแล้ว<br><small\x20class=\x22text-slate-400\x22>','view-ceo','ttb_reg_id','<div\x20class=\x22w-5\x20h-5\x20border-2\x20border-white\x20border-t-transparent\x20rounded-full\x20animate-spin\x20inline-block\x20mr-2\x22></div>\x20กำลังบันทึก...','map','disabled','scale-95','text-xl\x20font-bold\x20text-green-600\x20mb-1','log','scale-100','classList','w-full\x20bg-slate-200\x20text-slate-400\x20text-lg\x20font-bold\x20py-4\x20rounded-2xl\x20transition-all\x20shadow-none\x20cursor-not-allowed\x20flex\x20justify-center\x20items-center\x20gap-2','lucide','setItem','error','8IzIGFo','success','createIcons','medium','494472DzCJah','subtle','view-register','/public/data/coop_registrations','btn-check','join','modal-card','data','default-app-id','view-result-modal','toLocaleString','remove','error-msg','display-name','กลับหน้าแรก','userAgent','ตกลง','EmpMember','โทรศัพท์เครื่องนี้ได้ทำการลงทะเบียนสมาชิกไปแล้ว\x20ไม่สามารถลงทะเบียนของสมาชิกท่านอื่นได้','citizenId','parse','1310KMLAVH','11297EeEEHr','init','short','innerText','length','display-member','1450592WGMBHL','loading-overlay','fire','citizen-id','innerHTML','Auth\x20Ready','ConfirmGift','บันทึกไม่สำเร็จ\x20กรุณาลองใหม่','Error','toString','90661rETvgJ','replace','confirmed-time','encode','Auth\x20Failed','text-xl\x20font-bold\x20text-slate-800\x20mb-1','focus','from','toDate','undefined','th-TH','Self\x20Register','#d33','opacity','เกิดข้อผิดพลาดในการเชื่อมต่อ','945225rGeQwj','#d32f2f','artifacts/','padStart','EmpID','hidden'];_0x3ce5=function(){return _0x200fc6;};return _0x3ce5();}function _0x8973(_0x21af58,_0x54714e){_0x21af58=_0x21af58-0xf2;const _0x3ce544=_0x3ce5();let _0x8973a1=_0x3ce544[_0x21af58];return _0x8973a1;}(function(_0x442ba5,_0x2d9cdc){const _0x21cb6b=_0x8973,_0x3cc76f=_0x442ba5();while(!![]){try{const _0x5f1015=parseInt(_0x21cb6b(0xfd))/0x1+-parseInt(_0x21cb6b(0x117))/0x2*(parseInt(_0x21cb6b(0x13e))/0x3)+parseInt(_0x21cb6b(0xf3))/0x4+parseInt(_0x21cb6b(0x10c))/0x5+-parseInt(_0x21cb6b(0x129))/0x6*(-parseInt(_0x21cb6b(0x11d))/0x7)+parseInt(_0x21cb6b(0x13a))/0x8*(-parseInt(_0x21cb6b(0x116))/0x9)+parseInt(_0x21cb6b(0x153))/0xa*(-parseInt(_0x21cb6b(0x154))/0xb);if(_0x5f1015===_0x2d9cdc)break;else _0x3cc76f['push'](_0x3cc76f['shift']());}catch(_0x17d671){_0x3cc76f['push'](_0x3cc76f['shift']());}}}(_0x3ce5,0x41dd5));import{initializeApp}from'https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js';import{getAuth,signInAnonymously,signInWithCustomToken}from'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';import{getFirestore,collection,query,where,getDocs,updateDoc,serverTimestamp}from'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';const isSandboxEnv=typeof __firebase_config!==_0x4c0e48(0x106);let firebaseConfig,finalCollectionPath;if(isSandboxEnv){firebaseConfig=JSON[_0x4c0e48(0x152)](__firebase_config);const appId=typeof __app_id!==_0x4c0e48(0x106)?__app_id:_0x4c0e48(0x146);finalCollectionPath=_0x4c0e48(0x10e)+appId+_0x4c0e48(0x141);}else firebaseConfig={'apiKey':'AIzaSyAgWMzWcZPzyzoBu5eQzj2y59nKsxTWurQ','projectId':'ttb-register'},finalCollectionPath='Outsources';const appFirebase=initializeApp(firebaseConfig),auth=getAuth(appFirebase),db=getFirestore(appFirebase);async function sha256(_0x37e373){const _0x229c07=_0x4c0e48,_0x1932f3=new TextEncoder()[_0x229c07(0x100)](_0x37e373),_0x159b37=await crypto[_0x229c07(0x13f)]['digest'](_0x229c07(0x123),_0x1932f3),_0x29ec0d=Array[_0x229c07(0x104)](new Uint8Array(_0x159b37));return _0x29ec0d[_0x229c07(0x12f)](_0x3cb365=>_0x3cb365[_0x229c07(0xfc)](0x10)[_0x229c07(0x10f)](0x2,'0'))[_0x229c07(0x143)]('');}let currentUserDoc=null;const app={'init':async()=>{const _0x35228b=_0x4c0e48;try{typeof __initial_auth_token!==_0x35228b(0x106)&&__initial_auth_token?await signInWithCustomToken(auth,__initial_auth_token):await signInAnonymously(auth),console[_0x35228b(0x133)](_0x35228b(0xf8));}catch(_0x2cbe66){console[_0x35228b(0x139)](_0x35228b(0x101),_0x2cbe66),Swal[_0x35228b(0xf5)](_0x35228b(0xfb),_0x35228b(0x128),'error');}if(window[_0x35228b(0x137)])lucide[_0x35228b(0x13c)]();},'goToCeoMessage':()=>{const _0x243284=_0x4c0e48;document[_0x243284(0x121)](_0x243284(0x11a))[_0x243284(0x135)][_0x243284(0x114)](_0x243284(0x111)),document[_0x243284(0x121)](_0x243284(0x12c))[_0x243284(0x135)][_0x243284(0x149)](_0x243284(0x111));},'backFromCeo':()=>{const _0x3c0a9c=_0x4c0e48;document['getElementById'](_0x3c0a9c(0x12c))[_0x3c0a9c(0x135)][_0x3c0a9c(0x114)](_0x3c0a9c(0x111)),document[_0x3c0a9c(0x121)](_0x3c0a9c(0x11a))[_0x3c0a9c(0x135)]['remove']('hidden');},'goToRegister':()=>{const _0x1233cc=_0x4c0e48;document[_0x1233cc(0x121)](_0x1233cc(0x11a))['classList'][_0x1233cc(0x114)]('hidden'),document[_0x1233cc(0x121)](_0x1233cc(0x140))[_0x1233cc(0x135)][_0x1233cc(0x149)](_0x1233cc(0x111)),document[_0x1233cc(0x121)](_0x1233cc(0xf6))[_0x1233cc(0x103)]();},'goBack':()=>{const _0x50aacd=_0x4c0e48,_0x3300a2=document['getElementById']('view-result-modal');_0x3300a2[_0x50aacd(0x135)][_0x50aacd(0x114)](_0x50aacd(0x111)),document['getElementById'](_0x50aacd(0x140))[_0x50aacd(0x135)][_0x50aacd(0x114)](_0x50aacd(0x111)),document[_0x50aacd(0x121)](_0x50aacd(0x11a))[_0x50aacd(0x135)][_0x50aacd(0x149)](_0x50aacd(0x111)),document['getElementById'](_0x50aacd(0xf6))['value']='',app[_0x50aacd(0x11c)](document[_0x50aacd(0x121)](_0x50aacd(0xf6))),currentUserDoc=null;},'validateInput':_0x2d712c=>{const _0x20ff8f=_0x4c0e48;_0x2d712c[_0x20ff8f(0x113)]=_0x2d712c['value'][_0x20ff8f(0xfe)](/[^0-9]/g,'');const _0x4f3353=_0x2d712c[_0x20ff8f(0x113)],_0x2ab632=document[_0x20ff8f(0x121)](_0x20ff8f(0x142)),_0x2bf61c=document[_0x20ff8f(0x121)]('validation-icon'),_0x5a9930=document[_0x20ff8f(0x121)](_0x20ff8f(0x14a));if(_0x4f3353[_0x20ff8f(0x158)]===0xd)_0x2ab632['disabled']=![],_0x2ab632[_0x20ff8f(0x11b)]='w-full\x20bg-red-600\x20hover:bg-red-700\x20text-white\x20text-lg\x20font-bold\x20py-4\x20rounded-2xl\x20transition-all\x20shadow-lg\x20shadow-red-200\x20transform\x20active:scale-95\x20flex\x20justify-center\x20items-center\x20gap-2',_0x2bf61c[_0x20ff8f(0xf7)]='<i\x20data-lucide=\x22check-circle\x22\x20class=\x22w-6\x20h-6\x20text-green-500\x22></i>',_0x5a9930[_0x20ff8f(0x118)][_0x20ff8f(0x10a)]='0';else{_0x2ab632[_0x20ff8f(0x130)]=!![],_0x2ab632[_0x20ff8f(0x11b)]=_0x20ff8f(0x136),_0x2bf61c[_0x20ff8f(0xf7)]='<i\x20data-lucide=\x22shield\x22\x20class=\x22w-6\x20h-6\x20text-slate-300\x22></i>';if(_0x4f3353['length']>0x0&&_0x4f3353['length']<0xd)_0x5a9930['style'][_0x20ff8f(0x10a)]='1';else _0x5a9930['style'][_0x20ff8f(0x10a)]='0';}if(window[_0x20ff8f(0x137)])lucide[_0x20ff8f(0x13c)]();},'verifyUser':async()=>{const _0xd83bd6=_0x4c0e48,_0x309352=document[_0xd83bd6(0x121)]('citizen-id')[_0xd83bd6(0x113)];if(_0x309352[_0xd83bd6(0x158)]!==0xd)return;document[_0xd83bd6(0x121)](_0xd83bd6(0xf4))[_0xd83bd6(0x135)][_0xd83bd6(0x149)](_0xd83bd6(0x111));try{const _0x7edd2=await sha256(_0x309352),_0x54e1ac=localStorage['getItem'](_0xd83bd6(0x12d)),_0x52f097=query(collection(db,finalCollectionPath),where(_0xd83bd6(0x151),'==',_0x7edd2)),_0x1b34ee=await getDocs(_0x52f097);document[_0xd83bd6(0x121)](_0xd83bd6(0xf4))[_0xd83bd6(0x135)][_0xd83bd6(0x114)](_0xd83bd6(0x111));if(_0x1b34ee[_0xd83bd6(0x11e)]){Swal[_0xd83bd6(0xf5)]({'icon':_0xd83bd6(0x139),'title':_0xd83bd6(0x11f),'text':'กรุณาตรวจสอบเลขบัตรประชาชน\x20หรือติดต่อเจ้าหน้าที่','confirmButtonColor':_0xd83bd6(0x109),'confirmButtonText':_0xd83bd6(0x14e)});return;}currentUserDoc=_0x1b34ee['docs'][0x0];const _0x17bbe5=currentUserDoc[_0xd83bd6(0x145)](),_0x10754a=_0x17bbe5[_0xd83bd6(0xf9)];let _0x48bfa0=![];_0x10754a?_0x54e1ac===_0x7edd2?_0x48bfa0=!![]:_0x48bfa0=![]:!_0x54e1ac?_0x48bfa0=!![]:_0x48bfa0=![];if(!_0x48bfa0){currentUserDoc=null,Swal[_0xd83bd6(0xf5)]({'icon':'warning','title':_0xd83bd6(0x125),'text':_0xd83bd6(0x150),'confirmButtonColor':_0xd83bd6(0x10d),'confirmButtonText':_0xd83bd6(0x14c),'allowOutsideClick':![]})[_0xd83bd6(0x12a)](()=>{const _0xdd7924=_0xd83bd6;app[_0xdd7924(0x115)]();});return;}document['getElementById'](_0xd83bd6(0x14b))[_0xd83bd6(0x157)]=_0x17bbe5[_0xd83bd6(0x112)]||'-',document[_0xd83bd6(0x121)](_0xd83bd6(0x127))[_0xd83bd6(0x157)]=_0x17bbe5[_0xd83bd6(0x110)]||'-',document[_0xd83bd6(0x121)](_0xd83bd6(0xf2))[_0xd83bd6(0x157)]=_0x17bbe5[_0xd83bd6(0x14f)]||'-';const _0x19358c=document[_0xd83bd6(0x121)]('action-new'),_0x593319=document[_0xd83bd6(0x121)]('action-exist'),_0x22358e=document['getElementById']('modal-title');if(_0x10754a){_0x22358e[_0xd83bd6(0x157)]='ท่านลงทะเบียนแล้ว',_0x22358e[_0xd83bd6(0x11b)]=_0xd83bd6(0x132),_0x19358c[_0xd83bd6(0x135)]['add'](_0xd83bd6(0x111)),_0x593319[_0xd83bd6(0x135)]['remove']('hidden');const _0x509d8b=_0x17bbe5[_0xd83bd6(0xf9)][_0xd83bd6(0x105)]?_0x17bbe5[_0xd83bd6(0xf9)][_0xd83bd6(0x105)]():new Date(_0x17bbe5['ConfirmGift']);document[_0xd83bd6(0x121)](_0xd83bd6(0xff))[_0xd83bd6(0x157)]=_0x509d8b[_0xd83bd6(0x148)](_0xd83bd6(0x107),{'dateStyle':_0xd83bd6(0x156),'timeStyle':_0xd83bd6(0x13d)});}else _0x22358e[_0xd83bd6(0x157)]='ข้อมูลถูกต้อง',_0x22358e[_0xd83bd6(0x11b)]=_0xd83bd6(0x102),_0x19358c[_0xd83bd6(0x135)][_0xd83bd6(0x149)](_0xd83bd6(0x111)),_0x593319[_0xd83bd6(0x135)][_0xd83bd6(0x114)](_0xd83bd6(0x111));const _0x564fc3=document['getElementById']('view-result-modal');_0x564fc3[_0xd83bd6(0x135)][_0xd83bd6(0x149)]('hidden');if(window[_0xd83bd6(0x137)])lucide[_0xd83bd6(0x13c)]();setTimeout(()=>{const _0x7b58de=_0xd83bd6;_0x564fc3[_0x7b58de(0x135)][_0x7b58de(0x149)]('opacity-0'),document['getElementById']('modal-card')[_0x7b58de(0x135)][_0x7b58de(0xfe)](_0x7b58de(0x131),_0x7b58de(0x134));},0xa);}catch(_0x2ad312){console[_0xd83bd6(0x139)](_0x2ad312),document[_0xd83bd6(0x121)](_0xd83bd6(0xf4))[_0xd83bd6(0x135)][_0xd83bd6(0x114)]('hidden'),Swal[_0xd83bd6(0xf5)](_0xd83bd6(0xfb),_0xd83bd6(0x10b),_0xd83bd6(0x139));}},'closeModal':()=>{const _0x46dc15=_0x4c0e48,_0x348b4d=document[_0x46dc15(0x121)](_0x46dc15(0x147));_0x348b4d[_0x46dc15(0x135)]['add'](_0x46dc15(0x119)),document[_0x46dc15(0x121)](_0x46dc15(0x144))[_0x46dc15(0x135)][_0x46dc15(0xfe)]('scale-100',_0x46dc15(0x131)),setTimeout(()=>{const _0x20872d=_0x46dc15;_0x348b4d[_0x20872d(0x135)]['add'](_0x20872d(0x111)),currentUserDoc=null;},0x12c);},'confirmGift':async()=>{const _0x1d34db=_0x4c0e48;if(!currentUserDoc)return;const _0x46eddc=document['querySelector'](_0x1d34db(0x126)),_0x5fe510=_0x46eddc['innerHTML'];_0x46eddc['innerHTML']=_0x1d34db(0x12e),_0x46eddc[_0x1d34db(0x130)]=!![];try{await updateDoc(currentUserDoc['ref'],{'ConfirmGift':serverTimestamp(),'CheckIN':serverTimestamp(),'status':_0x1d34db(0x108),'deviceUserAgent':navigator[_0x1d34db(0x14d)]});const _0x381edc=document[_0x1d34db(0x121)](_0x1d34db(0xf6))[_0x1d34db(0x113)],_0x37b767=await sha256(_0x381edc);localStorage[_0x1d34db(0x138)](_0x1d34db(0x12d),_0x37b767),app['closeModal'](),Swal[_0x1d34db(0xf5)]({'icon':_0x1d34db(0x13b),'title':'บันทึกสำเร็จ!','html':_0x1d34db(0x12b)+new Date()[_0x1d34db(0x148)](_0x1d34db(0x107))+_0x1d34db(0x124),'confirmButtonColor':_0x1d34db(0x120),'confirmButtonText':'ตกลง','timer':0xbb8,'timerProgressBar':!![]})[_0x1d34db(0x12a)](()=>{const _0x58cccf=_0x1d34db;app[_0x58cccf(0x115)]();}),confetti({'particleCount':0x96,'spread':0x46,'origin':{'y':0.6}});}catch(_0x4ff8b7){console[_0x1d34db(0x139)](_0x4ff8b7),Swal[_0x1d34db(0xf5)](_0x1d34db(0xfb),_0x1d34db(0xfa),_0x1d34db(0x139));}finally{_0x46eddc[_0x1d34db(0xf7)]=_0x5fe510,_0x46eddc['disabled']=![];}}};window[_0x4c0e48(0x122)]=app,app[_0x4c0e48(0x155)]();
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+        import { getFirestore, collection, query, where, getDocs, updateDoc, doc, serverTimestamp, onSnapshot, addDoc, deleteDoc, writeBatch, deleteField, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+        // Confetti library is loaded in head
+
+        const isSandboxEnv = typeof __firebase_config !== 'undefined';
+        let firebaseConfig;
+        let finalCollectionPath;
+
+        if (isSandboxEnv) {
+            firebaseConfig = JSON.parse(__firebase_config);
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            finalCollectionPath = `artifacts/${appId}/public/data/coop_registrations`;
+        } else {
+            firebaseConfig = {
+                apiKey: "AIzaSyAgWMzWcZPzyzoBu5eQzj2y59nKsxTWurQ",
+                projectId: "ttb-register"
+            };
+            finalCollectionPath = 'Outsources';
+        }
+
+        const appFirebase = initializeApp(firebaseConfig);
+        const auth = getAuth(appFirebase);
+        const db = getFirestore(appFirebase);
+
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        let currentUserDoc = null;
+
+        const app = {
+            deviceId: null,
+
+            init: async () => {
+                try {
+                    let did = localStorage.getItem('ttb_device_uuid');
+                    if (!did) {
+                        did = crypto.randomUUID();
+                        localStorage.setItem('ttb_device_uuid', did);
+                    }
+                    app.deviceId = did;
+
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                    console.log("Auth Ready, Device ID:", app.deviceId);
+                } catch(e) {
+                    console.error("Auth Failed", e);
+                    Swal.fire('Error', 'ไม่สามารถเชื่อมต่อระบบได้', 'error');
+                }
+                if(window.lucide) lucide.createIcons();
+            },
+
+            // ... (other functions remain same) ...
+            
+            goToCeoMessage: () => {
+                document.getElementById('view-welcome').classList.add('hidden');
+                document.getElementById('view-ceo').classList.remove('hidden');
+            },
+
+            backFromCeo: () => {
+                document.getElementById('view-ceo').classList.add('hidden');
+                document.getElementById('view-welcome').classList.remove('hidden');
+            },
+
+            goToRegister: () => {
+                document.getElementById('view-welcome').classList.add('hidden');
+                document.getElementById('view-register').classList.remove('hidden');
+                document.getElementById('citizen-id').focus();
+            },
+
+            goBack: () => {
+                const modal = document.getElementById('view-result-modal');
+                modal.classList.add('hidden');
+                document.getElementById('view-pre-game').classList.add('hidden');
+                document.getElementById('view-register').classList.add('hidden');
+                document.getElementById('view-welcome').classList.remove('hidden');
+                document.getElementById('citizen-id').value = '';
+                app.validateInput(document.getElementById('citizen-id'));
+                currentUserDoc = null;
+            },
+
+            validateInput: (el) => {
+                el.value = el.value.replace(/[^0-9]/g, '');
+                const val = el.value;
+                const btn = document.getElementById('btn-check');
+                const icon = document.getElementById('validation-icon');
+                const errorMsg = document.getElementById('error-msg');
+
+                if (val.length === 13) {
+                    btn.disabled = false;
+                    btn.className = "w-full bg-red-600 hover:bg-red-700 text-white text-lg font-bold py-4 rounded-2xl transition-all shadow-lg shadow-red-200 transform active:scale-95 flex justify-center items-center gap-2";
+                    icon.innerHTML = '<i data-lucide="check-circle" class="w-6 h-6 text-green-500"></i>';
+                    errorMsg.style.opacity = '0';
+                } else {
+                    btn.disabled = true;
+                    btn.className = "w-full bg-slate-200 text-slate-400 text-lg font-bold py-4 rounded-2xl transition-all shadow-none cursor-not-allowed flex justify-center items-center gap-2";
+                    icon.innerHTML = '<i data-lucide="shield" class="w-6 h-6 text-slate-300"></i>';
+                    if(val.length > 0 && val.length < 13) errorMsg.style.opacity = '1';
+                    else errorMsg.style.opacity = '0';
+                }
+                if(window.lucide) lucide.createIcons();
+            },
+
+            verifyUser: async () => {
+                const citizenId = document.getElementById('citizen-id').value;
+                if(citizenId.length !== 13) return;
+
+                document.getElementById('loading-overlay').classList.remove('hidden');
+
+                try {
+                    const hashedId = await sha256(citizenId);
+                    
+                    const q = query(collection(db, finalCollectionPath), where('citizenId', '==', hashedId));
+                    const snapshot = await getDocs(q);
+
+                    if (snapshot.empty) {
+                        document.getElementById('loading-overlay').classList.add('hidden');
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'ไม่พบข้อมูล',
+                            text: 'กรุณาตรวจสอบเลขบัตรประชาชน หรือติดต่อเจ้าหน้าที่',
+                            confirmButtonColor: '#d33',
+                            confirmButtonText: 'ตกลง'
+                        });
+                        return;
+                    }
+
+                    currentUserDoc = snapshot.docs[0];
+                    const userData = currentUserDoc.data();
+                    
+                    let allowAccess = false;
+                    let blockReason = "";
+
+                    if (userData.ConfirmGift) {
+                        if (userData.deviceID === app.deviceId) {
+                            allowAccess = true;
+                        } else {
+                            allowAccess = false;
+                            blockReason = "ท่านได้ลงทะเบียนรับสิทธิ์ไปแล้ว (บนอุปกรณ์อื่น)";
+                        }
+                    } else {
+                        const lastUserHash = localStorage.getItem('ttb_last_user_hash');
+                        
+                        if (lastUserHash && lastUserHash !== hashedId) {
+                            const otherQ = query(collection(db, finalCollectionPath), where('citizenId', '==', lastUserHash));
+                            const otherSnap = await getDocs(otherQ);
+                            
+                            if (!otherSnap.empty) {
+                                const otherData = otherSnap.docs[0].data();
+                                if (otherData.ConfirmGift && otherData.deviceID === app.deviceId) {
+                                    allowAccess = false;
+                                    blockReason = "โทรศัพท์เครื่องนี้ได้ทำการลงทะเบียนสมาชิกท่านอื่นไปแล้ว";
+                                } else {
+                                    allowAccess = true; 
+                                }
+                            } else {
+                                allowAccess = true; 
+                            }
+                        } else {
+                            allowAccess = true; 
+                        }
+                    }
+
+                    document.getElementById('loading-overlay').classList.add('hidden');
+
+                    if (!allowAccess) {
+                        currentUserDoc = null;
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'ไม่สามารถทำรายการได้',
+                            text: blockReason || 'ไม่สามารถลงทะเบียนได้',
+                            confirmButtonColor: '#d32f2f',
+                            confirmButtonText: 'กลับหน้าแรก',
+                            allowOutsideClick: false
+                        }).then(() => {
+                            app.goBack();
+                        });
+                        return;
+                    }
+
+                    // *** DISPLAY LOGIC ***
+                    if (userData.ConfirmGift) {
+                        // EXISTING USER -> Show Post-Game View directly (NO POPUP)
+                        app.showPostGameView(userData);
+                    } else {
+                        // NEW USER -> Show Pre-Game (Randomizer Button)
+                        document.getElementById('pre-game-name').innerText = userData.EmpName || 'สมาชิก';
+                        document.getElementById('view-register').classList.add('hidden');
+                        document.getElementById('view-pre-game').classList.remove('hidden');
+                        
+                        // Ensure states are reset
+                        document.getElementById('pre-game-content').classList.remove('hidden');
+                        document.getElementById('post-game-content').classList.add('hidden');
+                        
+                        if(window.lucide) lucide.createIcons();
+                    }
+
+                } catch (error) {
+                    console.error(error);
+                    document.getElementById('loading-overlay').classList.add('hidden');
+                    Swal.fire('Error', 'เกิดข้อผิดพลาดในการเชื่อมต่อ', 'error');
+                }
+            },
+
+            showPostGameView: (userData) => {
+                 document.getElementById('view-register').classList.add('hidden');
+                 document.getElementById('view-pre-game').classList.remove('hidden');
+                 
+                 document.getElementById('pre-game-content').classList.add('hidden');
+                 document.getElementById('post-game-content').classList.remove('hidden');
+
+                 // Update Text
+                 document.getElementById('post-user-name').innerText = userData.EmpName || 'สมาชิก';
+
+                 let amount = 0;
+                 if (userData.EmpID) {
+                    const parsed = parseInt(String(userData.EmpID).replace(/[^0-9]/g, ''));
+                    if(!isNaN(parsed)) amount = parsed;
+                 }
+                 document.getElementById('final-amount').innerText = amount.toLocaleString('en-US');
+                 
+                 const date = userData.ConfirmGift.toDate ? userData.ConfirmGift.toDate() : new Date(userData.ConfirmGift);
+                 document.getElementById('final-confirmed-time').innerText = date.toLocaleString('th-TH', { dateStyle: 'short', timeStyle: 'medium' });
+                 
+                 if(window.lucide) lucide.createIcons();
+            },
+
+            fireWorks: () => {
+                var duration = 3 * 1000;
+                var animationEnd = Date.now() + duration;
+                var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 99999 };
+
+                var random = function(min, max) {
+                  return Math.random() * (max - min) + min;
+                }
+
+                var interval = setInterval(function() {
+                  var timeLeft = animationEnd - Date.now();
+
+                  if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                  }
+
+                  var particleCount = 50 * (timeLeft / duration);
+                  
+                  // Fireworks from left and right
+                  confetti(Object.assign({}, defaults, { particleCount, origin: { x: random(0.1, 0.3), y: Math.random() - 0.2 } }));
+                  confetti(Object.assign({}, defaults, { particleCount, origin: { x: random(0.7, 0.9), y: Math.random() - 0.2 } }));
+                }, 250);
+                
+                // One big burst in center
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    zIndex: 99999
+                });
+            },
+
+            showRandomizer: () => {
+                if(!currentUserDoc) return;
+                const userData = currentUserDoc.data();
+                
+                // Show Animation in Modal
+                const modal = document.getElementById('view-result-modal');
+                const anim = document.getElementById('gift-animation');
+                const content = document.getElementById('result-content');
+                
+                modal.classList.remove('hidden');
+                modal.classList.remove('opacity-0');
+                document.getElementById('modal-card').classList.replace('scale-95', 'scale-100');
+                
+                anim.classList.remove('hidden');
+                content.classList.add('hidden');
+                
+                if(window.lucide) lucide.createIcons();
+
+                // Wait 3 seconds
+                setTimeout(() => {
+                    anim.classList.add('hidden');
+                    content.classList.remove('hidden');
+                    app.showResultModal(userData, false);
+                    
+                    // Trigger Fireworks here
+                    app.fireWorks(); 
+                }, 3000);
+            },
+
+            showResultModal: (userData, isExisting) => {
+                let amount = 0;
+                if (userData.EmpID) {
+                    const parsed = parseInt(String(userData.EmpID).replace(/[^0-9]/g, ''));
+                    if(!isNaN(parsed)) amount = parsed;
+                }
+                const formattedAmount = amount.toLocaleString('en-US');
+
+                document.getElementById('result-amount').innerText = formattedAmount;
+
+                const btnAck = document.getElementById('btn-acknowledge');
+
+                if (isExisting) {
+                    // This block mostly unused now for modal
+                } else {
+                    btnAck.classList.remove('hidden');
+                }
+
+                const modal = document.getElementById('view-result-modal');
+                modal.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    document.getElementById('modal-card').classList.replace('scale-95', 'scale-100');
+                }, 10);
+            },
+
+            closeModal: () => {
+                const modal = document.getElementById('view-result-modal');
+                modal.classList.add('opacity-0');
+                document.getElementById('modal-card').classList.replace('scale-100', 'scale-95');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    currentUserDoc = null;
+                }, 300);
+            },
+
+            confirmGift: async () => {
+                if(!currentUserDoc) return;
+                
+                const btn = document.getElementById('btn-acknowledge');
+                const originalText = btn ? btn.innerHTML : 'รับทราบ';
+                if(btn) {
+                    btn.innerHTML = '<div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin inline-block mr-2"></div> กำลังบันทึก...';
+                    btn.disabled = true;
+                }
+
+                try {
+                    await updateDoc(currentUserDoc.ref, {
+                        ConfirmGift: serverTimestamp(),
+                        CheckIN: serverTimestamp(),
+                        status: 'Self Register',
+                        deviceUserAgent: navigator.userAgent,
+                        deviceID: app.deviceId
+                    });
+
+                    const citizenId = document.getElementById('citizen-id').value;
+                    const hashedId = await sha256(citizenId);
+                    localStorage.setItem('ttb_last_user_hash', hashedId);
+                    
+                    // Update Local Data
+                    const now = new Date();
+                    const updatedData = {
+                        ...currentUserDoc.data(),
+                        ConfirmGift: now
+                    };
+                    
+                    // HIDE MODAL
+                    const modal = document.getElementById('view-result-modal');
+                    modal.classList.add('opacity-0');
+                    document.getElementById('modal-card').classList.replace('scale-100', 'scale-95');
+                    
+                    setTimeout(() => {
+                        modal.classList.add('hidden');
+                        // SHOW POST GAME VIEW
+                        app.showPostGameView(updatedData);
+                        
+                        // Fire confetti again on result screen for good measure
+                        app.fireWorks();
+                    }, 300);
+
+                } catch(e) {
+                    console.error(e);
+                    Swal.fire('Error', 'บันทึกไม่สำเร็จ กรุณาลองใหม่', 'error');
+                    if(btn) {
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    }
+                }
+            }
+        };
+
+        window.app = app;
+        app.init();
     </script>
 </body>
-
 </html>
