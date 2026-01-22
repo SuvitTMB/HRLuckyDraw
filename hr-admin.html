@@ -170,7 +170,6 @@
             <!-- VIEW 2: DATA TABLE -->
             <div id="view-data" class="view-section hidden space-y-6 fade-in-up">
                  <div id="data-summary-container" class="grid grid-cols-1 md:grid-cols-5 gap-4"></div>
-
                  <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
                     <div class="p-6 border-b border-slate-100 flex flex-col md:flex-row justify-between items-center bg-slate-200 gap-4">
                         <h3 class="font-bold text-lg text-slate-800">ข้อมูลการลงทะเบียนทั้งหมด</h3>
@@ -223,15 +222,15 @@
 
             <!-- VIEW 3: WINNERS -->
             <div id="view-winners" class="view-section hidden space-y-6 fade-in-up">
-                 <div id="winners-container" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[80%] mx-auto"></div>
+                 <div id="winners-container" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[80%] mx-auto font-bold"></div>
             </div>
 
             <!-- VIEW 4: IMPORT -->
-            <div id="view-import" class="view-section hidden space-y-6 fade-in-up">
+            <div id="view-import" class="view-section hidden space-y-6 fade-in-up font-bold">
                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 font-bold">
                         <h3 class="font-bold text-lg text-slate-800 mb-4 flex items-center gap-2 font-bold"><i data-lucide="upload-cloud" width="20" class="text-blue-600"></i> นำเข้าข้อมูล (JSON/CSV)</h3>
-                        <p class="text-sm text-slate-500 mb-4">รองรับโครงสร้าง: <code>citizenId</code>, <code>EmpName</code>, <code>Reward</code>, ฯลฯ ระบบจะรัน <code>no</code> ให้อัตโนมัติ</p>
+                        <p class="text-sm text-slate-500 mb-4">ระบบจะรันหมายเลข <code>no</code> ให้อัตโนมัติทุกครั้งที่นำเข้าใหม่</p>
                         <div class="border-2 border-dashed border-slate-200 rounded-xl p-8 text-center cursor-pointer hover:bg-slate-50 transition" onclick="document.getElementById('file-upload').click()">
                             <i data-lucide="file-up" width="40" class="mx-auto text-slate-400 mb-2"></i>
                             <p class="text-sm font-bold text-slate-600">คลิกเพื่อเลือกไฟล์ หรือลากมาวางที่นี่</p>
@@ -241,7 +240,7 @@
                             <span id="file-name" class="font-bold"></span>
                             <button onclick="window.app.clearFileSelection()"><i data-lucide="x" width="16"></i></button>
                         </div>
-                        <button onclick="window.app.processImport()" id="btn-import" disabled class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold mt-4 hover:bg-blue-700 transition shadow-lg shadow-blue-100">เริ่มนำเข้าข้อมูล</button>
+                        <button onclick="window.app.processImport()" id="btn-import" disabled class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold mt-4 hover:bg-blue-700 transition shadow-lg shadow-blue-100 font-bold">เริ่มนำเข้าข้อมูล</button>
                         <div id="import-progress" class="hidden w-full bg-slate-200 rounded-full h-2.5 mt-4">
                             <div id="import-bar" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
                         </div>
@@ -266,54 +265,33 @@
             <div id="view-labels" class="view-section hidden space-y-6 fade-in-up">
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 font-bold">
                     <h3 class="font-bold text-lg text-slate-800 mb-6 flex items-center gap-2"><i data-lucide="tags" width="20" class="text-indigo-600"></i> ระบบจัดการฉลาก</h3>
-                    
                     <div id="label-summary-container" class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-6">
+                        <!-- Stats boxes populated in init() -->
                         <div class="bg-rose-600 text-white p-5 rounded-2xl flex flex-col justify-center shadow-xl border border-white/10 transition-all hover:scale-[1.02]">
                             <p class="text-[11px] font-bold uppercase tracking-wider opacity-80">กลุ่ม 1,000</p>
                             <h4 id="card-total-1000" class="text-2xl font-black mt-1">0 <span class="text-xs font-normal opacity-70">สลาก</span></h4>
-                            <div class="mt-2 flex justify-between items-baseline font-bold">
-                                <span class="text-xs"><span id="card-used-1000">0</span> <span class="opacity-70 font-normal">ใช้แล้ว</span></span>
-                                <span class="text-sm font-black" id="card-percent-1000">0%</span>
-                            </div>
-                            <div class="w-full bg-white/30 h-1 mt-2 rounded-full overflow-hidden">
-                                <div id="card-bar-1000" class="bg-white h-1 rounded-full transition-all duration-1000" style="width: 0%"></div>
-                            </div>
+                            <div class="mt-2 flex justify-between items-baseline font-bold"><span class="text-xs"><span id="card-used-1000">0</span> <span class="opacity-70 font-normal">ใช้แล้ว</span></span><span class="text-sm font-black" id="card-percent-1000">0%</span></div>
+                            <div class="w-full bg-white/30 h-1 mt-2 rounded-full overflow-hidden"><div id="card-bar-1000" class="bg-white h-1 rounded-full transition-all duration-1000" style="width: 0%"></div></div>
                         </div>
                         <div class="bg-emerald-600 text-white p-5 rounded-2xl flex flex-col justify-center shadow-xl border border-white/10 transition-all hover:scale-[1.02]">
                             <p class="text-[11px] font-bold uppercase tracking-wider opacity-80">กลุ่ม 2,000</p>
                             <h4 id="card-total-2000" class="text-2xl font-black mt-1">0 <span class="text-xs font-normal opacity-70">สลาก</span></h4>
-                            <div class="mt-2 flex justify-between items-baseline font-bold">
-                                <span class="text-xs"><span id="card-used-2000">0</span> <span class="opacity-70 font-normal">ใช้แล้ว</span></span>
-                                <span class="text-sm font-black" id="card-percent-2000">0%</span>
-                            </div>
-                            <div class="w-full bg-white/30 h-1 mt-2 rounded-full overflow-hidden">
-                                <div id="card-bar-2000" class="bg-white h-1 rounded-full transition-all duration-1000" style="width: 0%"></div>
-                            </div>
+                            <div class="mt-2 flex justify-between items-baseline font-bold"><span class="text-xs"><span id="card-used-2000">0</span> <span class="opacity-70 font-normal">ใช้แล้ว</span></span><span class="text-sm font-black" id="card-percent-2000">0%</span></div>
+                            <div class="w-full bg-white/30 h-1 mt-2 rounded-full overflow-hidden"><div id="card-bar-2000" class="bg-white h-1 rounded-full transition-all duration-1000" style="width: 0%"></div></div>
                         </div>
                         <div class="bg-sky-600 text-white p-5 rounded-2xl flex flex-col justify-center shadow-xl border border-white/10 transition-all hover:scale-[1.02]">
                             <p class="text-[11px] font-bold uppercase tracking-wider opacity-80">กลุ่ม 3,000</p>
                             <h4 id="card-total-3000" class="text-2xl font-black mt-1">0 <span class="text-xs font-normal opacity-70">สลาก</span></h4>
-                            <div class="mt-2 flex justify-between items-baseline font-bold">
-                                <span class="text-xs"><span id="card-used-3000">0</span> <span class="opacity-70 font-normal">ใช้แล้ว</span></span>
-                                <span class="text-sm font-black" id="card-percent-3000">0%</span>
-                            </div>
-                            <div class="w-full bg-white/30 h-1 mt-2 rounded-full overflow-hidden">
-                                <div id="card-bar-3000" class="bg-white h-1 rounded-full transition-all duration-1000" style="width: 0%"></div>
-                            </div>
+                            <div class="mt-2 flex justify-between items-baseline font-bold"><span class="text-xs"><span id="card-used-3000">0</span> <span class="opacity-70 font-normal">ใช้แล้ว</span></span><span class="text-sm font-black" id="card-percent-3000">0%</span></div>
+                            <div class="w-full bg-white/30 h-1 mt-2 rounded-full overflow-hidden"><div id="card-bar-3000" class="bg-white h-1 rounded-full transition-all duration-1000" style="width: 0%"></div></div>
                         </div>
                         <div class="bg-amber-600 text-white p-5 rounded-2xl flex flex-col justify-center shadow-xl border border-white/10 transition-all hover:scale-[1.02]">
                             <p class="text-[11px] font-bold uppercase tracking-wider opacity-80">กลุ่ม 4,000</p>
                             <h4 id="card-total-4000" class="text-2xl font-black mt-1">0 <span class="text-xs font-normal opacity-70">สลาก</span></h4>
-                            <div class="mt-2 flex justify-between items-baseline font-bold">
-                                <span class="text-xs"><span id="card-used-4000">0</span> <span class="opacity-70 font-normal">ใช้แล้ว</span></span>
-                                <span class="text-sm font-black" id="card-percent-4000">0%</span>
-                            </div>
-                            <div class="w-full bg-white/30 h-1 mt-2 rounded-full overflow-hidden">
-                                <div id="card-bar-4000" class="bg-white h-1 rounded-full transition-all duration-1000" style="width: 0%"></div>
-                            </div>
+                            <div class="mt-2 flex justify-between items-baseline font-bold"><span class="text-xs"><span id="card-used-4000">0</span> <span class="opacity-70 font-normal">ใช้แล้ว</span></span><span class="text-sm font-black" id="card-percent-4000">0%</span></div>
+                            <div class="w-full bg-white/30 h-1 mt-2 rounded-full overflow-hidden"><div id="card-bar-4000" class="bg-white h-1 rounded-full transition-all duration-1000" style="width: 0%"></div></div>
                         </div>
                     </div>
-
                     <div class="flex flex-col md:flex-row gap-3">
                         <button onclick="window.app.openDeleteLabelsModal()" class="flex-1 min-h-[50px] bg-red-50 text-red-600 border border-red-200 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-red-100 transition shadow-sm group">
                             <i data-lucide="trash-2" width="20"></i> ลบฉลากทั้งหมด
@@ -324,12 +302,12 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden mt-6">
                     <div class="p-4 bg-slate-50 border-b flex justify-between items-center">
                         <h3 class="font-bold text-slate-700 text-lg">ตารางแสดงผลฉลากตามกลุ่ม</h3>
-                        <div class="flex items-center gap-3">
-                            <label class="text-sm font-bold text-slate-600">เลือกกลุ่มรางวัล:</label>
-                            <select id="label-group-select" onchange="window.app.onLabelGroupChange(this.value)" class="w-48 p-2 border rounded-xl shadow-sm outline-none focus:ring-2 focus:ring-indigo-100 text-sm font-bold">
+                        <div class="flex items-center gap-3 font-bold">
+                            <label class="text-sm text-slate-600">เลือกกลุ่มรางวัล:</label>
+                            <select id="label-group-select" onchange="window.app.onLabelGroupChange(this.value)" class="w-48 p-2 border rounded-xl shadow-sm outline-none focus:ring-2 focus:ring-indigo-100 text-sm">
                                 <option value="">รางวัลทั้งหมด</option>
                             </select>
                         </div>
@@ -420,15 +398,7 @@
         </div>
     </main>
     
-    <!-- Modals -->
-    <div id="general-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-backdrop font-bold">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6 text-center">
-            <h3 id="general-modal-title" class="text-lg font-bold mb-2">แจ้งเตือน</h3>
-            <p id="general-modal-message" class="text-slate-500 text-sm mb-6"></p>
-            <button onclick="window.app.closeGeneralModal()" class="w-full py-2.5 rounded-xl bg-slate-800 text-white font-bold">ตกลง</button>
-        </div>
-    </div>
-
+    <!-- Confirm Modal -->
     <div id="label-confirm-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-backdrop font-bold">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-[90%] md:max-w-[40%] p-8 text-center transition-all duration-300 font-bold">
             <div id="label-modal-icon" class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 font-bold"></div>
@@ -442,6 +412,7 @@
         </div>
     </div>
 
+    <!-- Edit Reward Modal -->
     <div id="edit-reward-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-backdrop font-bold">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-8 text-center font-bold">
             <h3 class="text-xl font-bold mb-2 text-slate-800">แก้ไขของรางวัล</h3>
@@ -456,8 +427,581 @@
 
     <!-- Firebase Logic -->
     <script type="module">
-const _0x387750=_0x543f;(function(_0x2ce798,_0x177355){const _0x254b2a=_0x543f,_0x35a7db=_0x2ce798();while(!![]){try{const _0x5be3ff=-parseInt(_0x254b2a(0x1c5))/0x1*(-parseInt(_0x254b2a(0x1c0))/0x2)+-parseInt(_0x254b2a(0x1ee))/0x3+parseInt(_0x254b2a(0x215))/0x4*(parseInt(_0x254b2a(0x1fc))/0x5)+parseInt(_0x254b2a(0x23b))/0x6+-parseInt(_0x254b2a(0x1f2))/0x7+-parseInt(_0x254b2a(0x1cb))/0x8+parseInt(_0x254b2a(0x1b1))/0x9;if(_0x5be3ff===_0x177355)break;else _0x35a7db['push'](_0x35a7db['shift']());}catch(_0x18ad80){_0x35a7db['push'](_0x35a7db['shift']());}}}(_0x22c0,0x504ab));import{initializeApp}from'https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js';import{getAuth,signInAnonymously,signInWithCustomToken,onAuthStateChanged}from'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';function _0x543f(_0x375037,_0x3d78d5){_0x375037=_0x375037-0x100;const _0x22c0a1=_0x22c0();let _0x543fa0=_0x22c0a1[_0x375037];return _0x543fa0;}import{getFirestore,collection,query,where,getDocs,updateDoc,doc,serverTimestamp,onSnapshot,addDoc,deleteDoc,writeBatch,deleteField,getDoc,setDoc}from'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';const TARGET_COLLECTION_NAME='Outsources',CARDS_COLLECTION_NAME='Outsources_card',LOGS_COLLECTION_NAME=_0x387750(0x1d8),isSandboxEnv=typeof __firebase_config!==_0x387750(0x1da);let firebaseConfig,finalCollectionPath,cardCollectionPath,logCollectionPath;const appId=typeof __app_id!==_0x387750(0x1da)?__app_id:_0x387750(0x1f0);isSandboxEnv?(firebaseConfig=JSON[_0x387750(0x10b)](__firebase_config),finalCollectionPath='artifacts/'+appId+_0x387750(0x138)+TARGET_COLLECTION_NAME,cardCollectionPath=_0x387750(0x1cd)+appId+_0x387750(0x138)+CARDS_COLLECTION_NAME,logCollectionPath=_0x387750(0x1cd)+appId+_0x387750(0x138)+LOGS_COLLECTION_NAME):(firebaseConfig={'apiKey':_0x387750(0x116),'authDomain':'ttb-register.firebaseapp.com','projectId':_0x387750(0x104),'storageBucket':'ttb-register.firebasestorage.app','messagingSenderId':_0x387750(0x1b6),'appId':'1:1070273157855:web:5c8120e1df27e233d8676a'},finalCollectionPath=TARGET_COLLECTION_NAME,cardCollectionPath=CARDS_COLLECTION_NAME,logCollectionPath=LOGS_COLLECTION_NAME);const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),state={'users':[],'cards':[],'logs':[],'activeTab':_0x387750(0x1f1),'searchTerm':'','rowsPerPage':0x32,'currentPage':0x1,'sortBy':'no','sortOrder':_0x387750(0x1fe),'hourlyData':Array(0x18)[_0x387750(0x196)](0x0),'selectedLabelGroup':'','labelPage':0x1,'labelRowsPerPage':0x32,'labelSortKey':_0x387750(0x155),'labelSortOrder':_0x387750(0x1fe),'logPage':0x1,'logRowsPerPage':0x32,'logSortKey':'Datetime','logSortOrder':_0x387750(0x12e),'selectedDataReward':''},formatDate=_0x278c24=>{const _0x10d0e9=_0x387750;if(!_0x278c24)return'-';try{if(_0x278c24[_0x10d0e9(0x24e)]){const _0x6f7e11=_0x278c24[_0x10d0e9(0x24e)]();return _0x6f7e11[_0x10d0e9(0x1f9)](_0x10d0e9(0x19d))+'\x20'+_0x6f7e11[_0x10d0e9(0x17b)]('th-TH');}const _0x40362e=new Date(_0x278c24);if(!isNaN(_0x40362e[_0x10d0e9(0x1b8)]()))return _0x40362e['toLocaleDateString']('th-TH')+'\x20'+_0x40362e[_0x10d0e9(0x17b)](_0x10d0e9(0x19d));}catch(_0x107b77){}return _0x278c24;},normalizeReward=_0x2a451a=>String(_0x2a451a||'')[_0x387750(0x11c)](/,/g,'')[_0x387750(0x117)]();async function sha256(_0x3cabed){const _0x23c4e7=_0x387750,_0x9fa74d=new TextEncoder()['encode'](_0x3cabed),_0x42b841=await crypto['subtle'][_0x23c4e7(0x1c3)](_0x23c4e7(0x19e),_0x9fa74d);return Array[_0x23c4e7(0x19c)](new Uint8Array(_0x42b841))[_0x23c4e7(0x107)](_0x17219c=>_0x17219c[_0x23c4e7(0x22a)](0x10)[_0x23c4e7(0x192)](0x2,'0'))[_0x23c4e7(0x252)]('');}function chunkArray(_0x110348,_0x324358){const _0x11836c=_0x387750,_0x438018=[];for(let _0x223007=0x0;_0x223007<_0x110348[_0x11836c(0x10e)];_0x223007+=_0x324358)_0x438018['push'](_0x110348[_0x11836c(0x206)](_0x223007,_0x223007+_0x324358));return _0x438018;}function csvToJson(_0xfea5c0){const _0x96b083=_0x387750,_0x4f7de3=_0xfea5c0[_0x96b083(0x16c)]('\x0a');if(_0x4f7de3[_0x96b083(0x10e)]===0x0)return[];const _0x3dbb44=_0x4f7de3[0x0][_0x96b083(0x16c)](',')['map'](_0x346b39=>_0x346b39[_0x96b083(0x117)]());return _0x4f7de3[_0x96b083(0x206)](0x1)[_0x96b083(0x107)](_0x1abdda=>{const _0x5ae8ad=_0x96b083,_0x5e7a13=_0x1abdda[_0x5ae8ad(0x16c)](',');if(_0x5e7a13['length']<_0x3dbb44['length'])return null;return _0x3dbb44[_0x5ae8ad(0x224)]((_0x4a956f,_0x36f8e2,_0x14de30)=>{const _0x14fa32=_0x5ae8ad;return _0x4a956f[_0x36f8e2]=_0x5e7a13[_0x14de30]?_0x5e7a13[_0x14de30][_0x14fa32(0x117)]():'',_0x4a956f;},{});})[_0x96b083(0x1db)](_0x508cf4=>_0x508cf4);}window['app']={'showToast':(_0x3594c7,_0x12e495=_0x387750(0x188))=>{const _0x50e9f7=_0x387750,_0x2cd251=document[_0x50e9f7(0x1a0)]('toast-container');if(!_0x2cd251)return;const _0x164b02=document['createElement'](_0x50e9f7(0x1c9));_0x164b02[_0x50e9f7(0x20f)]='bg-white\x20border-l-4\x20'+(_0x12e495===_0x50e9f7(0x188)?'border-green-500':_0x50e9f7(0x11b))+_0x50e9f7(0x109),_0x164b02[_0x50e9f7(0x127)]=_0x50e9f7(0x10d)+_0x3594c7+_0x50e9f7(0x23f),_0x2cd251[_0x50e9f7(0x1fa)](_0x164b02),setTimeout(()=>{const _0x1a052b=_0x50e9f7;_0x164b02[_0x1a052b(0x18c)][_0x1a052b(0x15d)](_0x1a052b(0x158)),setTimeout(()=>_0x164b02[_0x1a052b(0x1ea)](),0x12c);},0xbb8);},'switchTab':_0x165e1f=>{const _0x3b2d3a=_0x387750;document[_0x3b2d3a(0x216)](_0x3b2d3a(0x118))[_0x3b2d3a(0x114)](_0x495ef1=>_0x495ef1[_0x3b2d3a(0x18c)][_0x3b2d3a(0x15d)](_0x3b2d3a(0x1c7)));const _0xbbcfdd=document['getElementById'](_0x3b2d3a(0x1e2)+_0x165e1f);if(_0xbbcfdd)_0xbbcfdd[_0x3b2d3a(0x18c)]['remove'](_0x3b2d3a(0x1c7));document[_0x3b2d3a(0x216)](_0x3b2d3a(0x22b))[_0x3b2d3a(0x114)](_0x1f1836=>_0x1f1836[_0x3b2d3a(0x18c)][_0x3b2d3a(0x1ea)](_0x3b2d3a(0x1f6),'text-white'));const _0x268d20=document[_0x3b2d3a(0x1a0)]('nav-'+_0x165e1f);if(_0x268d20)_0x268d20[_0x3b2d3a(0x18c)]['add'](_0x3b2d3a(0x1f6),_0x3b2d3a(0x1e3));state[_0x3b2d3a(0x1d0)]=_0x165e1f;const _0x2f03f9={'dashboard':_0x3b2d3a(0x121),'data':_0x3b2d3a(0x129),'winners':_0x3b2d3a(0x10c),'import':'จัดการข้อมูล','labels':_0x3b2d3a(0x1b2),'qrcode-in':'QR\x20Code\x20ฮั่งเปา','logs':_0x3b2d3a(0x160)};document[_0x3b2d3a(0x1a0)](_0x3b2d3a(0x197))[_0x3b2d3a(0x1a3)]=_0x2f03f9[_0x165e1f]||_0x165e1f;if(_0x165e1f===_0x3b2d3a(0x24b))window['app'][_0x3b2d3a(0x245)]();_0x165e1f===_0x3b2d3a(0x113)&&(window[_0x3b2d3a(0x1c1)][_0x3b2d3a(0x151)](),window[_0x3b2d3a(0x1c1)][_0x3b2d3a(0x12b)]());if(_0x165e1f===_0x3b2d3a(0x1d2))window[_0x3b2d3a(0x1c1)]['renderWinnersView']();if(_0x165e1f===_0x3b2d3a(0x1f1))window['app'][_0x3b2d3a(0x16f)]();if(_0x165e1f===_0x3b2d3a(0x1c6))window['app']['renderLogTable']();lucide['createIcons']();},'renderDataSummary':()=>{const _0x5a09a9=_0x387750,_0x4a2e20=document[_0x5a09a9(0x1a0)](_0x5a09a9(0x1bf));if(!_0x4a2e20||state[_0x5a09a9(0x1d0)]!==_0x5a09a9(0x113))return;const _0x1c64e8=state[_0x5a09a9(0x218)][_0x5a09a9(0x1db)](_0x40d981=>_0x40d981[_0x5a09a9(0x23c)]&&_0x40d981[_0x5a09a9(0x23c)]!=='')[_0x5a09a9(0x10e)],_0x1a0991=[],_0x47c040=[{'bg':'bg-blue-600','bar':_0x5a09a9(0x1d3),'text':_0x5a09a9(0x1e3)},{'bg':_0x5a09a9(0x130),'bar':_0x5a09a9(0x1d3),'text':_0x5a09a9(0x1e3)},{'bg':_0x5a09a9(0x174),'bar':'bg-white/30','text':_0x5a09a9(0x1e3)},{'bg':_0x5a09a9(0x123),'bar':'bg-white/30','text':_0x5a09a9(0x1e3)},{'bg':_0x5a09a9(0x1d9),'bar':_0x5a09a9(0x1d3),'text':_0x5a09a9(0x1e3)}];_0x1a0991[_0x5a09a9(0x1af)]({'type':_0x5a09a9(0x1a5),'label':_0x5a09a9(0x179),'total':state[_0x5a09a9(0x218)][_0x5a09a9(0x10e)],'registered':_0x1c64e8,'percent':state[_0x5a09a9(0x218)][_0x5a09a9(0x10e)]>0x0?Math[_0x5a09a9(0x25d)](_0x1c64e8/state['users'][_0x5a09a9(0x10e)]*0x64):0x0});const _0x1236c0=['1000',_0x5a09a9(0x24c),'3000',_0x5a09a9(0x234)];_0x1236c0[_0x5a09a9(0x114)](_0x4e6e53=>{const _0x47227f=_0x5a09a9,_0x122529=state[_0x47227f(0x218)][_0x47227f(0x1db)](_0x30b771=>normalizeReward(_0x30b771[_0x47227f(0x13e)])===_0x4e6e53),_0x20b49b=_0x122529['filter'](_0x17ace6=>_0x17ace6[_0x47227f(0x23c)]&&_0x17ace6[_0x47227f(0x23c)]!=='')['length'];_0x1a0991[_0x47227f(0x1af)]({'type':_0x47227f(0x24a),'label':_0x4e6e53,'total':_0x122529[_0x47227f(0x10e)],'registered':_0x20b49b,'percent':_0x122529['length']>0x0?Math['round'](_0x20b49b/_0x122529[_0x47227f(0x10e)]*0x64):0x0});}),_0x4a2e20[_0x5a09a9(0x127)]=_0x1a0991[_0x5a09a9(0x107)]((_0x5aa7fb,_0x4c3ac6)=>{const _0x25455a=_0x5a09a9,_0x1ba57d=_0x47c040[_0x4c3ac6%_0x47c040[_0x25455a(0x10e)]];return _0x25455a(0x193)+_0x1ba57d['bg']+_0x25455a(0x1ba)+_0x1ba57d['text']+_0x25455a(0x163)+(_0x5aa7fb[_0x25455a(0x13d)]===_0x25455a(0x1a5)?_0x5aa7fb[_0x25455a(0x243)]:_0x25455a(0x22e)+_0x5aa7fb[_0x25455a(0x243)])+_0x25455a(0x221)+_0x5aa7fb[_0x25455a(0x1a5)][_0x25455a(0x19a)]()+_0x25455a(0x21d)+_0x5aa7fb[_0x25455a(0x1f5)][_0x25455a(0x19a)]()+_0x25455a(0x17f)+_0x5aa7fb['percent']+_0x25455a(0x238)+_0x1ba57d[_0x25455a(0x105)]+_0x25455a(0x157)+_0x5aa7fb['percent']+'%\x22></div></div></div>';})[_0x5a09a9(0x252)]('');},'renderWinnersView':()=>{const _0x5c908a=_0x387750,_0x3d300b=document['getElementById'](_0x5c908a(0x1aa));if(!_0x3d300b||state[_0x5c908a(0x1d0)]!==_0x5c908a(0x1d2))return;const _0x513c9f=[_0x5c908a(0x15b),_0x5c908a(0x24c),_0x5c908a(0x229),_0x5c908a(0x234)],_0x4507b1={'1000':_0x5c908a(0x178),'2000':'emerald','3000':_0x5c908a(0x18f),'4000':_0x5c908a(0x1a8)};_0x3d300b[_0x5c908a(0x127)]=_0x513c9f[_0x5c908a(0x107)](_0x5136e3=>{const _0x4798b6=_0x5c908a,_0x403033=_0x4507b1[_0x5136e3]||_0x4798b6(0x20d),_0x522eff=state[_0x4798b6(0x12d)][_0x4798b6(0x1db)](_0x473b8d=>normalizeReward(_0x473b8d[_0x4798b6(0x13e)])===_0x5136e3),_0x33c70d=state['users']['filter'](_0x403fda=>normalizeReward(_0x403fda[_0x4798b6(0x13e)])===_0x5136e3),_0xe78e=_0x522eff[_0x4798b6(0x1db)](_0x5addbc=>_0x5addbc[_0x4798b6(0x154)]&&_0x5addbc['Datetime']!==''),_0x4f93e5=_0xe78e[_0x4798b6(0x1db)](_0x39e525=>_0x39e525['rewardname']&&_0x39e525[_0x4798b6(0x183)][_0x4798b6(0x117)]()!==''),_0x223a79=_0x4f93e5[_0x4798b6(0x10e)]===0x0?_0x4798b6(0x132):_0x4f93e5[_0x4798b6(0x107)](_0xc264fd=>_0x4798b6(0x159)+(_0xc264fd['EmpName']||_0x4798b6(0x260))+_0x4798b6(0x1cf)+_0x403033+_0x4798b6(0x195)+_0xc264fd[_0x4798b6(0x183)]+_0x4798b6(0x231)+formatDate(_0xc264fd[_0x4798b6(0x154)])+_0x4798b6(0x170))[_0x4798b6(0x252)]('');return _0x4798b6(0x204)+_0x403033+_0x4798b6(0x176)+_0x5136e3+_0x4798b6(0x210)+_0x403033+_0x4798b6(0x244)+_0x403033+_0x4798b6(0x112)+(_0x4f93e5[_0x4798b6(0x10e)]>0x0?[...new Set(_0x4f93e5[_0x4798b6(0x107)](_0x1620f9=>_0x1620f9['rewardname']))][_0x4798b6(0x252)](',\x20'):_0x4798b6(0x20c))+_0x4798b6(0x147)+_0x223a79+_0x4798b6(0x1e8)+_0xe78e[_0x4798b6(0x10e)]+_0x4798b6(0x136)+_0x522eff[_0x4798b6(0x10e)]+_0x4798b6(0x11f)+_0x403033+_0x4798b6(0x134)+(_0x522eff[_0x4798b6(0x10e)]?_0xe78e[_0x4798b6(0x10e)]/_0x522eff[_0x4798b6(0x10e)]*0x64:0x0)+'%\x22></div></div><p\x20class=\x22text-[12px]\x20text-slate-400\x20mt-2\x20text-right\x20font-bold\x20text-slate-600\x20italic\x22>พนักงานในกลุ่มนี้:\x20'+_0x33c70d['length']+_0x4798b6(0x110);})['join']('');},'renderLabelTable':()=>{const _0x1f830f=_0x387750,_0x3318d2=document[_0x1f830f(0x1a0)](_0x1f830f(0x18e)),_0x33c433=document['getElementById'](_0x1f830f(0x122)),_0x250c12=document[_0x1f830f(0x1a0)]('label-pagination-controls');if(!_0x3318d2||state['activeTab']!==_0x1f830f(0x24b))return;let _0x3a594c=state[_0x1f830f(0x169)]===''?[...state[_0x1f830f(0x12d)]]:state[_0x1f830f(0x12d)]['filter'](_0x28b6b6=>normalizeReward(_0x28b6b6[_0x1f830f(0x13e)])===state[_0x1f830f(0x169)]);_0x3a594c[_0x1f830f(0x249)]((_0x4d3576,_0x1ded57)=>{const _0x23ff93=_0x1f830f;let _0x4c93cc=_0x4d3576[state[_0x23ff93(0x239)]],_0xbaedb2=_0x1ded57[state['labelSortKey']];if(state[_0x23ff93(0x239)]===_0x23ff93(0x155)||state[_0x23ff93(0x239)]===_0x23ff93(0x13e)){const _0x4a3a9f=parseFloat(String(_0x4c93cc||'')[_0x23ff93(0x11c)](/,/g,''))||0x0,_0x5c7d20=parseFloat(String(_0xbaedb2||'')[_0x23ff93(0x11c)](/,/g,''))||0x0;return state[_0x23ff93(0x103)]==='asc'?_0x4a3a9f-_0x5c7d20:_0x5c7d20-_0x4a3a9f;}if(state['labelSortKey']===_0x23ff93(0x154)){const _0x34d832=_0x4c93cc?.[_0x23ff93(0x24e)]?_0x4c93cc[_0x23ff93(0x24e)]()[_0x23ff93(0x1b8)]():new Date(_0x4c93cc)['getTime']()||0x0,_0x5d4e2d=_0xbaedb2?.[_0x23ff93(0x24e)]?_0xbaedb2['toDate']()['getTime']():new Date(_0xbaedb2)[_0x23ff93(0x1b8)]()||0x0;return state[_0x23ff93(0x103)]===_0x23ff93(0x1fe)?_0x34d832-_0x5d4e2d:_0x5d4e2d-_0x34d832;}return state[_0x23ff93(0x103)]==='asc'?String(_0x4c93cc||'')['localeCompare'](String(_0xbaedb2||''),'th',{'numeric':!![]}):String(_0xbaedb2||'')['localeCompare'](String(_0x4c93cc||''),'th',{'numeric':!![]});});const _0x37476a=_0x3a594c[_0x1f830f(0x10e)],_0x1df851=Math[_0x1f830f(0x21b)](_0x37476a/0x32)||0x1;if(state[_0x1f830f(0x167)]>_0x1df851)state[_0x1f830f(0x167)]=_0x1df851;const _0x1e66dd=_0x3a594c['slice']((state['labelPage']-0x1)*0x32,state[_0x1f830f(0x167)]*0x32);if(_0x33c433)_0x33c433[_0x1f830f(0x1a3)]=_0x1f830f(0x17e)+((state['labelPage']-0x1)*0x32+0x1)+_0x1f830f(0x22c)+Math[_0x1f830f(0x115)](state['labelPage']*0x32,_0x37476a)+'\x20จากทั้งหมด\x20'+_0x37476a;if(_0x250c12)_0x250c12['innerHTML']='<button\x20onclick=\x22window.app.changeLabelPage(-1)\x22\x20class=\x22px-3\x20py-1\x20bg-white\x20border\x20rounded-md\x20text-sm\x20hover:bg-slate-50\x20font-bold\x22\x20'+(state['labelPage']<=0x1?_0x1f830f(0x17c):'')+_0x1f830f(0x1df)+state['labelPage']+'/'+_0x1df851+_0x1f830f(0x15f)+(state['labelPage']>=_0x1df851?'disabled':'')+'>Next</button>';_0x3318d2[_0x1f830f(0x127)]=_0x1e66dd[_0x1f830f(0x107)](_0x5a7515=>{const _0x4384ae=_0x1f830f,_0x536ac3=!!_0x5a7515[_0x4384ae(0x154)],_0x379324=(_0x5a7515[_0x4384ae(0x183)]||'')[_0x4384ae(0x11c)](/'/g,'\x5c\x27');return _0x4384ae(0x247)+(_0x5a7515['CardNo']||'-')+_0x4384ae(0x164)+(_0x5a7515[_0x4384ae(0x13e)]||'-')+_0x4384ae(0x242)+(_0x5a7515[_0x4384ae(0x183)]||'-')+_0x4384ae(0x21a)+(_0x5a7515[_0x4384ae(0x108)]||'-')+_0x4384ae(0x125)+formatDate(_0x5a7515[_0x4384ae(0x154)])+_0x4384ae(0x11e)+(!_0x536ac3?_0x4384ae(0x101)+_0x5a7515['id']+'\x27,\x20\x27'+_0x379324+'\x27)':'')+'\x22\x20class=\x22text-indigo-600\x20font-bold\x20text-xs\x20p-1\x20px-2\x20border\x20border-indigo-200\x20rounded-lg\x20hover:bg-indigo-50\x20transition\x20'+(_0x536ac3?_0x4384ae(0x256):'')+'\x22\x20'+(_0x536ac3?_0x4384ae(0x17c):'')+_0x4384ae(0x1b3)+(!!_0x5a7515[_0x4384ae(0x154)]?_0x4384ae(0x181)+_0x5a7515['id']+'\x27)':'')+_0x4384ae(0x202)+(!_0x5a7515[_0x4384ae(0x154)]?'opacity-20\x20cursor-not-allowed':_0x4384ae(0x1ca))+_0x4384ae(0x186)+(!_0x5a7515[_0x4384ae(0x154)]?_0x4384ae(0x17c):'')+'>ล้างผลสุ่ม</button></div></td></tr>';})[_0x1f830f(0x252)](''),lucide[_0x1f830f(0x177)]();},'exportDataToCSV':()=>{const _0x3fb7d2=_0x387750;let _0x1e6a5a=state[_0x3fb7d2(0x218)][_0x3fb7d2(0x1db)](_0x5aeadd=>(_0x5aeadd['EmpName']||'')[_0x3fb7d2(0x1ce)]()['includes'](state[_0x3fb7d2(0x18b)])&&(state[_0x3fb7d2(0x255)]===''||String(_0x5aeadd[_0x3fb7d2(0x13e)])===String(state['selectedDataReward'])));if(_0x1e6a5a['length']===0x0)return window['app'][_0x3fb7d2(0x1b5)]('ไม่มีข้อมูลสำหรับดาวน์โหลด',_0x3fb7d2(0x25c));_0x1e6a5a[_0x3fb7d2(0x249)]((_0x369e4d,_0x4cc9e4)=>{const _0x4b2d03=_0x3fb7d2,_0x5a8836=_0x369e4d[state[_0x4b2d03(0x182)]],_0x150695=_0x4cc9e4[state['sortBy']];if(state[_0x4b2d03(0x182)]==='no'||!isNaN(_0x5a8836)&&!isNaN(_0x150695)&&_0x5a8836!==''&&_0x150695!=='')return state['sortOrder']===_0x4b2d03(0x1fe)?(parseFloat(_0x5a8836)||0x0)-(parseFloat(_0x150695)||0x0):(parseFloat(_0x150695)||0x0)-(parseFloat(_0x5a8836)||0x0);return state[_0x4b2d03(0x25a)]===_0x4b2d03(0x1fe)?String(_0x5a8836||'')[_0x4b2d03(0x131)](String(_0x150695||''),'th',{'numeric':!![]}):String(_0x150695||'')[_0x4b2d03(0x131)](String(_0x5a8836||''),'th',{'numeric':!![]});});const _0x3a5df4=[_0x3fb7d2(0x1b4),'ชื่อ-นามสกุล','Reward\x20(Group)',_0x3fb7d2(0x1dc),_0x3fb7d2(0x189),_0x3fb7d2(0x1f8),_0x3fb7d2(0x1bb)],_0x81bff=_0x1e6a5a['map'](_0x30f3bf=>[_0x30f3bf['no']||'',_0x30f3bf[_0x3fb7d2(0x108)]||'',_0x30f3bf[_0x3fb7d2(0x13e)]||'',formatDate(_0x30f3bf[_0x3fb7d2(0x23c)]),formatDate(_0x30f3bf['DateLogin']),formatDate(_0x30f3bf[_0x3fb7d2(0x1bd)]),_0x30f3bf[_0x3fb7d2(0x219)]||'']),_0x17a351='\ufeff'+[_0x3a5df4,..._0x81bff][_0x3fb7d2(0x107)](_0x56ae39=>_0x56ae39['map'](_0xad3b9b=>'\x22'+_0xad3b9b+'\x22')['join'](','))[_0x3fb7d2(0x252)]('\x0a'),_0x5b005a=new Blob([_0x17a351],{'type':_0x3fb7d2(0x258)}),_0x1c4ad7=document[_0x3fb7d2(0x1f3)]('a'),_0x2f35c9=URL[_0x3fb7d2(0x1a9)](_0x5b005a);_0x1c4ad7[_0x3fb7d2(0x235)](_0x3fb7d2(0x25f),_0x2f35c9),_0x1c4ad7[_0x3fb7d2(0x235)](_0x3fb7d2(0x1b9),_0x3fb7d2(0x168)+new Date()['getTime']()+'.csv'),_0x1c4ad7[_0x3fb7d2(0x13c)][_0x3fb7d2(0x1c8)]=_0x3fb7d2(0x1c7),document[_0x3fb7d2(0x18a)][_0x3fb7d2(0x1fa)](_0x1c4ad7),_0x1c4ad7['click'](),document['body'][_0x3fb7d2(0x21e)](_0x1c4ad7);},'exportLabelsToCSV':()=>{const _0x27b932=_0x387750;let _0x422ece=state['selectedLabelGroup']===''?[...state['cards']]:state[_0x27b932(0x12d)][_0x27b932(0x1db)](_0x3fa11d=>normalizeReward(_0x3fa11d[_0x27b932(0x13e)])===state[_0x27b932(0x169)]);if(_0x422ece[_0x27b932(0x10e)]===0x0)return window[_0x27b932(0x1c1)][_0x27b932(0x1b5)]('ไม่มีข้อมูลสำหรับดาวน์โหลด',_0x27b932(0x25c));_0x422ece[_0x27b932(0x249)]((_0x526ed9,_0xcfa2b)=>(parseInt(_0x526ed9[_0x27b932(0x155)])||0x0)-(parseInt(_0xcfa2b['CardNo'])||0x0));const _0x49a023=[_0x27b932(0x237),_0x27b932(0x233),_0x27b932(0x22f),_0x27b932(0x119),_0x27b932(0x154)],_0x425d77=_0x422ece['map'](_0x369190=>[_0x369190[_0x27b932(0x155)]||'',_0x369190[_0x27b932(0x13e)]||'',_0x369190[_0x27b932(0x183)]||'',_0x369190['EmpName']||'',formatDate(_0x369190[_0x27b932(0x154)])]),_0x27442b='\ufeff'+[_0x49a023,..._0x425d77][_0x27b932(0x107)](_0x42b58e=>_0x42b58e[_0x27b932(0x107)](_0x48983d=>'\x22'+_0x48983d+'\x22')[_0x27b932(0x252)](','))['join']('\x0a'),_0x3590ba=new Blob([_0x27442b],{'type':'text/csv;charset=utf-8;'}),_0x58b90d=document[_0x27b932(0x1f3)]('a'),_0x526500=URL[_0x27b932(0x1a9)](_0x3590ba);_0x58b90d[_0x27b932(0x235)]('href',_0x526500),_0x58b90d[_0x27b932(0x235)](_0x27b932(0x1b9),'labels_export_'+(state[_0x27b932(0x169)]||'all')+'_'+new Date()['getTime']()+_0x27b932(0x207)),_0x58b90d[_0x27b932(0x13c)][_0x27b932(0x1c8)]=_0x27b932(0x1c7),document['body'][_0x27b932(0x1fa)](_0x58b90d),_0x58b90d['click'](),document[_0x27b932(0x18a)][_0x27b932(0x21e)](_0x58b90d);},'renderLogTable':()=>{const _0x7e56cf=_0x387750,_0x27dfeb=document[_0x7e56cf(0x1a0)](_0x7e56cf(0x1fd)),_0x53c462=document['getElementById'](_0x7e56cf(0x1d7));if(!_0x27dfeb)return;let _0x29a390=[...state[_0x7e56cf(0x1c6)]];_0x29a390[_0x7e56cf(0x249)]((_0x2036cc,_0xf5703c)=>{const _0x5a9ac0=_0x7e56cf;let _0x4b2f9e=_0x2036cc[state[_0x5a9ac0(0x24d)]],_0x1165b9=_0xf5703c[state[_0x5a9ac0(0x24d)]];state[_0x5a9ac0(0x24d)]===_0x5a9ac0(0x154)&&(_0x4b2f9e=_0x2036cc['Datetime']?.[_0x5a9ac0(0x24e)]?_0x2036cc['Datetime']['toDate']()[_0x5a9ac0(0x1b8)]():new Date(_0x2036cc[_0x5a9ac0(0x154)])['getTime'](),_0x1165b9=_0xf5703c['Datetime']?.['toDate']?_0xf5703c[_0x5a9ac0(0x154)]['toDate']()[_0x5a9ac0(0x1b8)]():new Date(_0xf5703c['Datetime'])['getTime']());if(state[_0x5a9ac0(0x24d)]===_0x5a9ac0(0x1e4))return state[_0x5a9ac0(0x185)]===_0x5a9ac0(0x1fe)?0x1:-0x1;return state[_0x5a9ac0(0x185)]===_0x5a9ac0(0x1fe)?String(_0x4b2f9e||'')['localeCompare'](String(_0x1165b9||''),'th'):String(_0x1165b9||'')[_0x5a9ac0(0x131)](String(_0x4b2f9e||''),'th');});const _0x6bd847=_0x29a390[_0x7e56cf(0x10e)],_0x209a1c=Math[_0x7e56cf(0x21b)](_0x6bd847/state[_0x7e56cf(0x13f)])||0x1;if(state['logPage']>_0x209a1c)state[_0x7e56cf(0x251)]=_0x209a1c;const _0x55e8d1=_0x29a390[_0x7e56cf(0x206)]((state['logPage']-0x1)*0x32,state[_0x7e56cf(0x251)]*0x32);if(document['getElementById'](_0x7e56cf(0x259)))document[_0x7e56cf(0x1a0)]('log-total-count')[_0x7e56cf(0x1a3)]=_0x6bd847['toLocaleString']();_0x27dfeb['innerHTML']=_0x55e8d1[_0x7e56cf(0x107)]((_0x5ce732,_0x7ba294)=>_0x7e56cf(0x142)+((state[_0x7e56cf(0x251)]-0x1)*0x32+_0x7ba294+0x1)+_0x7e56cf(0x12c)+_0x5ce732[_0x7e56cf(0x263)]+'\x22>'+(_0x5ce732['citizenId']||'-')+_0x7e56cf(0x15a)+(_0x5ce732[_0x7e56cf(0x108)]||'-')+_0x7e56cf(0x102)+(_0x5ce732[_0x7e56cf(0x23a)]||_0x7e56cf(0x1ff))+_0x7e56cf(0x144)+(_0x5ce732['deviceID']||'-')+'</td><td\x20class=\x22px-4\x20py-3\x20text-slate-500\x20font-normal\x20text-sm\x22>'+formatDate(_0x5ce732['Datetime'])+'</td></tr>')[_0x7e56cf(0x252)]('');if(_0x53c462)_0x53c462['innerHTML']='<button\x20onclick=\x22window.app.changeLogPage(-1)\x22\x20class=\x22px-3\x20py-1\x20bg-white\x20border\x20rounded-md\x20text-xs\x20hover:bg-slate-50\x20font-bold\x22\x20'+(state[_0x7e56cf(0x251)]<=0x1?_0x7e56cf(0x17c):'')+_0x7e56cf(0x1ab)+state[_0x7e56cf(0x251)]+'/'+_0x209a1c+_0x7e56cf(0x1fb)+(state['logPage']>=_0x209a1c?_0x7e56cf(0x17c):'')+_0x7e56cf(0x12a);lucide['createIcons']();},'openDeleteLogsModal':()=>{const _0x117dfd=_0x387750;window[_0x117dfd(0x1c1)][_0x117dfd(0x13b)]('Delete','ลบประวัติรายการทั้งหมด?',_0x117dfd(0x16e),_0x117dfd(0x254),async()=>{const _0x3645b5=_0x117dfd;try{const _0x362258=await getDocs(collection(db,logCollectionPath));for(const _0x23cbdd of chunkArray(_0x362258[_0x3645b5(0x24f)],0x190)){const _0x44fa9f=writeBatch(db);_0x23cbdd[_0x3645b5(0x114)](_0x577faf=>_0x44fa9f[_0x3645b5(0x173)](_0x577faf[_0x3645b5(0x240)])),await _0x44fa9f[_0x3645b5(0x220)]();}window[_0x3645b5(0x1c1)][_0x3645b5(0x1b5)](_0x3645b5(0x199));}catch(_0x281860){window[_0x3645b5(0x1c1)][_0x3645b5(0x1b5)]('เกิดข้อผิดพลาด',_0x3645b5(0x25c));}});},'changeLogSort':_0x51326f=>{const _0x326c02=_0x387750;state[_0x326c02(0x185)]=state[_0x326c02(0x24d)]===_0x51326f?state[_0x326c02(0x185)]==='asc'?_0x326c02(0x12e):_0x326c02(0x1fe):_0x326c02(0x12e),state[_0x326c02(0x24d)]=_0x51326f,window[_0x326c02(0x1c1)][_0x326c02(0x128)]();},'exportLogsToCSV':()=>{const _0x2f2531=_0x387750;if(state['logs'][_0x2f2531(0x10e)]===0x0)return window[_0x2f2531(0x1c1)][_0x2f2531(0x1b5)](_0x2f2531(0x223),_0x2f2531(0x25c));const _0x1f34cf=['ลำดับที่','citizenId',_0x2f2531(0x108),_0x2f2531(0x23a),'deviceID',_0x2f2531(0x154)],_0x541a6d=state[_0x2f2531(0x1c6)][_0x2f2531(0x107)]((_0x1beedd,_0x4eef69)=>[_0x4eef69+0x1,'\x09'+(_0x1beedd['citizenId']||''),_0x1beedd[_0x2f2531(0x108)]||'',_0x1beedd[_0x2f2531(0x23a)]||_0x2f2531(0x1ff),_0x1beedd[_0x2f2531(0x16a)]||'',formatDate(_0x1beedd[_0x2f2531(0x154)])]),_0x225530='\ufeff'+[_0x1f34cf,..._0x541a6d][_0x2f2531(0x107)](_0x4fa1bb=>_0x4fa1bb['map'](_0x17a2cf=>'\x22'+_0x17a2cf+'\x22')[_0x2f2531(0x252)](','))[_0x2f2531(0x252)]('\x0a'),_0x589e40=new Blob([_0x225530],{'type':'text/csv;charset=utf-8;'}),_0x398989=document[_0x2f2531(0x1f3)]('a'),_0x589770=URL[_0x2f2531(0x1a9)](_0x589e40);_0x398989['setAttribute'](_0x2f2531(0x25f),_0x589770),_0x398989[_0x2f2531(0x235)](_0x2f2531(0x1b9),_0x2f2531(0x135)+new Date()[_0x2f2531(0x1b8)]()+_0x2f2531(0x207)),_0x398989['style'][_0x2f2531(0x1c8)]='hidden',document[_0x2f2531(0x18a)]['appendChild'](_0x398989),_0x398989['click'](),document[_0x2f2531(0x18a)]['removeChild'](_0x398989);},'onDataRewardFilterChange':_0x1e259d=>{const _0x32404c=_0x387750;state[_0x32404c(0x255)]=_0x1e259d,state[_0x32404c(0x156)]=0x1,window['app'][_0x32404c(0x12b)]();},'handleSearch':_0x4b383a=>{const _0x36716e=_0x387750;state['searchTerm']=_0x4b383a[_0x36716e(0x1ce)](),state[_0x36716e(0x156)]=0x1,window[_0x36716e(0x1c1)][_0x36716e(0x12b)]();},'changeRowsLimit':_0x4922e0=>{const _0x2b8a4a=_0x387750;state[_0x2b8a4a(0x1ad)]=parseInt(_0x4922e0),state[_0x2b8a4a(0x156)]=0x1,window[_0x2b8a4a(0x1c1)][_0x2b8a4a(0x12b)]();},'changePage':_0xc6c9f9=>{const _0x5c9128=_0x387750;state[_0x5c9128(0x156)]+=_0xc6c9f9,window[_0x5c9128(0x1c1)][_0x5c9128(0x12b)]();},'changeSort':_0x3c9671=>{const _0x1f508b=_0x387750;state[_0x1f508b(0x25a)]=state[_0x1f508b(0x182)]===_0x3c9671?state['sortOrder']==='asc'?_0x1f508b(0x12e):'asc':_0x3c9671==='no'?_0x1f508b(0x1fe):_0x1f508b(0x12e),state[_0x1f508b(0x182)]=_0x3c9671,window[_0x1f508b(0x1c1)][_0x1f508b(0x12b)]();},'renderTable':()=>{const _0x13ed51=_0x387750,_0x352d38=document['getElementById'](_0x13ed51(0x1eb));if(!_0x352d38||state['activeTab']!==_0x13ed51(0x113))return;let _0x663896=state[_0x13ed51(0x218)][_0x13ed51(0x1db)](_0x10c3d1=>(_0x10c3d1['EmpName']||'')[_0x13ed51(0x1ce)]()['includes'](state[_0x13ed51(0x18b)])&&(state[_0x13ed51(0x255)]===''||String(_0x10c3d1[_0x13ed51(0x13e)])===String(state[_0x13ed51(0x255)])));_0x663896[_0x13ed51(0x249)]((_0x1ac045,_0x484962)=>{const _0x19ca46=_0x13ed51,_0x895589=_0x1ac045[state[_0x19ca46(0x182)]],_0x574850=_0x484962[state[_0x19ca46(0x182)]];if(state[_0x19ca46(0x182)]==='no'||!isNaN(_0x895589)&&!isNaN(_0x574850)&&_0x895589!==''&&_0x574850!=='')return state[_0x19ca46(0x25a)]===_0x19ca46(0x1fe)?(parseFloat(_0x895589)||0x0)-(parseFloat(_0x574850)||0x0):(parseFloat(_0x574850)||0x0)-(parseFloat(_0x895589)||0x0);return state[_0x19ca46(0x25a)]===_0x19ca46(0x1fe)?String(_0x895589||'')['localeCompare'](String(_0x574850||''),'th',{'numeric':!![]}):String(_0x574850||'')['localeCompare'](String(_0x895589||''),'th',{'numeric':!![]});});const _0x795609=_0x663896[_0x13ed51(0x206)]((state[_0x13ed51(0x156)]-0x1)*state[_0x13ed51(0x1ad)],state[_0x13ed51(0x156)]*state[_0x13ed51(0x1ad)]);_0x352d38['innerHTML']=_0x795609['map'](_0x26a06a=>_0x13ed51(0x1a1)+(_0x26a06a['no']||'-')+_0x13ed51(0x194)+(_0x26a06a[_0x13ed51(0x108)]||'-')+'</td><td\x20class=\x22px-6\x20py-4\x20font-normal\x20font-bold\x22>'+(_0x26a06a[_0x13ed51(0x13e)]||'-')+_0x13ed51(0x137)+formatDate(_0x26a06a[_0x13ed51(0x23c)])+_0x13ed51(0x214)+formatDate(_0x26a06a[_0x13ed51(0x1b7)])+_0x13ed51(0x214)+formatDate(_0x26a06a[_0x13ed51(0x1bd)])+'</td><td\x20class=\x22px-6\x20py-4\x20font-bold\x20text-indigo-600\x20font-normal\x20font-bold\x22>'+(_0x26a06a[_0x13ed51(0x219)]||'-')+_0x13ed51(0x11d)+_0x26a06a['id']+'\x27)\x22\x20class=\x22text-red-400\x20hover:text-red-600\x20transition\x20p-1\x22><i\x20data-lucide=\x22trash-2\x22\x20width=\x2218\x22></i></button></td></tr>')['join']('');if(document[_0x13ed51(0x1a0)](_0x13ed51(0x172)))document[_0x13ed51(0x1a0)]('data-table-info')[_0x13ed51(0x1a3)]='แสดง\x20'+_0x795609[_0x13ed51(0x10e)]+_0x13ed51(0x22d)+_0x663896[_0x13ed51(0x10e)]+_0x13ed51(0x1ae);const _0x256872=document[_0x13ed51(0x1a0)](_0x13ed51(0x120));if(_0x256872)_0x256872[_0x13ed51(0x127)]=_0x13ed51(0x236)+(state['currentPage']<=0x1?_0x13ed51(0x17c):'')+_0x13ed51(0x232)+state[_0x13ed51(0x156)]+_0x13ed51(0x253)+(state[_0x13ed51(0x156)]*state['rowsPerPage']>=_0x663896['length']?_0x13ed51(0x17c):'')+_0x13ed51(0x257);lucide[_0x13ed51(0x177)]();},'openResetModal':()=>{const _0x3b42f3=_0x387750;window['app'][_0x3b42f3(0x13b)]('Reset',_0x3b42f3(0x15e),_0x3b42f3(0x165),_0x3b42f3(0x17a),async()=>{const _0x241835=_0x3b42f3;try{const _0x900b93=await getDocs(collection(db,finalCollectionPath)),_0xb57ca=writeBatch(db);_0x900b93[_0x241835(0x24f)][_0x241835(0x114)](_0x1ebdfd=>_0xb57ca[_0x241835(0x230)](_0x1ebdfd['ref'],{'DateLogin':'','StatusReward':'','DateReward':'','DateCheck':''})),await _0xb57ca[_0x241835(0x220)](),window[_0x241835(0x1c1)][_0x241835(0x1b5)](_0x241835(0x21c));}catch(_0x1ca454){window['app'][_0x241835(0x1b5)](_0x241835(0x126),_0x241835(0x25c));}});},'openDeleteModal':()=>{const _0x5930cd=_0x387750;window[_0x5930cd(0x1c1)][_0x5930cd(0x13b)]('Delete',_0x5930cd(0x1e9),_0x5930cd(0x10a),_0x5930cd(0x254),async()=>{const _0x3b6efd=_0x5930cd;try{const _0x708f2a=await getDocs(collection(db,finalCollectionPath));for(const _0x4fd5b0 of chunkArray(_0x708f2a[_0x3b6efd(0x24f)],0x190)){const _0x409fcf=writeBatch(db);_0x4fd5b0['forEach'](_0x42b243=>_0x409fcf[_0x3b6efd(0x173)](_0x42b243['ref'])),await _0x409fcf[_0x3b6efd(0x220)]();}window[_0x3b6efd(0x1c1)][_0x3b6efd(0x1b5)]('ลบสำเร็จ');}catch(_0x55c263){window['app'][_0x3b6efd(0x1b5)]('เกิดข้อผิดพลาด',_0x3b6efd(0x25c));}});},'openDeleteLabelsModal':()=>{const _0x413179=_0x387750;window['app'][_0x413179(0x13b)](_0x413179(0x1f7),_0x413179(0x184),_0x413179(0x208),'red',async()=>{const _0x544d8b=_0x413179;try{const _0x2b86c9=await getDocs(collection(db,cardCollectionPath));for(const _0x355f04 of chunkArray(_0x2b86c9[_0x544d8b(0x24f)],0x190)){const _0x2d385e=writeBatch(db);_0x355f04[_0x544d8b(0x114)](_0x477af6=>_0x2d385e[_0x544d8b(0x173)](_0x477af6[_0x544d8b(0x240)])),await _0x2d385e[_0x544d8b(0x220)]();}const _0x279410=await getDocs(collection(db,finalCollectionPath));for(const _0x1dbfbf of chunkArray(_0x279410[_0x544d8b(0x24f)],0x190)){const _0x3ccd9d=writeBatch(db);_0x1dbfbf[_0x544d8b(0x114)](_0x2e8f6e=>_0x3ccd9d[_0x544d8b(0x230)](_0x2e8f6e[_0x544d8b(0x240)],{'DateLogin':'','StatusReward':'','DateReward':'','CardNo':''})),await _0x3ccd9d['commit']();}window[_0x544d8b(0x1c1)][_0x544d8b(0x1b5)](_0x544d8b(0x10f));}catch(_0x395617){window[_0x544d8b(0x1c1)][_0x544d8b(0x1b5)](_0x544d8b(0x126),_0x544d8b(0x25c));}});},'openCreateLabelsModal':()=>{const _0xfd0a57=_0x387750;window[_0xfd0a57(0x1c1)][_0xfd0a57(0x13b)](_0xfd0a57(0x153),_0xfd0a57(0x175),_0xfd0a57(0x1bc),'indigo',async()=>{const _0x14c467=_0xfd0a57;try{await window[_0x14c467(0x1c1)][_0x14c467(0x16b)](),window['app']['showToast']('สร้างฉลากใหม่สำเร็จ');}catch(_0x12f480){window[_0x14c467(0x1c1)][_0x14c467(0x1b5)](_0x14c467(0x126),_0x14c467(0x25c));}});},'generateLabels':async()=>{const _0x2f6ec6=_0x387750;if(state[_0x2f6ec6(0x218)][_0x2f6ec6(0x10e)]===0x0){window[_0x2f6ec6(0x1c1)][_0x2f6ec6(0x1b5)](_0x2f6ec6(0x1ec),_0x2f6ec6(0x25c));return;}const _0x411d25=await getDocs(collection(db,cardCollectionPath));for(const _0x5753e1 of chunkArray(_0x411d25[_0x2f6ec6(0x24f)],0x190)){const _0x9df98a=writeBatch(db);_0x5753e1[_0x2f6ec6(0x114)](_0x2337d2=>_0x9df98a[_0x2f6ec6(0x173)](_0x2337d2[_0x2f6ec6(0x240)])),await _0x9df98a[_0x2f6ec6(0x220)]();}const _0x3605e9={},_0x1755a3=state[_0x2f6ec6(0x218)][_0x2f6ec6(0x107)](_0x5660e2=>{const _0x448f2d=_0x2f6ec6,_0x2b7da6=String(_0x5660e2['Reward']||'ไม่ระบุกลุ่ม')[_0x448f2d(0x117)]();return _0x3605e9[_0x2b7da6]=(_0x3605e9[_0x2b7da6]||0x0)+0x1,{'Reward':_0x2b7da6,'rewardname':'','CardNo':String(_0x3605e9[_0x2b7da6]),'EmpName':'','citizenId':'','Datetime':''};});for(const _0x2a285a of chunkArray(_0x1755a3,0x190)){const _0x2ad45d=writeBatch(db);_0x2a285a[_0x2f6ec6(0x114)](_0xc50163=>_0x2ad45d[_0x2f6ec6(0x1ac)](doc(collection(db,cardCollectionPath)),_0xc50163)),await _0x2ad45d[_0x2f6ec6(0x220)]();}},'handleFileSelect':_0xfb483d=>{const _0x307831=_0x387750,_0x307dbf=_0xfb483d[_0x307831(0x1b0)][_0x307831(0x143)][0x0];_0x307dbf&&(document[_0x307831(0x1a0)](_0x307831(0x14b))[_0x307831(0x1a3)]=_0x307dbf[_0x307831(0x205)],document[_0x307831(0x1a0)](_0x307831(0x1a6))[_0x307831(0x18c)][_0x307831(0x1ea)](_0x307831(0x1c7)),document['getElementById'](_0x307831(0x21f))[_0x307831(0x17c)]=![]);},'clearFileSelection':()=>{const _0x490dab=_0x387750;document['getElementById'](_0x490dab(0x20a))[_0x490dab(0x1f4)]='',document[_0x490dab(0x1a0)](_0x490dab(0x1a6))[_0x490dab(0x18c)][_0x490dab(0x15d)](_0x490dab(0x1c7)),document[_0x490dab(0x1a0)](_0x490dab(0x21f))[_0x490dab(0x17c)]=!![];},'processImport':async()=>{const _0x4849a2=_0x387750,_0x4bc565=document[_0x4849a2(0x1a0)](_0x4849a2(0x20a)),_0x58d911=_0x4bc565[_0x4849a2(0x143)][0x0];if(!_0x58d911)return;document[_0x4849a2(0x1a0)](_0x4849a2(0x106))[_0x4849a2(0x18c)]['remove'](_0x4849a2(0x1c7));const _0x26ef47=document[_0x4849a2(0x1a0)](_0x4849a2(0x180)),_0x368f7b=new FileReader();_0x368f7b[_0x4849a2(0x1e1)]=async _0x19d4a7=>{const _0x37cd8e=_0x4849a2;try{const _0x2c79c9=_0x58d911[_0x37cd8e(0x205)][_0x37cd8e(0x227)](_0x37cd8e(0x226))?JSON[_0x37cd8e(0x10b)](_0x19d4a7[_0x37cd8e(0x1b0)][_0x37cd8e(0x1cc)]):csvToJson(_0x19d4a7[_0x37cd8e(0x1b0)]['result']),_0x5cf5c0=_0x2c79c9[_0x37cd8e(0x10e)];for(let _0x31d8bb=0x0;_0x31d8bb<_0x5cf5c0;_0x31d8bb+=0x190){const _0x8ee8f7=_0x2c79c9[_0x37cd8e(0x206)](_0x31d8bb,_0x31d8bb+0x190),_0x3defb0=writeBatch(db),_0x4eb959=_0x8ee8f7[_0x37cd8e(0x107)](async(_0x5320fe,_0x5e3837)=>{const _0x28cba2=_0x37cd8e,_0x273630=String(_0x5320fe[_0x28cba2(0x263)]||'')[_0x28cba2(0x11c)](/-/g,'')[_0x28cba2(0x117)](),_0x38fe7f=await sha256(_0x273630),_0x493bb2=_0x5320fe[_0x28cba2(0x108)]||_0x5320fe[_0x28cba2(0x246)]||'',_0x59436e=(_0x31d8bb+_0x5e3837+0x1)['toString'](),_0x4d6cb9=doc(collection(db,finalCollectionPath));_0x3defb0[_0x28cba2(0x1ac)](_0x4d6cb9,{'citizenId':_0x38fe7f,'no':_0x59436e,'EmpName':_0x493bb2,'Dateworking':_0x5320fe[_0x28cba2(0x11a)]||'','Datework':_0x5320fe[_0x28cba2(0x23d)]||'','Reward':_0x5320fe[_0x28cba2(0x13e)]||'','DateLogin':_0x5320fe[_0x28cba2(0x1b7)]||'','StatusReward':_0x5320fe[_0x28cba2(0x219)]||'','DateReward':_0x5320fe[_0x28cba2(0x1bd)]||'','DateCheck':_0x5320fe[_0x28cba2(0x23c)]||'','importedAt':serverTimestamp()});});await Promise[_0x37cd8e(0x211)](_0x4eb959),await _0x3defb0['commit'](),_0x26ef47[_0x37cd8e(0x13c)][_0x37cd8e(0x1de)]=Math[_0x37cd8e(0x115)](0x64,Math[_0x37cd8e(0x25d)]((_0x31d8bb+_0x8ee8f7['length'])/_0x5cf5c0*0x64))+'%';}window[_0x37cd8e(0x1c1)][_0x37cd8e(0x1b5)](_0x37cd8e(0x19b)),window[_0x37cd8e(0x1c1)]['clearFileSelection']();}catch(_0x43085d){window['app']['showToast'](_0x37cd8e(0x191)+_0x43085d[_0x37cd8e(0x18d)],_0x37cd8e(0x25c));}finally{document[_0x37cd8e(0x1a0)](_0x37cd8e(0x106))['classList'][_0x37cd8e(0x15d)](_0x37cd8e(0x1c7));}},_0x368f7b[_0x4849a2(0x203)](_0x58d911);},'refreshCharts':()=>{const _0x822214=_0x387750,_0x4c2183=document[_0x822214(0x1a0)](_0x822214(0x198));if(_0x4c2183){if(window[_0x822214(0x1d5)])window[_0x822214(0x1d5)][_0x822214(0x141)]();const _0x5dc1b3=state[_0x822214(0x218)][_0x822214(0x1db)](_0x4d19da=>_0x4d19da['DateCheck']&&_0x4d19da[_0x822214(0x23c)]!=='')[_0x822214(0x10e)];window[_0x822214(0x1d5)]=new Chart(_0x4c2183,{'type':'doughnut','data':{'labels':[_0x822214(0x1e0),'ยังไม่ลงทะเบียน'],'datasets':[{'data':[_0x5dc1b3,Math['max'](0x0,state['users']['length']-_0x5dc1b3)],'backgroundColor':[_0x822214(0x248),'#e2e8f0']}]},'options':{'maintainAspectRatio':![]}});}const _0x14527a=document[_0x822214(0x1a0)](_0x822214(0x148));if(_0x14527a){if(window[_0x822214(0x14a)])window[_0x822214(0x14a)][_0x822214(0x141)]();window[_0x822214(0x14a)]=new Chart(_0x14527a,{'type':_0x822214(0x152),'data':{'labels':Array[_0x822214(0x19c)]({'length':0x18},(_0x5d8d00,_0x2c718a)=>_0x2c718a+_0x822214(0x1d4)),'datasets':[{'label':_0x822214(0x1e7),'data':state[_0x822214(0x14c)],'borderColor':_0x822214(0x1ef),'fill':!![],'tension':0.4}]},'options':{'maintainAspectRatio':![]}});}window['app']['renderManualHistory']();},'renderManualHistory':()=>{const _0x1c599f=_0x387750,_0x529dc5=document[_0x1c599f(0x1a0)]('recent-activity-list'),_0x25ee0a=state[_0x1c599f(0x218)][_0x1c599f(0x1db)](_0x4324bd=>_0x4324bd['DateCheck']&&_0x4324bd['DateCheck']!=='')[_0x1c599f(0x249)]((_0x121834,_0x4f3ced)=>{const _0x40554c=_0x1c599f,_0x585967=_0x121834[_0x40554c(0x23c)]?.['toDate']?_0x121834['DateCheck'][_0x40554c(0x24e)]():new Date(_0x121834[_0x40554c(0x23c)]),_0xb20810=_0x4f3ced[_0x40554c(0x23c)]?.[_0x40554c(0x24e)]?_0x4f3ced[_0x40554c(0x23c)][_0x40554c(0x24e)]():new Date(_0x4f3ced['DateCheck']);return _0xb20810-_0x585967;})[_0x1c599f(0x206)](0x0,0xa);_0x529dc5&&(_0x529dc5[_0x1c599f(0x127)]=_0x25ee0a['length']?_0x25ee0a[_0x1c599f(0x107)](_0x5ee287=>_0x1c599f(0x25b)+(_0x5ee287[_0x1c599f(0x108)]||_0x1c599f(0x1e5))+_0x1c599f(0x12f)+(_0x5ee287[_0x1c599f(0x13e)]||'-')+'</span>\x20<div\x20class=\x22text-[10px]\x20text-slate-400\x20mt-1\x20font-normal\x22>ลงทะเบียนเมื่อ\x20'+formatDate(_0x5ee287['DateCheck'])+'</div></div>')['join'](''):_0x1c599f(0x1a7));},'resetMemberData':async _0x36eace=>{const _0x47dcf6=_0x387750;if(!confirm(_0x47dcf6(0x1a4)))return;try{await updateDoc(doc(db,finalCollectionPath,_0x36eace),{'DateLogin':'','StatusReward':'','DateReward':'','DateCheck':''}),window[_0x47dcf6(0x1c1)][_0x47dcf6(0x1b5)]('สำเร็จ');}catch(_0x43d23e){window[_0x47dcf6(0x1c1)]['showToast']('ผิดพลาด',_0x47dcf6(0x25c));}},'resetLabelRecord':async _0x4b3b3a=>{const _0x32b438=_0x387750;if(!confirm(_0x32b438(0x16d)))return;try{await updateDoc(doc(db,cardCollectionPath,_0x4b3b3a),{'EmpName':'','Datetime':'','citizenId':''}),window[_0x32b438(0x1c1)][_0x32b438(0x1b5)]('ล้างข้อมูลแล้ว');}catch(_0x3688e0){window[_0x32b438(0x1c1)]['showToast']('ผิดพลาด',_0x32b438(0x25c));}},'openEditRewardModal':(_0x23c97e,_0x27487f)=>{const _0x28fe75=_0x387750;document[_0x28fe75(0x1a0)]('edit-reward-input')[_0x28fe75(0x1f4)]=_0x27487f,document[_0x28fe75(0x1a0)](_0x28fe75(0x140))['onclick']=async()=>{const _0x266de9=_0x28fe75,_0x16f881=document[_0x266de9(0x1a0)](_0x266de9(0x149))['value'][_0x266de9(0x117)]();try{await updateDoc(doc(db,cardCollectionPath,_0x23c97e),{'rewardname':_0x16f881}),window[_0x266de9(0x1c1)][_0x266de9(0x1b5)](_0x266de9(0x15c)),window[_0x266de9(0x1c1)][_0x266de9(0x1d6)]();}catch(_0x3e9880){window[_0x266de9(0x1c1)]['showToast'](_0x266de9(0x23e),'error');}},document[_0x28fe75(0x1a0)](_0x28fe75(0x250))[_0x28fe75(0x18c)][_0x28fe75(0x1ea)](_0x28fe75(0x1c7));},'showLabelModal':(_0x29222d,_0x34d57f,_0x3a217e,_0x185c05,_0x110930)=>{const _0x2063af=_0x387750,_0x5baabc=document[_0x2063af(0x1a0)]('label-confirm-modal'),_0x4ddfc=document[_0x2063af(0x1a0)](_0x2063af(0x187));document[_0x2063af(0x1a0)](_0x2063af(0x190))['innerText']=_0x34d57f,document[_0x2063af(0x1a0)](_0x2063af(0x201))[_0x2063af(0x1a3)]=_0x3a217e;const _0x48e611=document['getElementById'](_0x2063af(0x213));_0x48e611[_0x2063af(0x20f)]=_0x2063af(0x13a)+_0x185c05+_0x2063af(0x150)+_0x185c05+_0x2063af(0x1d1),_0x48e611[_0x2063af(0x127)]='<i\x20data-lucide=\x22'+(_0x29222d===_0x2063af(0x1f7)?_0x2063af(0x1be):'check-circle')+_0x2063af(0x1e6),document[_0x2063af(0x1a0)]('label-modal-input-container')[_0x2063af(0x18c)][_0x2063af(0x1ea)](_0x2063af(0x1c7));const _0x363ade=document[_0x2063af(0x1a0)](_0x2063af(0x19f));_0x363ade[_0x2063af(0x1f4)]='',_0x363ade[_0x2063af(0x262)]='พิมพ์\x20'+_0x29222d+_0x2063af(0x146),_0x4ddfc[_0x2063af(0x20f)]=_0x2063af(0x171)+(_0x185c05==='red'?_0x2063af(0x162):_0x185c05===_0x2063af(0x17a)?'orange-600':'indigo-600')+_0x2063af(0x124),_0x4ddfc[_0x2063af(0x1a3)]=_0x2063af(0x111),_0x4ddfc[_0x2063af(0x222)]=async()=>{const _0x166872=_0x2063af;if(_0x363ade[_0x166872(0x1f4)]!==_0x29222d)return window[_0x166872(0x1c1)][_0x166872(0x1b5)]('คำยืนยันไม่ถูกต้อง','error');_0x4ddfc['disabled']=!![],_0x4ddfc[_0x166872(0x1a3)]=_0x166872(0x228);try{await _0x110930(),window['app']['closeLabelModal']();}finally{_0x4ddfc[_0x166872(0x17c)]=![],_0x4ddfc[_0x166872(0x1a3)]=_0x166872(0x111);}},_0x5baabc['classList'][_0x2063af(0x1ea)](_0x2063af(0x1c7)),lucide[_0x2063af(0x177)]();},'closeLabelModal':()=>document['getElementById'](_0x387750(0x17d))[_0x387750(0x18c)][_0x387750(0x15d)](_0x387750(0x1c7)),'closeEditRewardModal':()=>document[_0x387750(0x1a0)](_0x387750(0x250))[_0x387750(0x18c)][_0x387750(0x15d)]('hidden'),'closeGeneralModal':()=>document[_0x387750(0x1a0)](_0x387750(0x133))[_0x387750(0x18c)]['add'](_0x387750(0x1c7)),'onLabelGroupChange':_0x17282d=>{const _0x967271=_0x387750;state[_0x967271(0x169)]=normalizeReward(_0x17282d),state['labelPage']=0x1,window[_0x967271(0x1c1)][_0x967271(0x245)]();},'onDataRewardFilterChange':_0x420382=>{const _0x698beb=_0x387750;state['selectedDataReward']=_0x420382,state[_0x698beb(0x156)]=0x1,window[_0x698beb(0x1c1)]['renderTable']();},'handleSearch':_0x1b0025=>{const _0x10e6b0=_0x387750;state[_0x10e6b0(0x18b)]=_0x1b0025[_0x10e6b0(0x1ce)](),state[_0x10e6b0(0x156)]=0x1,window[_0x10e6b0(0x1c1)][_0x10e6b0(0x12b)]();},'changeRowsLimit':_0x1d47ee=>{const _0x269163=_0x387750;state[_0x269163(0x1ad)]=parseInt(_0x1d47ee),state[_0x269163(0x156)]=0x1,window[_0x269163(0x1c1)]['renderTable']();},'changePage':_0x24dfcd=>{const _0x2e5469=_0x387750;state['currentPage']+=_0x24dfcd,window[_0x2e5469(0x1c1)][_0x2e5469(0x12b)]();},'changeSort':_0x3a950f=>{const _0x2f4b76=_0x387750;state['sortOrder']=state[_0x2f4b76(0x182)]===_0x3a950f?state[_0x2f4b76(0x25a)]===_0x2f4b76(0x1fe)?'desc':_0x2f4b76(0x1fe):_0x3a950f==='no'?_0x2f4b76(0x1fe):_0x2f4b76(0x12e),state['sortBy']=_0x3a950f,window[_0x2f4b76(0x1c1)][_0x2f4b76(0x12b)]();},'changeLogPage':_0x48b520=>{const _0x372756=_0x387750;state[_0x372756(0x251)]+=_0x48b520,window[_0x372756(0x1c1)][_0x372756(0x128)]();},'changeLogSort':_0x541461=>{const _0x498ed3=_0x387750;state[_0x498ed3(0x185)]=state[_0x498ed3(0x24d)]===_0x541461?state[_0x498ed3(0x185)]===_0x498ed3(0x1fe)?_0x498ed3(0x12e):_0x498ed3(0x1fe):'desc',state[_0x498ed3(0x24d)]=_0x541461,window['app'][_0x498ed3(0x128)]();}};async function init(){const _0x55ed66=_0x387750;try{if(typeof __initial_auth_token!==_0x55ed66(0x1da)&&__initial_auth_token)await signInWithCustomToken(auth,__initial_auth_token);else await signInAnonymously(auth);document['getElementById'](_0x55ed66(0x14e))?.['classList'][_0x55ed66(0x11c)](_0x55ed66(0x100),_0x55ed66(0x161));if(document[_0x55ed66(0x1a0)]('status-text'))document[_0x55ed66(0x1a0)](_0x55ed66(0x225))[_0x55ed66(0x1a3)]=_0x55ed66(0x1ed);onSnapshot(collection(db,finalCollectionPath),_0x5c73a4=>{const _0x220af8=_0x55ed66;state[_0x220af8(0x218)]=_0x5c73a4[_0x220af8(0x24f)][_0x220af8(0x107)](_0x1ad837=>({'id':_0x1ad837['id'],..._0x1ad837[_0x220af8(0x113)]()})),document['getElementById']('stat-checkin')[_0x220af8(0x1a3)]=_0x5c73a4[_0x220af8(0x14f)][_0x220af8(0x19a)](),document[_0x220af8(0x1a0)]('manage-total-docs')[_0x220af8(0x1a3)]=_0x5c73a4['size'][_0x220af8(0x19a)]();const _0x4e9cba=state[_0x220af8(0x218)][_0x220af8(0x1db)](_0x300c81=>_0x300c81[_0x220af8(0x23c)]&&_0x300c81['DateCheck']!=='')[_0x220af8(0x10e)];document[_0x220af8(0x1a0)]('stat-checkout')[_0x220af8(0x1a3)]=_0x4e9cba[_0x220af8(0x19a)](),document[_0x220af8(0x1a0)]('stat-percent')[_0x220af8(0x1a3)]=_0x5c73a4[_0x220af8(0x14f)]>0x0?(_0x4e9cba/_0x5c73a4[_0x220af8(0x14f)]*0x64)[_0x220af8(0x139)](0x1)+'%':'0%';const _0x4e2ac6=Array(0x18)[_0x220af8(0x196)](0x0);state[_0x220af8(0x218)][_0x220af8(0x114)](_0x57df97=>{const _0x20d8b9=_0x220af8;if(_0x57df97[_0x20d8b9(0x23c)])try{let _0x135ae4=_0x57df97['DateCheck'][_0x20d8b9(0x24e)]?_0x57df97[_0x20d8b9(0x23c)][_0x20d8b9(0x24e)]():new Date(_0x57df97[_0x20d8b9(0x23c)]);if(!isNaN(_0x135ae4[_0x20d8b9(0x1b8)]()))_0x4e2ac6[_0x135ae4[_0x20d8b9(0x200)]()]++;}catch(_0x3a1301){}}),state['hourlyData']=_0x4e2ac6;const _0x33d15f=[...new Set(state[_0x220af8(0x218)][_0x220af8(0x107)](_0x3024b5=>String(_0x3024b5[_0x220af8(0x13e)]||'')[_0x220af8(0x117)]())['filter'](_0x44e831=>_0x44e831!==''))]['sort']((_0x4e01d0,_0x2548b7)=>_0x4e01d0['localeCompare'](_0x2548b7)),_0x50b99f=document[_0x220af8(0x1a0)](_0x220af8(0x20e));if(_0x50b99f){const _0xc39394=_0x50b99f['value'];_0x50b99f[_0x220af8(0x127)]=_0x220af8(0x1c2)+_0x33d15f[_0x220af8(0x107)](_0x4fa8d2=>_0x220af8(0x145)+_0x4fa8d2+'\x22>'+_0x4fa8d2+_0x220af8(0x1dd))[_0x220af8(0x252)](''),_0x50b99f[_0x220af8(0x1f4)]=_0x33d15f[_0x220af8(0x1c4)](_0xc39394)?_0xc39394:'';}window[_0x220af8(0x1c1)]['renderTable'](),window[_0x220af8(0x1c1)][_0x220af8(0x151)](),window['app']['renderWinnersView'](),window[_0x220af8(0x1c1)][_0x220af8(0x16f)]();}),onSnapshot(collection(db,cardCollectionPath),_0x27e4ff=>{const _0x3dd072=_0x55ed66;state[_0x3dd072(0x12d)]=_0x27e4ff[_0x3dd072(0x24f)][_0x3dd072(0x107)](_0x2781d4=>({'id':_0x2781d4['id'],..._0x2781d4[_0x3dd072(0x113)]()}));const _0x4bc67f=[_0x3dd072(0x15b),_0x3dd072(0x24c),_0x3dd072(0x229),_0x3dd072(0x234)],_0x31f2e5={};_0x4bc67f[_0x3dd072(0x114)](_0x4724df=>_0x31f2e5[_0x4724df]={'total':0x0,'used':0x0}),state['cards'][_0x3dd072(0x114)](_0x51a4cf=>{const _0x189957=_0x3dd072,_0x36849c=normalizeReward(_0x51a4cf[_0x189957(0x13e)]);if(_0x31f2e5['hasOwnProperty'](_0x36849c)){_0x31f2e5[_0x36849c][_0x189957(0x1a5)]++;if(_0x51a4cf[_0x189957(0x154)]&&_0x51a4cf[_0x189957(0x154)]!=='')_0x31f2e5[_0x36849c][_0x189957(0x1a2)]++;}}),_0x4bc67f[_0x3dd072(0x114)](_0x379704=>{const _0x2321c7=_0x3dd072,_0x6576e3=_0x31f2e5[_0x379704],_0x273974=_0x6576e3['total']>0x0?Math[_0x2321c7(0x25d)](_0x6576e3[_0x2321c7(0x1a2)]/_0x6576e3['total']*0x64):0x0;if(document[_0x2321c7(0x1a0)](_0x2321c7(0x25e)+_0x379704))document[_0x2321c7(0x1a0)]('card-total-'+_0x379704)[_0x2321c7(0x127)]=_0x6576e3[_0x2321c7(0x1a5)][_0x2321c7(0x19a)]()+_0x2321c7(0x261);if(document[_0x2321c7(0x1a0)](_0x2321c7(0x217)+_0x379704))document[_0x2321c7(0x1a0)]('card-used-'+_0x379704)[_0x2321c7(0x1a3)]=_0x6576e3[_0x2321c7(0x1a2)][_0x2321c7(0x19a)]();if(document[_0x2321c7(0x1a0)](_0x2321c7(0x212)+_0x379704))document[_0x2321c7(0x1a0)](_0x2321c7(0x212)+_0x379704)[_0x2321c7(0x1a3)]=_0x273974+'%';if(document[_0x2321c7(0x1a0)](_0x2321c7(0x14d)+_0x379704))document[_0x2321c7(0x1a0)](_0x2321c7(0x14d)+_0x379704)['style'][_0x2321c7(0x1de)]=_0x273974+'%';});const _0x43f408=[...new Set(state['cards'][_0x3dd072(0x107)](_0x161b2b=>normalizeReward(_0x161b2b[_0x3dd072(0x13e)])))][_0x3dd072(0x1db)](_0x18c39b=>_0x18c39b!=='')['sort']((_0x5ad04f,_0xe6bd89)=>_0x5ad04f['localeCompare'](_0xe6bd89,undefined,{'numeric':!![]})),_0x41fba8=document[_0x3dd072(0x1a0)](_0x3dd072(0x209));if(_0x41fba8){const _0x323495=_0x41fba8[_0x3dd072(0x1f4)];_0x41fba8[_0x3dd072(0x127)]=_0x3dd072(0x166)+_0x43f408['map'](_0x36fdd1=>_0x3dd072(0x145)+_0x36fdd1+'\x22>'+_0x36fdd1+_0x3dd072(0x1dd))[_0x3dd072(0x252)](''),_0x41fba8[_0x3dd072(0x1f4)]=_0x323495||'';}window['app']['renderLabelTable'](),window[_0x3dd072(0x1c1)][_0x3dd072(0x241)]();}),onSnapshot(collection(db,logCollectionPath),_0x332c17=>{const _0x33cc48=_0x55ed66;state[_0x33cc48(0x1c6)]=_0x332c17[_0x33cc48(0x24f)][_0x33cc48(0x107)](_0x5b5b08=>({'id':_0x5b5b08['id'],..._0x5b5b08[_0x33cc48(0x113)]()}));if(state[_0x33cc48(0x1d0)]==='logs')window[_0x33cc48(0x1c1)][_0x33cc48(0x128)]();}),window[_0x55ed66(0x1c1)]['switchTab'](state[_0x55ed66(0x1d0)]);}catch(_0x65956d){console['error'](_0x65956d);}}function _0x22c0(){const _0x3121db=['label-modal-input','getElementById','<tr\x20class=\x22hover:bg-indigo-50/30\x20transition\x20border-b\x20border-slate-100\x20font-bold\x20text-slate-800\x20font-normal\x20text-sm\x22><td\x20class=\x22px-6\x20py-4\x20text-slate-600\x20font-normal\x22>','used','innerText','ยืนยันการล้างข้อมูล?','total','file-info','<div\x20class=\x22text-center\x20text-slate-300\x20py-8\x20text-base\x20font-medium\x22>ไม่มีกิจกรรม</div>','amber','createObjectURL','winners-container','>Prev</button><span\x20class=\x22text-xs\x20font-bold\x20px-2\x22>Page\x20','set','rowsPerPage','\x20รายการ','push','target','9399483kWgmbH','ระบบจัดการฉลาก','>แก้ไข</button><button\x20onclick=\x22','NO.','showToast','1070273157855','DateLogin','getTime','download','\x20p-5\x20rounded-2xl\x20shadow-xl\x20border\x20border-white/10\x20flex\x20flex-col\x20transition-all\x20hover:shadow-2xl\x20hover:scale-[1.02]\x20h-full\x20','รางวัล\x20(StatusReward)','ยืนยันการสร้างสลากใหม่โดยอ้างอิงจากรายชื่อสมาชิกที่มีอยู่จริงในระบบ','DateReward','trash-2','data-summary-container','2OjFEfk','app','<option\x20value=\x22\x22>--\x20ทั้งหมด\x20--</option>','digest','includes','44057cppJNq','logs','hidden','visibility','div','hover:bg-red-50','4160488JmBhQl','result','artifacts/','toLowerCase','</span><span\x20class=\x22text-xs\x20text-','activeTab','-600\x20font-bold','winners','bg-white/30',':00','regPie','closeEditRewardModal','log-pagination-controls','Outsources_log','bg-rose-600','undefined','filter','Login\x20(DateCheck)','</option>','width','>Prev</button><span\x20class=\x22text-sm\x20self-center\x20font-bold\x20px-2\x22>หน้า\x20','ลงทะเบียนแล้ว','onload','view-','text-white','index','Unknown','\x22\x20width=\x2232\x22></i>','ความถี่การลงทะเบียน','</div><div\x20class=\x22bg-slate-50\x20p-5\x20border-t\x22><div\x20class=\x22flex\x20justify-between\x20items-center\x20mb-1.5\x20font-bold\x22><span\x20class=\x22text-[12px]\x20text-slate-500\x22>สถิติการสุ่มรางวัล</span><span\x20class=\x22text-xs\x20text-slate-700\x22>','ลบข้อมูลพนักงานทั้งหมด?','remove','table-body','ยังไม่มีข้อมูลสมาชิก','Online','418983jrGwLn','#3b82f6','default-app-id','dashboard','3901527rlidmH','createElement','value','registered','bg-slate-700','Delete','สุ่มครั้งที่\x202\x20(DateReward)','toLocaleDateString','appendChild','</span><button\x20onclick=\x22window.app.changeLogPage(1)\x22\x20class=\x22px-3\x20py-1\x20bg-white\x20border\x20rounded-md\x20text-xs\x20hover:bg-slate-50\x20font-bold\x22\x20','5BiSzBb','log-table-body','asc','Success','getHours','label-modal-message','\x22\x20class=\x22text-red-500\x20font-bold\x20text-xs\x20p-1\x20px-2\x20border\x20border-red-200\x20rounded-lg\x20','readAsText','<div\x20class=\x22bg-white\x20rounded-[2rem]\x20shadow-sm\x20border\x20border-slate-100\x20flex\x20flex-col\x20overflow-hidden\x20transition-all\x20hover:shadow-lg\x22><div\x20class=\x22bg-','name','slice','.csv','พิมพ์\x20Delete\x20เพื่อลบสลากทั้งหมดออกจากระบบและรีเซ็ตสถานะสุ่ม','label-group-select','file-upload','current-time','(ไม่มีของรางวัล)','blue','filter-data-reward','className','\x20บาท</h4></div><div\x20class=\x22bg-','all','card-percent-','label-modal-icon','</td><td\x20class=\x22px-6\x20py-4\x20text-slate-500\x20font-normal\x20font-bold\x22>','970988BSIMWY','querySelectorAll','card-used-','users','StatusReward','</td><td\x20class=\x22px-6\x20font-bold\x20text-slate-800\x20font-bold\x22>','ceil','รีเซ็ตสำเร็จ','\x20<span\x20class=\x22text-xs\x20font-normal\x20opacity-70\x22>ราย</span></h3><div\x20class=\x22mt-2\x20flex\x20justify-between\x20items-baseline\x20font-bold\x22><span\x20class=\x22text-sm\x22>','removeChild','btn-import','commit','</p><h3\x20class=\x22text-3xl\x20font-black\x20mt-1\x20leading-tight\x22>','onclick','ไม่มีข้อมูลสำหรับดาวน์โหลด','reduce','status-text','.json','endsWith','กำลังดำเนินการ...','3000','toString','.nav-item','\x20-\x20','\x20จาก\x20','กลุ่มรางวัล\x20','ของรางวัล\x20(Reward\x20Name)','update','</span><span\x20class=\x22text-[9px]\x20text-slate-300\x20font-normal\x20mt-0.5\x22>','>ย้อนกลับ</button><span\x20class=\x22text-sm\x20self-center\x20font-bold\x20px-2\x22>หน้า\x20','Reward\x20(กลุ่ม)','4000','setAttribute','<button\x20onclick=\x22window.app.changePage(-1)\x22\x20class=\x22px-3\x20py-1\x20bg-white\x20border\x20rounded-md\x20text-sm\x20hover:bg-slate-50\x20font-bold\x22\x20','ลำดับที่','%</span></div><div\x20class=\x22w-full\x20','labelSortKey','StatusReg','1288602FrxPZY','DateCheck','Datework','ผิดพลาด','</span>','ref','renderWinnersView','</td><td\x20class=\x22px-6\x20text-indigo-600\x20font-bold\x20font-bold\x22>','label','-50\x20p-3\x20border-b\x20text-center\x22><div\x20class=\x22text-sm\x20font-black\x20text-','renderLabelTable','Name','<tr\x20class=\x22hover:bg-indigo-50/30\x20transition\x20border-b\x20border-slate-50\x20font-normal\x20text-sm\x20text-slate-700\x20font-bold\x22><td\x20class=\x22px-6\x20font-mono\x20text-slate-500\x22>','#10b981','sort','group','labels','2000','logSortKey','toDate','docs','edit-reward-modal','logPage','join','</span><button\x20onclick=\x22window.app.changePage(1)\x22\x20class=\x22px-3\x20py-1\x20bg-white\x20border\x20rounded-md\x20text-sm\x20hover:bg-slate-50\x20font-bold\x22\x20','red','selectedDataReward','opacity-20\x20cursor-not-allowed','>ถัดไป</button>','text/csv;charset=utf-8;','log-total-count','sortOrder','<div\x20class=\x22p-3\x20bg-white\x20rounded-lg\x20text-sm\x20shadow-sm\x20border\x20border-slate-100\x20mb-1\x20font-bold\x22><b\x20class=\x22text-slate-800\x20font-black\x22>','error','round','card-total-','href','---','\x20<span\x20class=\x22text-xs\x20font-normal\x20opacity-70\x22>สลาก</span>','placeholder','citizenId','bg-red-500','window.app.openEditRewardModal(\x27','</td><td\x20class=\x22px-4\x20py-3\x20font-bold\x22><span\x20class=\x22px-2\x20py-0.5\x20rounded-full\x20text-[10px]\x20bg-blue-100\x20text-blue-600\x20font-bold\x22>','labelSortOrder','ttb-register','bar','import-progress','map','EmpName','\x20p-4\x20rounded-xl\x20shadow-lg\x20toast-enter\x20pointer-events-auto','พิมพ์\x20Delete\x20เพื่อลบรายชื่อพนักงานทั้งหมดออกจากฐานข้อมูล','parse','รางวัลโชคชั้นที่\x202','<span\x20class=\x22text-sm\x20font-bold\x20text-slate-700\x22>','length','ลบฉลากสำเร็จ','\x20คน</p></div></div>','ยืนยัน','-700\x22>','data','forEach','min','AIzaSyAgWMzWcZPzyzoBu5eQzj2y59nKsxTWurQ','trim','.view-section','ผู้รับรางวัล\x20(EmpName)','Dateworking','border-red-500','replace','</td><td\x20class=\x22px-6\x20py-4\x20text-right\x20font-bold\x22><button\x20onclick=\x22window.app.resetMemberData(\x27','</td><td\x20class=\x22px-6\x20text-right\x22><div\x20class=\x22flex\x20items-center\x20justify-end\x20gap-2\x22><button\x20onclick=\x22','\x20ราย</span></div><div\x20class=\x22w-full\x20bg-slate-200\x20rounded-full\x20h-2\x22><div\x20class=\x22bg-','pagination-controls','ภาพรวมระบบ','label-table-info','bg-amber-600','\x20text-white\x20font-bold\x20hover:opacity-90\x20transition\x20font-bold','</td><td\x20class=\x22px-6\x20text-slate-500\x20font-bold\x22>','เกิดข้อผิดพลาด','innerHTML','renderLogTable','ข้อมูลลงทะเบียน','>Next</button>','renderTable','</td><td\x20class=\x22px-4\x20py-3\x20font-mono\x20text-xs\x20text-slate-500\x20font-normal\x20text-sm\x20truncate\x20max-w-[120px]\x22\x20title=\x22','cards','desc','</b>\x20<span\x20class=\x22text-slate-400\x20font-normal\x20mx-1\x22>กลุ่ม:</span>\x20<span\x20class=\x22text-indigo-600\x22>','bg-indigo-600','localeCompare','<div\x20class=\x22text-base\x20text-slate-400\x20py-6\x20text-center\x20italic\x22>ยังไม่มีผู้ได้รับรางวัล</div>','general-modal','-500\x20h-2\x20rounded-full\x20transition-all\x20duration-1000\x22\x20style=\x22width:\x20','outsources_logs_','\x20/\x20','</td><td\x20class=\x22px-6\x20py-4\x20text-indigo-600\x20font-normal\x20font-bold\x22>','/public/data/','toFixed','w-16\x20h-16\x20rounded-full\x20flex\x20items-center\x20justify-center\x20mx-auto\x20mb-4\x20bg-','showLabelModal','style','type','Reward','logRowsPerPage','edit-reward-confirm-btn','destroy','<tr\x20class=\x22hover:bg-blue-50/50\x20transition\x20font-bold\x20text-slate-700\x20text-sm\x22><td\x20class=\x22px-4\x20py-3\x20font-mono\x20text-slate-400\x20font-normal\x20text-sm\x22>','files','</span></td><td\x20class=\x22px-4\x20py-3\x20font-mono\x20text-xs\x20text-slate-400\x20font-normal\x20text-sm\x22>','<option\x20value=\x22','\x20เพื่อยืนยัน','</div></div><div\x20class=\x22p-4\x20flex-1\x20overflow-y-auto\x20max-h-[350px]\x20custom-scroll-dark\x22><p\x20class=\x22text-[10px]\x20text-slate-400\x20mb-2\x20font-bold\x20uppercase\x20tracking-tighter\x22>รายชื่อผู้ได้รับรางวัลล่าสุด</p>','realtimeLineChart','edit-reward-input','regLine','file-name','hourlyData','card-bar-','status-indicator','size','-100\x20text-','renderDataSummary','line','Confirm','Datetime','CardNo','currentPage','\x20h-1.5\x20mt-auto\x20rounded-full\x20overflow-hidden\x20mt-3\x20shadow-inner\x22><div\x20class=\x22bg-white\x20h-1.5\x20rounded-full\x20transition-all\x20duration-1000\x22\x20style=\x22width:\x20','opacity-0','<div\x20class=\x22flex\x20flex-col\x20py-2\x20border-b\x20border-slate-50\x20last:border-0\x20px-2\x20font-bold\x22><span\x20class=\x22text-slate-800\x20text-lg\x22>','</td><td\x20class=\x22px-4\x20py-3\x20font-normal\x20text-sm\x20text-slate-700\x20font-bold\x22>','1000','สำเร็จ','add','ยืนยัน\x20Reset\x20Register?','</span><button\x20onclick=\x22window.app.changeLabelPage(1)\x22\x20class=\x22px-3\x20py-1\x20bg-white\x20border\x20rounded-md\x20text-sm\x20hover:bg-slate-50\x20font-bold\x22\x20','ตรวจสอบรายการ','bg-green-500','red-600','\x20font-bold\x22><p\x20class=\x22text-[11px]\x20font-bold\x20uppercase\x20tracking-wider\x20opacity-80\x22>','</td><td\x20class=\x22px-6\x22>','พิมพ์\x20Reset\x20เพื่อล้างข้อมูลการล็อกอินและผลการสุ่มทั้งหมด','<option\x20value=\x22\x22>รางวัลทั้งหมด</option>','labelPage','registration_data_','selectedLabelGroup','deviceID','generateLabels','split','ล้างข้อมูลฉลากใบนี้?','พิมพ์\x20Delete\x20เพื่อลบประวัติ\x20Log\x20การทำรายการทั้งหมดถาวร','refreshCharts','</span></div>','flex-1\x20py-3\x20rounded-xl\x20bg-','data-table-info','delete','bg-emerald-600','สร้างฉลากใหม่?','-500\x20text-white\x20p-3\x20text-center\x22><p\x20class=\x22text-[13px]\x20font-black\x20opacity-80\x20tracking-widest\x20uppercase\x22>กลุ่มรางวัล</p><h4\x20class=\x22text-xl\x20font-black\x22>','createIcons','rose','สมาชิกทั้งหมด','orange','toLocaleTimeString','disabled','label-confirm-modal','แสดงรายการที่\x20','\x20<span\x20class=\x22text-[10px]\x20opacity-70\x20font-normal\x22>ลงทะเบียนแล้ว</span></span><span\x20class=\x22text-lg\x20font-black\x22>','import-bar','window.app.resetLabelRecord(\x27','sortBy','rewardname','ลบฉลากทั้งหมด?','logSortOrder','\x20transition\x22\x20','label-modal-confirm-btn','success','สุ่มครั้งที่\x201\x20(DateLogin)','body','searchTerm','classList','message','label-table-body','sky','label-modal-title','ผิดพลาด:\x20','padStart','<div\x20class=\x22','</td><td\x20class=\x22px-6\x20py-4\x20text-slate-700\x20font-normal\x20font-bold\x22>','-600\x22>','fill','page-title','registrationChart','ลบประวัติ\x20Log\x20เรียบร้อยแล้ว','toLocaleString','นำเข้าข้อมูลเรียบร้อย','from','th-TH','SHA-256'];_0x22c0=function(){return _0x3121db;};return _0x22c0();}setInterval(()=>{const _0x12d4e4=_0x387750;if(document[_0x12d4e4(0x1a0)]('current-time'))document[_0x12d4e4(0x1a0)](_0x12d4e4(0x20b))[_0x12d4e4(0x1a3)]=new Date()[_0x12d4e4(0x17b)](_0x12d4e4(0x19d));},0x3e8),init();
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+        import { getFirestore, collection, query, where, getDocs, updateDoc, doc, serverTimestamp, onSnapshot, addDoc, deleteDoc, writeBatch, deleteField, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+        // CONFIG
+        const TARGET_COLLECTION_NAME = 'Outsources';
+        const CARDS_COLLECTION_NAME = 'Outsources_card';
+        const LOGS_COLLECTION_NAME = 'Outsources_log';
+        
+        const isSandboxEnv = typeof __firebase_config !== 'undefined';
+        let firebaseConfig, finalCollectionPath, cardCollectionPath, logCollectionPath;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        if (isSandboxEnv) {
+            firebaseConfig = JSON.parse(__firebase_config);
+            finalCollectionPath = `artifacts/${appId}/public/data/${TARGET_COLLECTION_NAME}`;
+            cardCollectionPath = `artifacts/${appId}/public/data/${CARDS_COLLECTION_NAME}`;
+            logCollectionPath = `artifacts/${appId}/public/data/${LOGS_COLLECTION_NAME}`;
+        } else {
+            firebaseConfig = { apiKey: "AIzaSyAgWMzWcZPzyzoBu5eQzj2y59nKsxTWurQ", authDomain: "ttb-register.firebaseapp.com", projectId: "ttb-register", storageBucket: "ttb-register.firebasestorage.app", messagingSenderId: "1070273157855", appId: "1:1070273157855:web:5c8120e1df27e233d8676a" };
+            finalCollectionPath = TARGET_COLLECTION_NAME;
+            cardCollectionPath = CARDS_COLLECTION_NAME;
+            logCollectionPath = LOGS_COLLECTION_NAME;
+        }
+        
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const state = {
+            users: [], cards: [], logs: [], 
+            activeTab: 'dashboard', searchTerm: '', rowsPerPage: 50, currentPage: 1, sortBy: 'no', sortOrder: 'asc',
+            hourlyData: Array(24).fill(0), selectedLabelGroup: '', labelPage: 1, labelRowsPerPage: 50, labelSortKey: 'CardNo', labelSortOrder: 'asc',
+            logPage: 1, logRowsPerPage: 50, logSortKey: 'Datetime', logSortOrder: 'desc',
+            selectedDataReward: ''
+        };
+
+        const formatDate = (val) => {
+            if (!val) return '-';
+            try {
+                if (val.toDate) {
+                    const d = val.toDate();
+                    return d.toLocaleDateString('th-TH') + ' ' + d.toLocaleTimeString('th-TH');
+                }
+                const d = new Date(val);
+                if (!isNaN(d.getTime())) return d.toLocaleDateString('th-TH') + ' ' + d.toLocaleTimeString('th-TH');
+            } catch(e) {}
+            return val;
+        };
+
+        const normalizeReward = (val) => String(val || "").replace(/,/g, '').trim();
+
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        function chunkArray(a, s) { const r = []; for (let i = 0; i < a.length; i += s) r.push(a.slice(i, i + s)); return r; }
+
+        function csvToJson(csv) {
+            const lines = csv.split('\n');
+            if(lines.length === 0) return [];
+            const headers = lines[0].split(',').map(h => h.trim());
+            return lines.slice(1).map(line => {
+                const data = line.split(',');
+                if (data.length < headers.length) return null;
+                return headers.reduce((obj, nextKey, index) => { 
+                    obj[nextKey] = data[index] ? data[index].trim() : ''; 
+                    return obj; 
+                }, {});
+            }).filter(x => x);
+        }
+
+        window.app = {
+            showToast: (m, t='success') => {
+                const c = document.getElementById('toast-container');
+                if(!c) return;
+                const toast = document.createElement('div');
+                toast.className = `bg-white border-l-4 ${t === 'success' ? 'border-green-500' : 'border-red-500'} p-4 rounded-xl shadow-lg toast-enter pointer-events-auto`;
+                toast.innerHTML = `<span class="text-sm font-bold text-slate-700">${m}</span>`;
+                c.appendChild(toast);
+                setTimeout(() => { toast.classList.add('opacity-0'); setTimeout(() => toast.remove(), 300); }, 3000);
+            },
+
+            switchTab: (tabName) => {
+                document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+                const target = document.getElementById(`view-${tabName}`);
+                if(target) target.classList.remove('hidden');
+                document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('bg-slate-700', 'text-white'));
+                const nav = document.getElementById(`nav-${tabName}`);
+                if(nav) nav.classList.add('bg-slate-700', 'text-white');
+                state.activeTab = tabName;
+                const titles = { 'dashboard':'ภาพรวมระบบ', 'data':'ข้อมูลลงทะเบียน', 'winners':'รางวัลโชคชั้นที่ 2', 'import':'จัดการข้อมูล', 'labels':'ระบบจัดการฉลาก', 'qrcode-in':'QR Code ฮั่งเปา', 'logs': 'ตรวจสอบรายการ' };
+                document.getElementById('page-title').innerText = titles[tabName] || tabName;
+                if(tabName === 'labels') window.app.renderLabelTable();
+                if(tabName === 'data') { window.app.renderDataSummary(); window.app.renderTable(); }
+                if(tabName === 'winners') window.app.renderWinnersView();
+                if(tabName === 'dashboard') window.app.refreshCharts();
+                if(tabName === 'logs') window.app.renderLogTable();
+                lucide.createIcons();
+            },
+
+            renderDataSummary: () => {
+                const container = document.getElementById('data-summary-container');
+                if (!container || state.activeTab !== 'data') return;
+                const registeredTotal = state.users.filter(u => u.DateCheck && u.DateCheck !== "").length;
+                const boxes = [];
+                const themes = [
+                    { bg: 'bg-blue-600', bar: 'bg-white/30', text: 'text-white' },
+                    { bg: 'bg-indigo-600', bar: 'bg-white/30', text: 'text-white' },
+                    { bg: 'bg-emerald-600', bar: 'bg-white/30', text: 'text-white' },
+                    { bg: 'bg-amber-600', bar: 'bg-white/30', text: 'text-white' },
+                    { bg: 'bg-rose-600', bar: 'bg-white/30', text: 'text-white' }
+                ];
+
+                boxes.push({ type: 'total', label: "สมาชิกทั้งหมด", total: state.users.length, registered: registeredTotal, percent: state.users.length > 0 ? Math.round((registeredTotal / state.users.length) * 100) : 0 });
+                const targetGroups = ["1000", "2000", "3000", "4000"];
+                targetGroups.forEach(target => {
+                    const groupUsers = state.users.filter(u => normalizeReward(u.Reward) === target);
+                    const regGroup = groupUsers.filter(u => u.DateCheck && u.DateCheck !== "").length;
+                    boxes.push({ type: 'group', label: target, total: groupUsers.length, registered: regGroup, percent: groupUsers.length > 0 ? Math.round((regGroup / groupUsers.length) * 100) : 0 });
+                });
+
+                container.innerHTML = boxes.map((box, i) => {
+                    const theme = themes[i % themes.length];
+                    return `<div class="${theme.bg} p-5 rounded-2xl shadow-xl border border-white/10 flex flex-col transition-all hover:shadow-2xl hover:scale-[1.02] h-full ${theme.text} font-bold"><p class="text-[11px] font-bold uppercase tracking-wider opacity-80">${box.type === 'total' ? box.label : 'กลุ่มรางวัล ' + box.label}</p><h3 class="text-3xl font-black mt-1 leading-tight">${box.total.toLocaleString()} <span class="text-xs font-normal opacity-70">ราย</span></h3><div class="mt-2 flex justify-between items-baseline font-bold"><span class="text-sm">${box.registered.toLocaleString()} <span class="text-[10px] opacity-70 font-normal">ลงทะเบียนแล้ว</span></span><span class="text-lg font-black">${box.percent}%</span></div><div class="w-full ${theme.bar} h-1.5 mt-auto rounded-full overflow-hidden mt-3 shadow-inner"><div class="bg-white h-1.5 rounded-full transition-all duration-1000" style="width: ${box.percent}%"></div></div></div>`;
+                }).join('');
+            },
+
+            renderWinnersView: () => {
+                const c = document.getElementById('winners-container');
+                if(!c || state.activeTab !== 'winners') return;
+                const prizeGroups = ["1000", "2000", "3000", "4000"];
+                const themes = { "1000": "rose", "2000": "emerald", "3000": "sky", "4000": "amber" };
+                c.innerHTML = prizeGroups.map(id => {
+                    const color = themes[id] || "blue";
+                    const gCards = state.cards.filter(x => normalizeReward(x.Reward) === id);
+                    const gUsers = state.users.filter(x => normalizeReward(x.Reward) === id);
+                    const gPrizes = [...new Set(gCards.map(x => x.rewardname).filter(r => r && r.trim() !== ""))];
+                    const drawn = gCards.filter(x => x.Datetime && x.Datetime !== "");
+                    const validWinners = drawn.filter(x => x.rewardname && x.rewardname.trim() !== "");
+                    
+                    const winnersHtml = (validWinners.length === 0) ? '<div class="text-base text-slate-400 py-6 text-center italic">ยังไม่มีผู้ได้รับรางวัล</div>' : validWinners.map(x => `<div class="flex flex-col py-2 border-b border-slate-50 last:border-0 px-2 font-bold"><span class="text-slate-800 text-lg">${x.EmpName || '---'}</span><span class="text-xs text-${color}-600">${x.rewardname}</span><span class="text-[9px] text-slate-300 font-normal mt-0.5">${formatDate(x.Datetime)}</span></div>`).join('');
+                    
+                    return `<div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 flex flex-col overflow-hidden transition-all hover:shadow-lg"><div class="bg-${color}-500 text-white p-3 text-center"><p class="text-[13px] font-black opacity-80 tracking-widest uppercase">กลุ่มรางวัล</p><h4 class="text-xl font-black">${id} บาท</h4></div><div class="bg-${color}-50 p-3 border-b text-center"><div class="text-sm font-black text-${color}-700">${gPrizes.length > 0 ? gPrizes.join(', ') : '(ไม่มีของรางวัล)'}</div></div><div class="p-4 flex-1 overflow-y-auto max-h-[350px] custom-scroll-dark"><p class="text-[10px] text-slate-400 mb-2 font-bold uppercase tracking-tighter">รายชื่อผู้ได้รับรางวัลล่าสุด</p>${winnersHtml}</div><div class="bg-slate-50 p-5 border-t"><div class="flex justify-between items-center mb-1.5 font-bold"><span class="text-[12px] text-slate-500">สถิติการสุ่มรางวัล</span><span class="text-xs text-slate-700">${drawn.length} / ${gCards.length} ราย</span></div><div class="w-full bg-slate-200 rounded-full h-2"><div class="bg-${color}-500 h-2 rounded-full transition-all duration-1000" style="width: ${gCards.length?(drawn.length/gCards.length*100):0}%"></div></div><p class="text-[12px] text-slate-400 mt-2 text-right font-bold text-slate-600 italic">พนักงานในกลุ่มนี้: ${gUsers.length} คน</p></div></div>`;
+                }).join('');
+            },
+
+            renderLabelTable: () => {
+                const tbody = document.getElementById('label-table-body');
+                const info = document.getElementById('label-table-info');
+                const pagin = document.getElementById('label-pagination-controls');
+                if(!tbody || state.activeTab !== 'labels') return;
+                let filtered = state.selectedLabelGroup === '' ? [...state.cards] : state.cards.filter(c => normalizeReward(c.Reward) === state.selectedLabelGroup);
+                
+                filtered.sort((a, b) => {
+                    let vA = a[state.labelSortKey]; let vB = b[state.labelSortKey];
+                    if (state.labelSortKey === 'CardNo' || state.labelSortKey === 'Reward') {
+                        const nA = parseFloat(String(vA || "").replace(/,/g, '')) || 0;
+                        const nB = parseFloat(String(vB || "").replace(/,/g, '')) || 0;
+                        return state.labelSortOrder === 'asc' ? nA - nB : nB - nA;
+                    }
+                    if (state.labelSortKey === 'Datetime') {
+                        const tA = vA?.toDate ? vA.toDate().getTime() : (new Date(vA).getTime() || 0);
+                        const tB = vB?.toDate ? vB.toDate().getTime() : (new Date(vB).getTime() || 0);
+                        return state.labelSortOrder === 'asc' ? tA - tB : tB - tA;
+                    }
+                    return state.labelSortOrder === 'asc' ? String(vA || "").localeCompare(String(vB || ""), 'th', {numeric: true}) : String(vB || "").localeCompare(String(vA || ""), 'th', {numeric: true});
+                });
+
+                const total = filtered.length;
+                const totalPages = Math.ceil(total / 50) || 1;
+                if (state.labelPage > totalPages) state.labelPage = totalPages;
+                const pageData = filtered.slice((state.labelPage - 1) * 50, state.labelPage * 50);
+                
+                if(info) info.innerText = `แสดงรายการที่ ${(state.labelPage-1)*50+1} - ${Math.min(state.labelPage*50, total)} จากทั้งหมด ${total}`;
+                if(pagin) pagin.innerHTML = `<button onclick="window.app.changeLabelPage(-1)" class="px-3 py-1 bg-white border rounded-md text-sm hover:bg-slate-50 font-bold" ${state.labelPage <= 1 ? 'disabled' : ''}>Prev</button><span class="text-sm self-center font-bold px-2">หน้า ${state.labelPage}/${totalPages}</span><button onclick="window.app.changeLabelPage(1)" class="px-3 py-1 bg-white border rounded-md text-sm hover:bg-slate-50 font-bold" ${state.labelPage >= totalPages ? 'disabled' : ''}>Next</button>`;
+                
+                tbody.innerHTML = pageData.map(c => {
+                    const isDrawn = !!c.Datetime;
+                    const rewardNameEscaped = (c.rewardname || '').replace(/'/g, "\\'");
+                    return `<tr class="hover:bg-indigo-50/30 transition border-b border-slate-50 font-normal text-sm text-slate-700 font-bold"><td class="px-6 font-mono text-slate-500">${c.CardNo || '-'}</td><td class="px-6">${c.Reward || '-'}</td><td class="px-6 text-indigo-600 font-bold font-bold">${c.rewardname || '-'}</td><td class="px-6 font-bold text-slate-800 font-bold">${c.EmpName || '-'}</td><td class="px-6 text-slate-500 font-bold">${formatDate(c.Datetime)}</td><td class="px-6 text-right"><div class="flex items-center justify-end gap-2"><button onclick="${!isDrawn ? `window.app.openEditRewardModal('${c.id}', '${rewardNameEscaped}')` : ''}" class="text-indigo-600 font-bold text-xs p-1 px-2 border border-indigo-200 rounded-lg hover:bg-indigo-50 transition ${isDrawn ? 'opacity-20 cursor-not-allowed' : ''}" ${isDrawn ? 'disabled' : ''}>แก้ไข</button><button onclick="${!!c.Datetime ? `window.app.resetLabelRecord('${c.id}')` : ''}" class="text-red-500 font-bold text-xs p-1 px-2 border border-red-200 rounded-lg ${!c.Datetime?'opacity-20 cursor-not-allowed':'hover:bg-red-50'} transition" ${!c.Datetime?'disabled':''}>ล้างผลสุ่ม</button></div></td></tr>`;
+                }).join('');
+                lucide.createIcons();
+            },
+
+            exportDataToCSV: () => {
+                let filtered = state.users.filter(u => (u.EmpName || '').toLowerCase().includes(state.searchTerm) && (state.selectedDataReward === '' || String(u.Reward) === String(state.selectedDataReward)));
+                if (filtered.length === 0) return window.app.showToast('ไม่มีข้อมูลสำหรับดาวน์โหลด', 'error');
+                filtered.sort((a, b) => (parseFloat(a.no)||0) - (parseFloat(b.no)||0));
+                const headers = ['NO.', 'ชื่อ-นามสกุล', 'Reward (Group)', 'Login (DateCheck)', 'สุ่มครั้งที่ 1 (DateLogin)', 'สุ่มครั้งที่ 2 (DateReward)', 'รางวัล (StatusReward)'];
+                const rows = filtered.map(u => [u.no || '', u.EmpName || '', u.Reward || '', formatDate(u.DateCheck), formatDate(u.DateLogin), formatDate(u.DateReward), u.StatusReward || '']);
+                const csvContent = "\uFEFF" + [headers, ...rows].map(e => e.map(val => `"${val}"`).join(",")).join("\n");
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement("a");
+                const url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", `registration_data_${new Date().getTime()}.csv`);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            },
+
+            exportLabelsToCSV: () => {
+                let filtered = state.selectedLabelGroup === '' ? [...state.cards] : state.cards.filter(c => normalizeReward(c.Reward) === state.selectedLabelGroup);
+                if (filtered.length === 0) return window.app.showToast('ไม่มีข้อมูลสำหรับดาวน์โหลด', 'error');
+                filtered.sort((a, b) => (parseInt(a.CardNo) || 0) - (parseInt(b.CardNo) || 0));
+                const headers = ['ลำดับที่', 'Reward (กลุ่ม)', 'ของรางวัล (Reward Name)', 'ผู้รับรางวัล (EmpName)', 'Datetime'];
+                const rows = filtered.map(c => [c.CardNo || '', c.Reward || '', c.rewardname || '', c.EmpName || '', formatDate(c.Datetime)]);
+                const csvContent = "\uFEFF" + [headers, ...rows].map(e => e.map(val => `"${val}"`).join(",")).join("\n");
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement("a");
+                const url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", `labels_export_${state.selectedLabelGroup || 'all'}_${new Date().getTime()}.csv`);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            },
+
+            renderLogTable: () => {
+                const tbody = document.getElementById('log-table-body');
+                const info = document.getElementById('log-pagination-controls');
+                if(!tbody) return;
+                let sortedLogs = [...state.logs];
+                sortedLogs.sort((a,b) => {
+                    let vA = a[state.logSortKey]; let vB = b[state.logSortKey];
+                    if (state.logSortKey === 'Datetime') {
+                        vA = a.Datetime?.toDate ? a.Datetime.toDate().getTime() : new Date(a.Datetime).getTime();
+                        vB = b.Datetime?.toDate ? b.Datetime.toDate().getTime() : new Date(b.Datetime).getTime();
+                    }
+                    if (state.logSortKey === 'index') return state.logSortOrder === 'asc' ? 1 : -1;
+                    return state.logSortOrder === 'asc' ? String(vA || "").localeCompare(String(vB || ""), 'th') : String(vB || "").localeCompare(String(vA || ""), 'th');
+                });
+                const total = sortedLogs.length;
+                const totalPages = Math.ceil(total / 50) || 1;
+                if (state.logPage > totalPages) state.logPage = totalPages;
+                const pageData = sortedLogs.slice((state.logPage - 1) * 50, state.logPage * 50);
+                if(document.getElementById('log-total-count')) document.getElementById('log-total-count').innerText = total.toLocaleString();
+                tbody.innerHTML = pageData.map((l, i) => `<tr class="hover:bg-blue-50/50 transition font-bold text-slate-700 text-sm"><td class="px-4 py-3 font-mono text-slate-400 font-normal text-sm">${(state.logPage-1)*50 + i + 1}</td><td class="px-4 py-3 font-mono text-xs text-slate-500 font-normal text-sm truncate max-w-[120px]" title="${l.citizenId}">${l.citizenId || '-'}</td><td class="px-4 py-3 font-normal text-sm text-slate-700 font-bold">${l.EmpName || '-'}</td><td class="px-4 py-3 font-bold"><span class="px-2 py-0.5 rounded-full text-[10px] bg-blue-100 text-blue-600 font-bold">${l.StatusReg || 'Success'}</span></td><td class="px-4 py-3 font-mono text-xs text-slate-400 font-normal text-sm">${l.deviceID || '-'}</td><td class="px-4 py-3 text-slate-500 font-normal text-sm">${formatDate(l.Datetime)}</td></tr>`).join('');
+                if(info) info.innerHTML = `<button onclick="window.app.changeLogPage(-1)" class="px-3 py-1 bg-white border rounded-md text-xs hover:bg-slate-50 font-bold" ${state.logPage <= 1 ? 'disabled' : ''}>Prev</button><span class="text-xs font-bold px-2">Page ${state.logPage}/${totalPages}</span><button onclick="window.app.changeLogPage(1)" class="px-3 py-1 bg-white border rounded-md text-xs hover:bg-slate-50 font-bold" ${state.logPage >= totalPages ? 'disabled' : ''}>Next</button>`;
+                lucide.createIcons();
+            },
+
+            openDeleteLogsModal: () => {
+                window.app.showLabelModal('Delete', 'ลบประวัติรายการทั้งหมด?', 'พิมพ์ Delete เพื่อลบประวัติ Log การทำรายการทั้งหมดถาวร', 'red', async () => {
+                    try {
+                        const snap = await getDocs(collection(db, logCollectionPath));
+                        const batchSize = 400;
+                        const chunks = chunkArray(snap.docs, batchSize);
+                        for(const chunk of chunks) {
+                            const batch = writeBatch(db);
+                            chunk.forEach(d => batch.delete(d.ref));
+                            await batch.commit();
+                        }
+                        window.app.showToast('ลบประวัติ Log เรียบร้อยแล้ว');
+                    } catch(e) { window.app.showToast('เกิดข้อผิดพลาด', 'error'); }
+                });
+            },
+
+            changeLogSort: (k) => {
+                state.logSortOrder = (state.logSortKey === k) ? (state.logSortOrder === 'asc' ? 'desc' : 'asc') : 'desc';
+                state.logSortKey = k;
+                window.app.renderLogTable();
+            },
+
+            exportLogsToCSV: () => {
+                if (state.logs.length === 0) return window.app.showToast('ไม่มีข้อมูลสำหรับดาวน์โหลด', 'error');
+                const headers = ['ลำดับที่', 'citizenId', 'EmpName', 'StatusReg', 'deviceID', 'Datetime'];
+                const rows = state.logs.map((l, idx) => [idx + 1, `\t${l.citizenId || ''}`, l.EmpName || '', l.StatusReg || 'Success', l.deviceID || '', formatDate(l.Datetime)]);
+                const csvContent = "\uFEFF" + [headers, ...rows].map(e => e.map(val => `"${val}"`).join(",")).join("\n");
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement("a");
+                const url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", `outsources_logs_${new Date().getTime()}.csv`);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            },
+
+            onDataRewardFilterChange: (v) => { state.selectedDataReward = v; state.currentPage = 1; window.app.renderTable(); },
+            handleSearch: (v) => { state.searchTerm = v.toLowerCase(); state.currentPage = 1; window.app.renderTable(); },
+            changeRowsLimit: (v) => { state.rowsPerPage = parseInt(v); state.currentPage = 1; window.app.renderTable(); },
+            changePage: (d) => { state.currentPage += d; window.app.renderTable(); },
+            changeSort: (v) => { 
+                state.sortOrder = (state.sortBy === v) ? (state.sortOrder === 'asc' ? 'desc' : 'asc') : (v === 'no' ? 'asc' : 'desc');
+                state.sortBy = v; window.app.renderTable(); 
+            },
+
+            renderTable: () => {
+                const tbody = document.getElementById('table-body');
+                if(!tbody || state.activeTab !== 'data') return;
+                let filtered = state.users.filter(u => (u.EmpName || '').toLowerCase().includes(state.searchTerm) && (state.selectedDataReward === '' || String(u.Reward) === String(state.selectedDataReward)));
+                filtered.sort((a, b) => {
+                    const vA = a[state.sortBy]; const vB = b[state.sortBy];
+                    if (state.sortBy === 'no' || !isNaN(vA) && !isNaN(vB) && vA !== "" && vB !== "") return state.sortOrder === 'asc' ? (parseFloat(vA)||0) - (parseFloat(vB)||0) : (parseFloat(vB)||0) - (parseFloat(vA)||0);
+                    return state.sortOrder === 'asc' ? String(vA || "").localeCompare(String(vB || ""), 'th', {numeric: true}) : String(vB || "").localeCompare(String(vA || ""), 'th', {numeric: true});
+                });
+                const paginated = filtered.slice((state.currentPage - 1) * state.rowsPerPage, state.currentPage * state.rowsPerPage);
+                tbody.innerHTML = paginated.map((u) => `<tr class="hover:bg-indigo-50/30 transition border-b border-slate-100 font-bold"><td class="px-6 py-4 text-slate-600 font-normal">${u.no || '-'}</td><td class="px-6 py-4 text-slate-700 font-normal font-bold">${u.EmpName||'-'}</td><td class="px-6 py-4 font-normal font-bold">${u.Reward || '-'}</td><td class="px-6 py-4 text-indigo-600 font-normal font-bold">${formatDate(u.DateCheck)}</td><td class="px-6 py-4 text-slate-500 font-normal font-bold">${formatDate(u.DateLogin)}</td><td class="px-6 py-4 text-slate-500 font-normal font-bold">${formatDate(u.DateReward)}</td><td class="px-6 py-4 font-bold text-indigo-600 font-normal font-bold">${u.StatusReward || '-'}</td><td class="px-6 py-4 text-right font-bold"><button onclick="window.app.resetMemberData('${u.id}')" class="text-red-400 hover:text-red-600 transition p-1"><i data-lucide="trash-2" width="18"></i></button></td></tr>`).join('');
+                if(document.getElementById('data-table-info')) document.getElementById('data-table-info').innerText = `แสดง ${paginated.length} จาก ${filtered.length} รายการ`;
+                const pagin = document.getElementById('pagination-controls');
+                if(pagin) pagin.innerHTML = `<button onclick="window.app.changePage(-1)" class="px-3 py-1 bg-white border rounded-md text-sm hover:bg-slate-50 font-bold" ${state.currentPage <= 1 ? 'disabled' : ''}>ย้อนกลับ</button><span class="text-sm self-center font-bold px-2">หน้า ${state.currentPage}</span><button onclick="window.app.changePage(1)" class="px-3 py-1 bg-white border rounded-md text-sm hover:bg-slate-50 font-bold" ${state.currentPage * state.rowsPerPage >= filtered.length ? 'disabled' : ''}>ถัดไป</button>`;
+                lucide.createIcons();
+            },
+
+            openResetModal: () => {
+                window.app.showLabelModal('Reset', 'ยืนยัน Reset Register?', 'พิมพ์ Reset เพื่อล้างข้อมูลการล็อกอินและผลการสุ่มทั้งหมด', 'orange', async () => {
+                    try {
+                        const snap = await getDocs(collection(db, finalCollectionPath));
+                        const batch = writeBatch(db);
+                        snap.docs.forEach(d => batch.update(d.ref, { DateLogin: "", StatusReward: "", DateReward: "", DateCheck: "" }));
+                        await batch.commit();
+                        window.app.showToast('รีเซ็ตสำเร็จ');
+                    } catch(e) { window.app.showToast('เกิดข้อผิดพลาด', 'error'); }
+                });
+            },
+
+            openDeleteModal: () => {
+                window.app.showLabelModal('Delete', 'ลบข้อมูลพนักงานทั้งหมด?', 'พิมพ์ Delete เพื่อลบรายชื่อพนักงานทั้งหมดออกจากฐานข้อมูล', 'red', async () => {
+                    try {
+                        const snap = await getDocs(collection(db, finalCollectionPath));
+                        const chunks = chunkArray(snap.docs, 400);
+                        for(const chunk of chunks) {
+                            const batch = writeBatch(db); chunk.forEach(d => batch.delete(d.ref)); await batch.commit();
+                        }
+                        window.app.showToast('ลบสำเร็จ');
+                    } catch(e) { window.app.showToast('เกิดข้อผิดพลาด', 'error'); }
+                });
+            },
+
+            openDeleteLabelsModal: () => {
+                window.app.showLabelModal('Delete', 'ลบฉลากทั้งหมด?', 'พิมพ์ Delete เพื่อลบสลากทั้งหมดออกจากระบบและรีเซ็ตสถานะสุ่ม', 'red', async () => {
+                    try {
+                        const cardsSnap = await getDocs(collection(db, cardCollectionPath));
+                        const chunks = chunkArray(cardsSnap.docs, 400);
+                        for(const chunk of chunks) {
+                            const batch = writeBatch(db); chunk.forEach(d => batch.delete(d.ref)); await batch.commit();
+                        }
+                        const usersSnap = await getDocs(collection(db, finalCollectionPath));
+                        const userChunks = chunkArray(usersSnap.docs, 400);
+                        for(const chunk of userChunks) {
+                            const batch = writeBatch(db); chunk.forEach(d => batch.update(d.ref, { DateLogin: "", StatusReward: "", DateReward: "", CardNo: "" })); await batch.commit();
+                        }
+                        window.app.showToast('ลบฉลากสำเร็จ');
+                    } catch(e) { window.app.showToast('เกิดข้อผิดพลาด', 'error'); }
+                });
+            },
+
+            openCreateLabelsModal: () => {
+                window.app.showLabelModal('Confirm', 'สร้างฉลากใหม่?', 'ยืนยันการสร้างสลากใหม่โดยอ้างอิงจากรายชื่อสมาชิกที่มีอยู่จริงในระบบ', 'indigo', async () => {
+                    try {
+                        await window.app.generateLabels();
+                        window.app.showToast('สร้างฉลากใหม่สำเร็จ');
+                    } catch(e) { window.app.showToast('เกิดข้อผิดพลาด', 'error'); }
+                });
+            },
+
+            generateLabels: async () => {
+                if (state.users.length === 0) { window.app.showToast('ยังไม่มีข้อมูลสมาชิก', 'error'); return; }
+                const cardsSnap = await getDocs(collection(db, cardCollectionPath));
+                const delChunks = chunkArray(cardsSnap.docs, 400);
+                for(const chunk of delChunks) {
+                    const batch = writeBatch(db); chunk.forEach(d => batch.delete(d.ref)); await batch.commit();
+                }
+                const groupCounters = {};
+                const newCards = state.users.map(m => {
+                    const groupKey = String(m.Reward || "ไม่ระบุกลุ่ม").trim();
+                    groupCounters[groupKey] = (groupCounters[groupKey] || 0) + 1;
+                    return { Reward: groupKey, rewardname: "", CardNo: String(groupCounters[groupKey]), EmpName: "", citizenId: "", Datetime: "" };
+                });
+                const chunks = chunkArray(newCards, 400);
+                for(const chunk of chunks) {
+                    const batch = writeBatch(db); chunk.forEach(c => batch.set(doc(collection(db, cardCollectionPath)), c)); await batch.commit();
+                }
+            },
+
+            handleFileSelect: (e) => { const f = e.target.files[0]; if(f) { document.getElementById('file-name').innerText = f.name; document.getElementById('file-info').classList.remove('hidden'); document.getElementById('btn-import').disabled = false; } },
+            clearFileSelection: () => { document.getElementById('file-upload').value = ''; document.getElementById('file-info').classList.add('hidden'); document.getElementById('btn-import').disabled = true; },
+            processImport: async () => {
+                const fileInput = document.getElementById('file-upload');
+                const f = fileInput.files[0];
+                if (!f) return;
+                document.getElementById('import-progress').classList.remove('hidden');
+                const bar = document.getElementById('import-bar');
+                const reader = new FileReader();
+                reader.onload = async (e) => {
+                    try {
+                        const data = f.name.endsWith('.json') ? JSON.parse(e.target.result) : csvToJson(e.target.result);
+                        const total = data.length;
+                        for (let i = 0; i < total; i += 400) {
+                            const chunk = data.slice(i, i + 400);
+                            const batch = writeBatch(db);
+                            const batchPromises = chunk.map(async (item, idx) => {
+                                const rawId = String(item.citizenId || "").replace(/-/g, '').trim();
+                                const hashed = await sha256(rawId);
+                                const currentNo = (i + idx + 1).toString();
+                                const newRef = doc(collection(db, finalCollectionPath));
+                                batch.set(newRef, { citizenId: hashed, no: currentNo, EmpName: item.EmpName || item.Name || "", Dateworking: item.Dateworking || "", Datework: item.Datework || "", Reward: item.Reward || "", DateLogin: item.DateLogin || "", StatusReward: item.StatusReward || "", DateReward: item.DateReward || "", DateCheck: item.DateCheck || "", importedAt: serverTimestamp() });
+                            });
+                            await Promise.all(batchPromises);
+                            await batch.commit();
+                            bar.style.width = Math.min(100, Math.round(((i + chunk.length) / total) * 100)) + '%';
+                        }
+                        window.app.showToast('นำเข้าข้อมูลเรียบร้อย'); window.app.clearFileSelection();
+                    } catch (err) { window.app.showToast('ผิดพลาด: ' + err.message, 'error'); } finally { document.getElementById('import-progress').classList.add('hidden'); }
+                };
+                reader.readAsText(f);
+            },
+
+            refreshCharts: () => {
+                const ctxPie = document.getElementById('registrationChart');
+                if(ctxPie) {
+                    if(window.regPie) window.regPie.destroy();
+                    const regCount = state.users.filter(u => u.DateCheck && u.DateCheck !== "").length;
+                    window.regPie = new Chart(ctxPie, { type:'doughnut', data:{ labels:['ลงทะเบียนแล้ว','ยังไม่ลงทะเบียน'], datasets:[{ data:[regCount, Math.max(0, state.users.length-regCount)], backgroundColor:['#10b981','#e2e8f0'] }] }, options:{ maintainAspectRatio:false } });
+                }
+                const ctxLine = document.getElementById('realtimeLineChart');
+                if(ctxLine) {
+                    if(window.regLine) window.regLine.destroy();
+                    window.regLine = new Chart(ctxLine, { type:'line', data:{ labels:Array.from({length:24},(_,i)=>`${i}:00`), datasets:[{ label:'ความถี่การลงทะเบียน', data:state.hourlyData, borderColor:'#3b82f6', fill:true, tension:0.4 }] }, options:{ maintainAspectRatio:false } });
+                }
+                window.app.renderManualHistory();
+            },
+
+            renderManualHistory: () => {
+                const tbody = document.getElementById('recent-activity-list');
+                const feed = state.users.filter(u => u.DateCheck && u.DateCheck !== "").sort((a,b) => {
+                    const tA = a.DateCheck?.toDate ? a.DateCheck.toDate() : new Date(a.DateCheck);
+                    const tB = b.DateCheck?.toDate ? b.DateCheck.toDate() : new Date(b.DateCheck);
+                    return tB - tA;
+                }).slice(0, 10);
+                if(tbody) {
+                    tbody.innerHTML = feed.length ? feed.map(e => `<div class="p-3 bg-white rounded-lg text-sm shadow-sm border border-slate-100 mb-1 font-bold"><b class="text-slate-800 font-black">${e.EmpName || 'Unknown'}</b> <span class="text-slate-400 font-normal mx-1">กลุ่ม:</span> <span class="text-indigo-600">${e.Reward || '-'}</span> <div class="text-[10px] text-slate-400 mt-1 font-normal">ลงทะเบียนเมื่อ ${formatDate(e.DateCheck)}</div></div>`).join('') : '<div class="text-center text-slate-300 py-8 text-base font-medium">ไม่มีกิจกรรม</div>';
+                }
+            },
+
+            resetMemberData: async (id) => {
+                if(!confirm('ยืนยันการล้างข้อมูล?')) return;
+                try { await updateDoc(doc(db, finalCollectionPath, id), { DateLogin: "", StatusReward: "", DateReward: "", DateCheck: "" }); window.app.showToast('สำเร็จ'); } catch(e) { window.app.showToast('ผิดพลาด', 'error'); }
+            },
+
+            resetLabelRecord: async (cardId) => {
+                if(!confirm('ล้างข้อมูลฉลากใบนี้?')) return;
+                try { await updateDoc(doc(db, cardCollectionPath, cardId), { EmpName: "", Datetime: "", citizenId: "" }); window.app.showToast('ล้างข้อมูลแล้ว'); } catch(e) { window.app.showToast('ผิดพลาด', 'error'); }
+            },
+
+            openEditRewardModal: (id, curRewardName) => {
+                document.getElementById('edit-reward-input').value = curRewardName;
+                document.getElementById('edit-reward-confirm-btn').onclick = async () => {
+                    const newVal = document.getElementById('edit-reward-input').value.trim();
+                    try { await updateDoc(doc(db, cardCollectionPath, id), { rewardname: newVal }); window.app.showToast('สำเร็จ'); window.app.closeEditRewardModal(); } catch(e) { window.app.showToast('ผิดพลาด', 'error'); }
+                };
+                document.getElementById('edit-reward-modal').classList.remove('hidden');
+            },
+
+            showLabelModal: (keyword, title, msg, color, cb) => {
+                const m = document.getElementById('label-confirm-modal');
+                const btn = document.getElementById('label-modal-confirm-btn');
+                document.getElementById('label-modal-title').innerText = title;
+                document.getElementById('label-modal-message').innerText = msg;
+                const icon = document.getElementById('label-modal-icon');
+                icon.className = `w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 bg-${color}-100 text-${color}-600 font-bold`;
+                icon.innerHTML = `<i data-lucide="${keyword==='Delete'?'trash-2':'check-circle'}" width="32"></i>`;
+                document.getElementById('label-modal-input-container').classList.remove('hidden');
+                const input = document.getElementById('label-modal-input');
+                input.value = ''; input.placeholder = `พิมพ์ ${keyword} เพื่อยืนยัน`;
+                btn.className = `flex-1 py-3 rounded-xl bg-${color==='red'?'red-600':(color==='orange'?'orange-600':'indigo-600')} text-white font-bold hover:opacity-90 transition font-bold`;
+                btn.innerText = 'ยืนยัน';
+                btn.onclick = async () => {
+                    if(input.value !== keyword) return window.app.showToast('คำยืนยันไม่ถูกต้อง', 'error');
+                    btn.disabled = true; btn.innerText = 'กำลังดำเนินการ...';
+                    try { await cb(); window.app.closeLabelModal(); } finally { btn.disabled = false; btn.innerText = 'ยืนยัน'; }
+                };
+                m.classList.remove('hidden'); lucide.createIcons();
+            },
+
+            closeLabelModal: () => document.getElementById('label-confirm-modal').classList.add('hidden'),
+            closeEditRewardModal: () => document.getElementById('edit-reward-modal').classList.add('hidden'),
+            closeGeneralModal: () => document.getElementById('general-modal').classList.add('hidden'),
+            onLabelGroupChange: (v) => { state.selectedLabelGroup = normalizeReward(v); state.labelPage = 1; window.app.renderLabelTable(); },
+            onDataRewardFilterChange: (v) => { state.selectedDataReward = v; state.currentPage = 1; window.app.renderTable(); },
+            handleSearch: (v) => { state.searchTerm = v.toLowerCase(); state.currentPage = 1; window.app.renderTable(); },
+            changeRowsLimit: (v) => { state.rowsPerPage = parseInt(v); state.currentPage = 1; window.app.renderTable(); },
+            changePage: (d) => { state.currentPage += d; window.app.renderTable(); },
+            changeSort: (v) => { 
+                state.sortOrder = (state.sortBy === v) ? (state.sortOrder === 'asc' ? 'desc' : 'asc') : (v === 'no' ? 'asc' : 'desc');
+                state.sortBy = v; window.app.renderTable(); 
+            },
+            changeLogPage: (d) => { state.logPage += d; window.app.renderLogTable(); },
+            changeLogSort: (k) => { state.logSortOrder = (state.logSortKey === k) ? (state.logSortOrder === 'asc' ? 'desc' : 'asc') : 'desc'; state.logSortKey = k; window.app.renderLogTable(); }
+        };
+
+        async function init() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) await signInWithCustomToken(auth, __initial_auth_token);
+                else await signInAnonymously(auth);
+                document.getElementById('status-indicator')?.classList.replace('bg-red-500', 'bg-green-500');
+                if(document.getElementById('status-text')) document.getElementById('status-text').innerText = "Online";
+                
+                onSnapshot(collection(db, finalCollectionPath), (snap) => {
+                    state.users = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                    document.getElementById('stat-checkin').innerText = snap.size.toLocaleString();
+                    document.getElementById('manage-total-docs').innerText = snap.size.toLocaleString();
+                    const regCount = state.users.filter(u => u.DateCheck && u.DateCheck !== "").length;
+                    document.getElementById('stat-checkout').innerText = regCount.toLocaleString();
+                    document.getElementById('stat-percent').innerText = snap.size > 0 ? ((regCount/snap.size)*100).toFixed(1) + '%' : '0%';
+                    const hours = Array(24).fill(0);
+                    state.users.forEach(u => { 
+                        if(u.DateCheck) {
+                            try {
+                                let dObj = u.DateCheck.toDate ? u.DateCheck.toDate() : new Date(u.DateCheck);
+                                if (!isNaN(dObj.getTime())) hours[dObj.getHours()]++;
+                            } catch(e) {}
+                        }
+                    });
+                    state.hourlyData = hours;
+                    const uniqueRewards = [...new Set(state.users.map(u => String(u.Reward || "").trim()).filter(id => id !== ""))].sort((a,b) => a.localeCompare(b));
+                    const dataSelect = document.getElementById('filter-data-reward');
+                    if(dataSelect) {
+                        const cur = dataSelect.value;
+                        dataSelect.innerHTML = '<option value="">-- ทั้งหมด --</option>' + uniqueRewards.map(id => `<option value="${id}">${id}</option>`).join('');
+                        dataSelect.value = uniqueRewards.includes(cur) ? cur : "";
+                    }
+                    window.app.renderTable(); window.app.renderDataSummary(); window.app.renderWinnersView(); window.app.refreshCharts();
+                });
+
+                onSnapshot(collection(db, cardCollectionPath), (snap) => {
+                    state.cards = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                    const groups = ["1000", "2000", "3000", "4000"];
+                    const statistics = {};
+                    groups.forEach(g => statistics[g] = { total: 0, used: 0 });
+
+                    state.cards.forEach(d => { 
+                        const groupKey = normalizeReward(d.Reward); 
+                        if(statistics.hasOwnProperty(groupKey)) {
+                            statistics[groupKey].total++;
+                            if (d.Datetime && d.Datetime !== "") statistics[groupKey].used++;
+                        }
+                    });
+
+                    groups.forEach(g => {
+                        const stats = statistics[g];
+                        const percent = stats.total > 0 ? Math.round((stats.used / stats.total) * 100) : 0;
+                        if(document.getElementById(`card-total-${g}`)) document.getElementById(`card-total-${g}`).innerHTML = `${stats.total.toLocaleString()} <span class="text-xs font-normal opacity-70">สลาก</span>`;
+                        if(document.getElementById(`card-used-${g}`)) document.getElementById(`card-used-${g}`).innerText = stats.used.toLocaleString();
+                        if(document.getElementById(`card-percent-${g}`)) document.getElementById(`card-percent-${g}`).innerText = `${percent}%`;
+                        if(document.getElementById(`card-bar-${g}`)) document.getElementById(`card-bar-${g}`).style.width = `${percent}%`;
+                    });
+
+                    const uniqueGroups = [...new Set(state.cards.map(c => normalizeReward(c.Reward)))].filter(id => id !== "").sort((a,b) => a.localeCompare(b, undefined, {numeric: true}));
+                    const labelSelect = document.getElementById('label-group-select');
+                    if(labelSelect) {
+                        const cur = labelSelect.value;
+                        labelSelect.innerHTML = '<option value="">รางวัลทั้งหมด</option>' + uniqueGroups.map(id => `<option value="${id}">${id}</option>`).join('');
+                        labelSelect.value = cur || ""; 
+                    }
+                    window.app.renderLabelTable(); window.app.renderWinnersView();
+                });
+
+                onSnapshot(collection(db, logCollectionPath), (snap) => {
+                    state.logs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                    if (state.activeTab === 'logs') window.app.renderLogTable();
+                });
+
+                window.app.switchTab(state.activeTab);
+            } catch (e) { console.error(e); }
+        }
+        setInterval(() => { if(document.getElementById('current-time')) document.getElementById('current-time').innerText = new Date().toLocaleTimeString('th-TH'); }, 1000);
+        init();
     </script>
 </body>
-
 </html>
