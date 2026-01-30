@@ -93,11 +93,14 @@
         .card-luck {
             @apply bg-white rounded-[28px] p-6 border border-slate-100 transition-all duration-300 relative overflow-hidden;
             box-shadow: 0 8px 20px -5px rgba(0, 0, 0, 0.04);
+            padding: 10px;
+            border-radius: 15px;
+            background-color: #e4e4e4;
         }
         
         .card-luck-played {
             @apply border-orange-200 shadow-none;
-            background-color: white;
+            background-color: #f7dfdf !important;
         }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -112,8 +115,6 @@
         .pt-12 { padding-top: 1.5rem !important; }
         .h-48 { height: 8rem !important; }
         .pb-20 { padding-bottom: 1.4rem !important; }
-        .card-luck { padding: 10px; border-radius: 15px; background-color: #e4e4e4; }
-        .card-luck-played { background-color: #f7dfdf !important;}
     </style>
 </head>
 <body class="select-none">
@@ -128,9 +129,8 @@
             </div>
 
             <div class="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-8 w-full">
-
-                <div style="margin-top:15px;" class="shake-hard">
-                    <center><img src="./images/y2026.png" style="width:70%; height: auto;"></center>
+                <div style="margin-top:15px;">
+                    <center><img src="./images/y2026.png" style="width:auto; height: 220px;" onerror="this.style.display='none'"></center>
                 </div>               
                 <h1 class="text-2xl font-extrabold text-white mb-2 tracking-tight drop-shadow-md animate-pulse" style="margin-top:15px;">อั่งเปา ลุ้นโชค 2 ชั้น</h1>
                 <p class="text-lm text-red-100 font-medium mb-10 opacity-90 drop-shadow-sm">จาก ทีทีบี (ttb)</p>
@@ -145,9 +145,9 @@
             </div>
 
             <div class="relative z-10 w-full px-8 pb-12 space-y-4">
-                <button onclick="app.goToCeoMessage()" class="w-full  text-white text-lg font-bold py-4 rounded-[24px] transform transition active:scale-95 flex items-center justify-center gap-2" style="background-color: #f68b1f;">
+                <button onclick="app.goToCeoMessage()" class="w-full text-white text-lg font-bold py-4 rounded-[24px] transform transition active:scale-95 flex items-center justify-center gap-2" style="background-color: #f68b1f;">
                     <i data-lucide="message-square" class="w-5 h-5"></i>
-                    <div>สาส์นจาก CEO</div>
+                    <div>สารจาก CEO</div>
                 </button>
 
                 <button onclick="app.goToRegister()" class="w-full text-white text-lg font-bold py-4 rounded-[24px] transform transition active:scale-95 flex items-center justify-center gap-2" style="background-color: #f68b1f;">
@@ -244,6 +244,36 @@
             </div>
         </div>
 
+        <!-- VIEW 2.5: AGREEMENT (REDESIGNED TO MATCH CEO FORMAT) -->
+        <div id="view-agreement" class="hidden absolute inset-0 flex flex-col z-20 bg-white fade-in">
+            <div class="bg-angpao-pattern h-48 relative shrink-0 flex items-end justify-center pb-12">
+                <button onclick="app.declineAgreement()" class="absolute top-10 left-6 p-3 text-white bg-black/15 rounded-2xl backdrop-blur-md active:scale-90 transition">
+                    <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                </button>
+                <div class="absolute -bottom-12">
+                    <div class="w-28 h-28 bg-white rounded-full p-1 shadow-2xl border-[4px] border-white flex items-center justify-center overflow-hidden">
+                        <i data-lucide="file-signature" class="w-12 h-12 text-slate-700"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-1 overflow-y-auto pt-16 px-8 pb-4 text-center no-scrollbar">
+                <h2 class="text-xl font-black text-slate-800 mb-1">ข้อตกลงในการใช้งาน</h2>
+                <p class="text-xs text-ttb-orange tracking-widest mb-6 uppercase">Terms and Conditions</p>
+                
+                <div class="bg-slate-50 p-7 rounded-[32px] border border-slate-100 text-left space-y-5">
+                    <ul class="text-slate-600 text-ls">
+                        <li>1. ข้าพเจ้ารับทราบและตกลงยินยอมให้ธนาคารเก็บรวบรวมใช้ หรือเปิดเผยข้อมูลส่วนบุคคลของข้าพเจ้าที่ได้ให้ไว้   เพื่อดำเนินการตามวัตถุประสงค์ของโครงการ อั่งเปาโชค2ชั้น จากทีทีบี และยอมรับหลักเกณฑ์ที่ธนาคารกำหนดไว้ทั้งหมด<br><br></li>
+                        <li>2. ผู้มีคุณสมบัติเข้าร่วมโครงการใช้สิทธิ์ได้1ครั้ง โดยใช้ข้อมูลของตนเองเท่านั้น ธนาคารสงวนสิทธิ์ในการยกเลิกรางวัลหากพบการปฎิบัติไม่เป็นไปตามที่กำหนด<br><br></li>
+                        <li>3. ธนาคารสงวนสิทธิ์ในการกำหนด เปลี่ยนแปลงหรือยกเลิกหลักเกณฑ์ใดๆ ตามความเหมาะสมและการตัดสินใจของธนาคารถือเป็นที่สุด<br><br></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="p-8 pt-4 flex gap-3">
+                <button onclick="app.declineAgreement()" class="flex-1 bg-red-500 text-white text-[14px] font-bold py-3 rounded-[24px] active:scale-95 transition shadow-lg shadow-red-100">ไม่ยอมรับ</button>
+                <button onclick="app.acceptAgreement()" class="flex-1 bg-green-500 text-white text-[14px] font-bold py-3 rounded-[24px] active:scale-95 transition shadow-lg shadow-green-100">ยอมรับเงื่อนไข</button>
+            </div>
+        </div>
+
         <!-- VIEW 3: DASHBOARD -->
         <div id="view-dashboard" class="hidden absolute inset-0 flex flex-col z-30 fade-in">
             <div class="px-8 pt-12 pb-6 flex items-center justify-between relative z-10">
@@ -264,7 +294,6 @@
                     <div>
                         <p class="text-slate-400 text-xs tracking-wider">สวัสดีครับ</p>
                         <h3 class="text-xl font-black text-slate-800 leading-tight" id="user-display-name">-</h3>
-                        <p class="hidden" id="user-display-empid"></p>
                     </div>
                 </div>
 
@@ -309,8 +338,7 @@
                     <div class="relative inline-block">
                         <div class="absolute inset-0 bg-red-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
                         <div class="shake-hard">
-                            <center><img src="./images/y2026@.png" style="width: 80%; height: auto;"></center>
-                            <!--<i data-lucide="mail" class="w-28 h-28 text-red-600 fill-red-100 relative z-10"></i>-->
+                            <center><img src="./images/y2026@.png" style="width: 80%; height: auto;" onerror="this.style.display='none'"></center>
                         </div>
                     </div>
                     <h3 class="text-xl font-black text-slate-500 mt-10 animate-pulse tracking-tight" id="anim-status">กำลังลุ้นโชค</h3>
@@ -318,11 +346,9 @@
                 </div>
 
                 <div id="modal-result" class="hidden pt-12 pb-10 px-10 text-center">
-                    <!--
-                    -->
                     <div id="modal-icon-container" class="w-24 h-24 rounded-[32px] flex items-center justify-center mx-auto mb-8 shadow-xl">
                         <div style="margin-top:15px;" class="shake-hard">
-                            <center><img src="./images/y2026@@.png" style="width:70%; height: auto;"></center>
+                            <center><img src="./images/y2026@@.png" style="width:70%; height: auto;" onerror="this.style.display='none'"></center>
                         </div>               
                     </div>
                     <h3 id="modal-title" class="text-2xl font-black mb-2">ยินดีด้วย!</h3>
@@ -343,362 +369,7 @@
     </div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-        import { getFirestore, collection, query, where, getDocs, updateDoc, doc, serverTimestamp, getDoc, addDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-
-        const isSandboxEnv = typeof __firebase_config !== 'undefined';
-        const firebaseConfig = isSandboxEnv ? JSON.parse(__firebase_config) : {
-            apiKey: "AIzaSyAgWMzWcZPzyzoBu5eQzj2y59nKsxTWurQ",
-            authDomain: "ttb-register.firebaseapp.com",
-            projectId: "ttb-register",
-            storageBucket: "ttb-register.firebasestorage.app",
-            messagingSenderId: "1070273157855",
-            appId: "1:1070273157855:web:5c8120e1df27e233d8676a"
-        };
-
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'standalone-app';
-        const OUTSOURCES_PATH = isSandboxEnv ? `artifacts/${appId}/public/data/Outsources` : "Outsources";
-        const CARDS_PATH = isSandboxEnv ? `artifacts/${appId}/public/data/Outsources_card` : "Outsources_card";
-        const LOGS_PATH = isSandboxEnv ? `artifacts/${appId}/public/data/Outsources_log` : "Outsources_log";
-
-        const fbApp = initializeApp(firebaseConfig);
-        const auth = getAuth(fbApp);
-        const db = getFirestore(fbApp);
-
-        async function sha256(message) {
-            const msgBuffer = new TextEncoder().encode(message);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-            return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-
-        let currentUserDoc = null;
-        let activeLuckType = 1; 
-
-        const app = {
-            deviceId: null,
-
-            init: async () => {
-                try {
-                    const fingerprintData = navigator.userAgent + screen.width + screen.height + navigator.language;
-                    app.deviceId = await sha256(fingerprintData);
-
-                    if (isSandboxEnv && typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                        await signInWithCustomToken(auth, __initial_auth_token);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
-                } catch(e) { console.error(e); }
-                if(window.lucide) lucide.createIcons();
-            },
-
-            goToRegister: () => {
-                document.getElementById('view-welcome').classList.add('hidden');
-                document.getElementById('view-register').classList.remove('hidden');
-                const input = document.getElementById('citizen-id');
-                input.focus();
-            },
-
-            goToCeoMessage: () => {
-                document.getElementById('view-welcome').classList.add('hidden');
-                document.getElementById('view-ceo').classList.remove('hidden');
-            },
-
-            backFromCeo: () => {
-                document.getElementById('view-ceo').classList.add('hidden');
-                document.getElementById('view-welcome').classList.remove('hidden');
-            },
-
-            goBack: () => { location.reload(); },
-
-            validateInput: (el) => {
-                let val = el.value.replace(/[^0-9]/g, '');
-                let formatted = "";
-                if (val.length > 0) formatted += val.substring(0, 1);
-                if (val.length > 1) formatted += "-" + val.substring(1, 5);
-                if (val.length > 5) formatted += "-" + val.substring(5, 10);
-                if (val.length > 10) formatted += "-" + val.substring(10, 12);
-                if (val.length > 12) formatted += "-" + val.substring(12, 13);
-                
-                el.value = formatted;
-                const btn = document.getElementById('btn-check');
-                const icon = document.getElementById('validation-icon');
-                const errorMsg = document.getElementById('error-msg');
-
-                if (val.length === 13) {
-                    btn.disabled = false;
-                    btn.classList.remove('bg-slate-400', 'text-white/70', 'cursor-not-allowed');
-                    btn.classList.add('bg-[#0056ff]', 'text-white');
-                    icon.innerHTML = '<i data-lucide="check-circle" class="w-7 h-7 text-green-500"></i>';
-                    errorMsg.style.opacity = '0';
-                } else {
-                    btn.disabled = true;
-                    btn.classList.add('bg-slate-400', 'text-white/70', 'cursor-not-allowed');
-                    btn.classList.remove('bg-[#0056ff]', 'text-white');
-                    icon.innerHTML = '<i data-lucide="shield" class="w-7 h-7 text-slate-300"></i>';
-                    errorMsg.style.opacity = val.length > 0 ? '1' : '0';
-                }
-                if(window.lucide) lucide.createIcons();
-            },
-
-            saveLog: async (citizenId, empName, status) => {
-                try {
-                    await addDoc(collection(db, LOGS_PATH), {
-                        citizenId: citizenId,
-                        EmpName: empName,
-                        deviceID: app.deviceId,
-                        StatusReg: status,
-                        Datetime: serverTimestamp()
-                    });
-                } catch (e) {
-                    console.error("Log error:", e);
-                }
-            },
-
-            verifyUser: async () => {
-                const inputEl = document.getElementById('citizen-id');
-                const rawId = inputEl.value.replace(/[^0-9]/g, '');
-                if (rawId.length !== 13) return;
-                const overlay = document.getElementById('loading-overlay');
-                overlay.classList.remove('hidden');
-
-                try {
-                    const hashedId = await sha256(rawId);
-                    const snap = await getDocs(collection(db, OUTSOURCES_PATH));
-                    const foundDoc = snap.docs.find(d => d.data().citizenId === hashedId);
-
-                    if (!foundDoc) {
-                        overlay.classList.add('hidden');
-                        await app.saveLog(rawId, "ไม่พบข้อมูล", "ไม่สำเร็จ");
-                        await Swal.fire({
-                            icon: 'error',
-                            title: 'ไม่พบสิทธิ์ของคุณ',
-                            text: 'กรุณาตรวจสอบเลขบัตรประชาชน หรือติดต่อฝ่ายบุคคล',
-                            confirmButtonColor: '#002d63',
-                            customClass: { popup: 'rounded-[32px]' }
-                        });
-                        inputEl.value = '';
-                        app.validateInput(inputEl);
-                        inputEl.focus();
-                        return;
-                    }
-
-                    currentUserDoc = foundDoc;
-                    const data = currentUserDoc.data();
-                    await app.saveLog(rawId, data.EmpName || "ไม่ระบุชื่อ", "สำเร็จ");
-
-                    const updates = { ConfirmLogin: serverTimestamp() };
-                    if (!data.DateCheck) {
-                        updates.DateCheck = serverTimestamp();
-                    }
-
-                    await updateDoc(currentUserDoc.ref, updates);
-                    overlay.classList.add('hidden');
-                    app.showDashboard();
-                } catch(e) {
-                    overlay.classList.add('hidden');
-                    Swal.fire('Error', 'ไม่สามารถเชื่อมต่อระบบได้', 'error');
-                }
-            },
-
-            showDashboard: () => {
-                const data = currentUserDoc.data();
-                document.getElementById('view-register').classList.add('hidden');
-                document.getElementById('view-dashboard').classList.remove('hidden');
-                document.getElementById('user-display-name').innerText = data.EmpName || 'คุณสมาชิก';
-                app.renderLuckLevels();
-            },
-
-            renderLuckLevels: () => {
-                const data = currentUserDoc.data();
-                const container1 = document.getElementById('luck-1-content');
-                const badge1 = document.getElementById('luck-1-badge');
-                const container2 = document.getElementById('luck-2-content');
-                const badge2 = document.getElementById('luck-2-badge');
-
-                if (data.DateLogin) {
-                    const date = data.DateLogin.toDate ? data.DateLogin.toDate() : new Date(data.DateLogin);
-                    const rewardVal = data.Reward || (data.EmpID ? parseInt(String(data.EmpID).replace(/[^0-9]/g, '')) : 0);
-                    badge1.innerHTML = `<i data-lucide="check-circle-2" class="w-6 h-6 text-white"></i>`;
-                    //badge1.innerHTML = `<img src="./images/y2026@.png" style="width: 80%; height:auto;">`;
-                    container1.innerHTML = `
-                        <div class="bg-[#f68b1f] p-5 rounded-[24px] border border-orange-200 flex items-center justify-between text-white">
-                            <div>
-                                <p class="text-xs text-white/80 mb-1">สถานะ: สุ่มโชคชั้นที่ 1 แล้ว</p>
-                                <p class="text-2xl font-black">${typeof rewardVal === 'number' ? rewardVal.toLocaleString() : rewardVal} <span class="text-sm font-bold text-white/90">บาท</span></p>
-                            </div>
-                            <div class="text-right">
-                                <p class="text-[10px] font-bold text-white/70 uppercase">วันและเวลาที่สุ่ม</p>
-                                <p class="text-xs font-bold">${date.toLocaleString('th-TH', {dateStyle:'short', timeStyle:'short'})}</p>
-                            </div>
-                        </div>
-                    `;
-                    document.getElementById('luck-1-container').classList.add('card-luck-played');
-                } else {
-                    badge1.innerHTML = `<span class="bg-red-100 text-red-600 text-xs font-black px-3 py-1 rounded-full uppercase tracking-widest"></span>`;
-                    container1.innerHTML = `<button onclick="app.startLuck(1)" class="w-full bg-[#0056ff] text-white font-black py-4 rounded-[20px] flex items-center justify-center gap-2 active:scale-95 transition text-base shadow-xl">คลิก เปิดซองอั่งเปา ลุ้นรับโชคชั้นที่ 1</button>`;
-                }
-
-                if (data.DateReward) {
-                    const date = data.DateReward.toDate ? data.DateReward.toDate() : new Date(data.DateReward);
-                    const reward = data.StatusReward || 'คุณไม่ได้รางวัล';
-                    badge2.innerHTML = `<i data-lucide="check-circle-2" class="w-6 h-6 text-white"></i>`;
-                    container2.innerHTML = `
-                        <div class="bg-[#f68b1f] p-5 rounded-[24px] border border-orange-200 flex items-center justify-between text-white">
-                            <div>
-                                <p class="text-xs text-white/80 mb-1">สถานะ: สุ่มโชคชั้นที่ 2 แล้ว</p>
-                                <p class="text-xl font-black">${reward}</p>
-                            </div>
-                            <div class="text-right">
-                                <p class="text-[10px] font-bold text-white/70 uppercase">วันและเวลาที่สุ่ม</p>
-                                <p class="text-xs font-bold">${date.toLocaleString('th-TH', {dateStyle:'short', timeStyle:'short'})}</p>
-                            </div>
-                        </div>
-                    `;
-                    document.getElementById('luck-2-container').classList.add('card-luck-played');
-                } else {
-                    badge2.innerHTML = `<span class="bg-blue-100 text-blue-600 text-xs font-black px-3 py-1 rounded-full uppercase tracking-widest"></span>`;
-                    container2.innerHTML = `<button onclick="app.startLuck(2)" class="w-full bg-[#0056ff] text-white font-black py-4 rounded-[20px] flex items-center justify-center gap-2 active:scale-95 transition text-base shadow-xl">คลิก เปิดซองอั่งเปา ลุ้นรับโชคชั้นที่ 2</button>`;
-                }
-                if(window.lucide) lucide.createIcons();
-            },
-
-            startLuck: (type) => {
-                activeLuckType = type;
-                const modal = document.getElementById('view-random-modal');
-                modal.classList.remove('hidden');
-                setTimeout(() => modal.classList.replace('opacity-0', 'opacity-100'), 10);
-                document.getElementById('modal-card').classList.replace('scale-90', 'scale-100');
-                
-                document.getElementById('anim-status').innerText = type === 1 ? "กำลังเปิดซองโชคชั้นที่ 1" : "กำลังเขย่าซองโชคชั้นที่ 2";
-                document.getElementById('modal-anim').classList.remove('hidden');
-                document.getElementById('modal-result').classList.add('hidden');
-                
-                setTimeout(async () => { await app.processLuck(type); }, 3000);
-            },
-
-            processLuck: async (type) => {
-                const data = currentUserDoc.data();
-                let rewardText = "";
-                let descText = "";
-                const modalBtn = document.getElementById('modal-close-btn');
-
-                try {
-                    if (type === 1) {
-                        const rewardValue = data.Reward || (data.EmpID ? parseInt(String(data.EmpID).replace(/[^0-9]/g, '')) : 0);
-                        rewardText = typeof rewardValue === 'number' ? `${rewardValue.toLocaleString()} บาท` : rewardValue;
-                        descText = "โชคชั้นที่ 1: อั่งเปาพนักงาน";
-                        
-                        await updateDoc(currentUserDoc.ref, { 
-                            DateLogin: serverTimestamp(), 
-                            status: 'Luck 1 Claimed',
-                            deviceID: app.deviceId 
-                        });
-                        app.fireConfetti();
-                        modalBtn.className = "w-full bg-slate-500 text-white text-xm font-black py-4 rounded-[28px] active:scale-95 transition shadow-2xl";
-                    } else {
-                        // โชคชั้นที่ 2: เริ่มสุ่ม
-                        const userRewardGroup = data.Reward; // ฟิลด์ Reward จาก Outsources
-                        const snap = await getDocs(collection(db, CARDS_PATH));
-                        
-                        // ค้นหาฉลากจาก Outsources_card โดยกรอง Reward ตรงกัน และ Datetime ว่าง
-                        const available = snap.docs.filter(d => {
-                            const dData = d.data();
-                            return String(dData.Reward) === String(userRewardGroup) && (!dData.Datetime || dData.Datetime === "");
-                        });
-                        
-                        if (available.length > 0) {
-                            const prizeDoc = available[Math.floor(Math.random() * available.length)];
-                            const cardData = prizeDoc.data();
-                            rewardText = cardData.rewardname || "ไม่ได้รางวัล";
-                            const finalCardNo = cardData.CardNo || prizeDoc.id;
-
-                            // 1. บันทึกข้อมูลลงใน Outsources_card
-                            await updateDoc(prizeDoc.ref, { 
-                                Datetime: serverTimestamp(),
-                                EmpName: data.EmpName || "ไม่ระบุชื่อ",
-                                citizenId: data.citizenId || "", // เก็บ citizenId จาก Outsources (แบบที่เก็บในเบส)
-                                WinnerDevice: app.deviceId
-                            });
-
-                            // 2. บันทึกข้อมูลลงใน Outsources
-                            await updateDoc(currentUserDoc.ref, { 
-                                CardNo: finalCardNo,
-                                StatusReward: cardData.rewardname || "ไม่ได้รางวัล",
-                                DateReward: serverTimestamp(),
-                                status_luck2: 'Luck 2 Claimed',
-                                deviceID: app.deviceId 
-                            });
-                            
-                            if (rewardText !== "ไม่ได้รางวัล") app.fireConfetti();
-                        } else { 
-                            rewardText = "ไม่ได้รางวัล"; 
-                            await updateDoc(currentUserDoc.ref, { 
-                                StatusReward: "ไม่ได้รางวัล",
-                                DateReward: serverTimestamp(),
-                                status_luck2: 'Luck 2 Attempted'
-                            });
-                        }
-                        descText = "โชคชั้นที่ 2: การ์ดรางวัลพิเศษ";
-                        modalBtn.className = "w-full btn-brand-blue text-white text-xm font-black py-4 rounded-[28px] active:scale-95 transition shadow-2xl";
-                    }
-
-                    const titleEl = document.getElementById('modal-title');
-                    const iconContainer = document.getElementById('modal-icon-container');
-                    const rewardEl = document.getElementById('modal-reward');
-
-                    if (rewardText === "ไม่ได้รางวัล") {
-                        titleEl.innerText = "เสียใจด้วย";
-                        titleEl.className = "text-2xl font-black text-slate-400 mb-2";
-                        rewardEl.className = "text-2xl font-black text-slate-500 tracking-tight";
-                        iconContainer.className = "";
-                        iconContainer.innerHTML = '<center><img src="./images/sad.png" style="width:90%; height: auto;"></center><br>';
-                    } else {
-                        titleEl.innerText = "ยินดีด้วย!";
-                        titleEl.className = "text-2xl font-black text-slate-800 mb-2";
-                        rewardEl.className = "text-3xl font-black text-red-600 tracking-tighter";
-                        iconContainer.className = "";
-                        iconContainer.innerHTML = '<center><img src="./images/y2026@@.png" style="width:90%; height: auto;"></center><br>';
-                    }
-
-                    document.getElementById('modal-anim').classList.add('hidden');
-                    document.getElementById('modal-result').classList.remove('hidden');
-                    document.getElementById('modal-reward').innerText = rewardText;
-                    document.getElementById('modal-desc').innerText = descText;
-                    
-                    if(window.lucide) lucide.createIcons();
-                } catch(e) { 
-                    console.error(e); 
-                    app.closeModal(); 
-                    Swal.fire('Error', 'เกิดข้อผิดพลาดในการประมวลผล', 'error'); 
-                }
-            },
-
-            closeModal: async () => {
-                const modal = document.getElementById('view-random-modal');
-                modal.classList.replace('opacity-100', 'opacity-0');
-                document.getElementById('modal-card').classList.replace('scale-100', 'scale-90');
-                setTimeout(async () => {
-                    modal.classList.add('hidden');
-                    const fresh = await getDoc(currentUserDoc.ref);
-                    currentUserDoc = fresh;
-                    app.renderLuckLevels();
-                }, 300);
-            },
-
-            fireConfetti: () => {
-                confetti({ 
-                    particleCount: 150, 
-                    spread: 70, 
-                    origin: { y: 0.6 }, 
-                    zIndex: 99999,
-                    colors: ['#002d63', '#f04e23', '#FFD700', '#d32f2f'] 
-                });
-            }
-        };
-
-        window.app = app;
-        app.init();
+const _0x50ee68=_0x4ad2;(function(_0x32986e,_0x5bc0ee){const _0x2c7e9f=_0x4ad2,_0xe9c9a=_0x32986e();while(!![]){try{const _0xfe2db6=-parseInt(_0x2c7e9f(0x14b))/0x1*(parseInt(_0x2c7e9f(0x161))/0x2)+-parseInt(_0x2c7e9f(0x14a))/0x3*(-parseInt(_0x2c7e9f(0x194))/0x4)+parseInt(_0x2c7e9f(0x196))/0x5+parseInt(_0x2c7e9f(0x18a))/0x6+-parseInt(_0x2c7e9f(0x187))/0x7+parseInt(_0x2c7e9f(0x1b2))/0x8+-parseInt(_0x2c7e9f(0x138))/0x9*(parseInt(_0x2c7e9f(0x169))/0xa);if(_0xfe2db6===_0x5bc0ee)break;else _0xe9c9a['push'](_0xe9c9a['shift']());}catch(_0x2ae603){_0xe9c9a['push'](_0xe9c9a['shift']());}}}(_0x52e3,0x98100));function _0x4ad2(_0x13c0e4,_0x1db244){_0x13c0e4=_0x13c0e4-0x123;const _0x52e3f2=_0x52e3();let _0x4ad2f1=_0x52e3f2[_0x13c0e4];return _0x4ad2f1;}import{initializeApp}from'https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js';import{getAuth,signInAnonymously,signInWithCustomToken}from'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';import{getFirestore,collection,query,where,getDocs,updateDoc,doc,serverTimestamp,getDoc,addDoc}from'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';const isSandboxEnv=typeof __firebase_config!==_0x50ee68(0x148),firebaseConfig=isSandboxEnv?JSON[_0x50ee68(0x181)](__firebase_config):{'apiKey':_0x50ee68(0x167),'authDomain':'ttb-register.firebaseapp.com','projectId':_0x50ee68(0x1a3),'storageBucket':_0x50ee68(0x15d),'messagingSenderId':_0x50ee68(0x19b),'appId':_0x50ee68(0x153)},appId=typeof __app_id!==_0x50ee68(0x148)?__app_id:_0x50ee68(0x152),OUTSOURCES_PATH=isSandboxEnv?_0x50ee68(0x162)+appId+_0x50ee68(0x18f):_0x50ee68(0x144),CARDS_PATH=isSandboxEnv?_0x50ee68(0x162)+appId+_0x50ee68(0x188):_0x50ee68(0x166),LOGS_PATH=isSandboxEnv?'artifacts/'+appId+_0x50ee68(0x1b7):'Outsources_log',fbApp=initializeApp(firebaseConfig),auth=getAuth(fbApp),db=getFirestore(fbApp);async function sha256(_0xd5082f){const _0x49ee6e=_0x50ee68,_0x3c0601=new TextEncoder()[_0x49ee6e(0x172)](_0xd5082f),_0x11da87=await crypto['subtle'][_0x49ee6e(0x176)](_0x49ee6e(0x17c),_0x3c0601);return Array[_0x49ee6e(0x17b)](new Uint8Array(_0x11da87))[_0x49ee6e(0x18d)](_0x5df166=>_0x5df166[_0x49ee6e(0x179)](0x10)[_0x49ee6e(0x12c)](0x2,'0'))[_0x49ee6e(0x191)]('');}let currentUserDoc=null,activeLuckType=0x1;const app={'deviceId':null,'init':async()=>{const _0x205ff1=_0x50ee68;try{const _0x36e6c5=navigator['userAgent']+screen[_0x205ff1(0x19a)]+screen[_0x205ff1(0x131)]+navigator[_0x205ff1(0x140)];app[_0x205ff1(0x13f)]=await sha256(_0x36e6c5),isSandboxEnv&&typeof __initial_auth_token!==_0x205ff1(0x148)&&__initial_auth_token?await signInWithCustomToken(auth,__initial_auth_token):await signInAnonymously(auth);}catch(_0x441951){console[_0x205ff1(0x155)](_0x441951);}if(window[_0x205ff1(0x1ac)])lucide[_0x205ff1(0x141)]();},'goToRegister':()=>{const _0x21c2d8=_0x50ee68;document[_0x21c2d8(0x1af)](_0x21c2d8(0x180))['classList'][_0x21c2d8(0x198)]('hidden'),document[_0x21c2d8(0x1af)](_0x21c2d8(0x18c))[_0x21c2d8(0x1b1)]['remove'](_0x21c2d8(0x16c)),document['getElementById'](_0x21c2d8(0x17a))[_0x21c2d8(0x17d)]();},'goToCeoMessage':()=>{const _0x373f68=_0x50ee68;document[_0x373f68(0x1af)]('view-welcome')[_0x373f68(0x1b1)][_0x373f68(0x198)](_0x373f68(0x16c)),document['getElementById']('view-ceo')[_0x373f68(0x1b1)][_0x373f68(0x1bc)](_0x373f68(0x16c));},'backFromCeo':()=>{const _0x53673e=_0x50ee68;document[_0x53673e(0x1af)](_0x53673e(0x15e))[_0x53673e(0x1b1)][_0x53673e(0x198)](_0x53673e(0x16c)),document[_0x53673e(0x1af)](_0x53673e(0x180))['classList'][_0x53673e(0x1bc)]('hidden');},'goBack':()=>{location['reload']();},'validateInput':_0x1dda30=>{const _0x1c2c98=_0x50ee68;let _0x591eaf=_0x1dda30['value'][_0x1c2c98(0x19d)](/[^0-9]/g,''),_0x1d4431='';if(_0x591eaf[_0x1c2c98(0x16d)]>0x0)_0x1d4431+=_0x591eaf[_0x1c2c98(0x1a5)](0x0,0x1);if(_0x591eaf[_0x1c2c98(0x16d)]>0x1)_0x1d4431+='-'+_0x591eaf['substring'](0x1,0x5);if(_0x591eaf[_0x1c2c98(0x16d)]>0x5)_0x1d4431+='-'+_0x591eaf[_0x1c2c98(0x1a5)](0x5,0xa);if(_0x591eaf[_0x1c2c98(0x16d)]>0xa)_0x1d4431+='-'+_0x591eaf[_0x1c2c98(0x1a5)](0xa,0xc);if(_0x591eaf[_0x1c2c98(0x16d)]>0xc)_0x1d4431+='-'+_0x591eaf[_0x1c2c98(0x1a5)](0xc,0xd);_0x1dda30[_0x1c2c98(0x19c)]=_0x1d4431;const _0x22c612=document[_0x1c2c98(0x1af)](_0x1c2c98(0x15b)),_0x5328a6=document[_0x1c2c98(0x1af)](_0x1c2c98(0x174)),_0x4759a9=document[_0x1c2c98(0x1af)]('error-msg');_0x591eaf[_0x1c2c98(0x16d)]===0xd?(_0x22c612[_0x1c2c98(0x128)]=![],_0x22c612[_0x1c2c98(0x1b1)]['remove'](_0x1c2c98(0x1b3),_0x1c2c98(0x13c),_0x1c2c98(0x1b0)),_0x22c612[_0x1c2c98(0x1b1)][_0x1c2c98(0x198)](_0x1c2c98(0x1a7),_0x1c2c98(0x199)),_0x5328a6[_0x1c2c98(0x12b)]=_0x1c2c98(0x1b9),_0x4759a9[_0x1c2c98(0x143)]['opacity']='0'):(_0x22c612[_0x1c2c98(0x128)]=!![],_0x22c612[_0x1c2c98(0x1b1)][_0x1c2c98(0x198)](_0x1c2c98(0x1b3),'text-white/70',_0x1c2c98(0x1b0)),_0x22c612[_0x1c2c98(0x1b1)]['remove'](_0x1c2c98(0x1a7),_0x1c2c98(0x199)),_0x5328a6[_0x1c2c98(0x12b)]=_0x1c2c98(0x13b),_0x4759a9[_0x1c2c98(0x143)]['opacity']=_0x591eaf[_0x1c2c98(0x16d)]>0x0?'1':'0');if(window[_0x1c2c98(0x1ac)])lucide[_0x1c2c98(0x141)]();},'saveLog':async(_0x31c04c,_0x243a06,_0xa5be39)=>{const _0xca19d2=_0x50ee68;try{await addDoc(collection(db,LOGS_PATH),{'citizenId':_0x31c04c,'EmpName':_0x243a06,'deviceID':app[_0xca19d2(0x13f)],'StatusReg':_0xa5be39,'Datetime':serverTimestamp()});}catch(_0xb943b3){console[_0xca19d2(0x155)](_0xca19d2(0x136),_0xb943b3);}},'verifyUser':async()=>{const _0x43a38a=_0x50ee68,_0xf4f25d=document[_0x43a38a(0x1af)](_0x43a38a(0x17a)),_0x294f61=_0xf4f25d['value'][_0x43a38a(0x19d)](/[^0-9]/g,'');if(_0x294f61[_0x43a38a(0x16d)]!==0xd)return;const _0x567b42=document[_0x43a38a(0x1af)]('loading-overlay');_0x567b42[_0x43a38a(0x1b1)][_0x43a38a(0x1bc)](_0x43a38a(0x16c));try{const _0x275b23=await sha256(_0x294f61),_0x138c4b=await getDocs(collection(db,OUTSOURCES_PATH)),_0x35d76d=_0x138c4b[_0x43a38a(0x186)][_0x43a38a(0x1b4)](_0x37ac5a=>_0x37ac5a['data']()[_0x43a38a(0x13e)]===_0x275b23);if(!_0x35d76d){_0x567b42[_0x43a38a(0x1b1)][_0x43a38a(0x198)](_0x43a38a(0x16c)),await app[_0x43a38a(0x14c)](_0x294f61,_0x43a38a(0x156),_0x43a38a(0x15c)),await Swal['fire']({'icon':_0x43a38a(0x155),'title':'ไม่พบสิทธิ์ของคุณ','text':_0x43a38a(0x1ba),'confirmButtonColor':_0x43a38a(0x132),'customClass':{'popup':'rounded-[32px]'}}),_0xf4f25d['value']='',app['validateInput'](_0xf4f25d),_0xf4f25d[_0x43a38a(0x17d)]();return;}currentUserDoc=_0x35d76d;const _0x4b0170=currentUserDoc['data']();await app['saveLog'](_0x294f61,_0x4b0170['EmpName']||'ไม่ระบุชื่อ',_0x43a38a(0x125));const _0x4ab9eb={'ConfirmLogin':serverTimestamp()};if(!_0x4b0170['DateCheck'])_0x4ab9eb['DateCheck']=serverTimestamp();await updateDoc(currentUserDoc['ref'],_0x4ab9eb),_0x567b42['classList'][_0x43a38a(0x198)]('hidden'),_0x4b0170[_0x43a38a(0x19e)]==='ยอมรับข้อตกลง'?app['showDashboard']():app[_0x43a38a(0x193)]();}catch(_0x3cf988){_0x567b42[_0x43a38a(0x1b1)]['add']('hidden'),Swal[_0x43a38a(0x1a1)]('Error',_0x43a38a(0x189),_0x43a38a(0x155));}},'showAgreement':()=>{const _0x2c766b=_0x50ee68;document[_0x2c766b(0x1af)]('view-register')[_0x2c766b(0x1b1)][_0x2c766b(0x198)]('hidden'),document[_0x2c766b(0x1af)]('view-agreement')[_0x2c766b(0x1b1)]['remove']('hidden');if(window[_0x2c766b(0x1ac)])lucide[_0x2c766b(0x141)]();},'acceptAgreement':async()=>{const _0x4a916b=_0x50ee68;try{await updateDoc(currentUserDoc['ref'],{'Agreement':_0x4a916b(0x123),'AgreeDate':serverTimestamp()}),document[_0x4a916b(0x1af)]('view-agreement')[_0x4a916b(0x1b1)]['add'](_0x4a916b(0x16c)),app[_0x4a916b(0x145)]();}catch(_0x49a539){Swal['fire'](_0x4a916b(0x18b),_0x4a916b(0x1ae),_0x4a916b(0x155));}},'declineAgreement':()=>{const _0x1d9b57=_0x50ee68;document[_0x1d9b57(0x1af)](_0x1d9b57(0x124))[_0x1d9b57(0x1b1)][_0x1d9b57(0x198)]('hidden'),document['getElementById'](_0x1d9b57(0x180))[_0x1d9b57(0x1b1)]['remove']('hidden');},'showDashboard':()=>{const _0x2a7f46=_0x50ee68,_0x346fd4=currentUserDoc[_0x2a7f46(0x195)]();document[_0x2a7f46(0x1af)]('view-register')[_0x2a7f46(0x1b1)][_0x2a7f46(0x198)]('hidden'),document[_0x2a7f46(0x1af)](_0x2a7f46(0x163))[_0x2a7f46(0x1b1)][_0x2a7f46(0x1bc)](_0x2a7f46(0x16c)),document[_0x2a7f46(0x1af)](_0x2a7f46(0x19f))[_0x2a7f46(0x1bd)]=_0x346fd4[_0x2a7f46(0x178)]||_0x2a7f46(0x157),app[_0x2a7f46(0x1c0)]();if(window[_0x2a7f46(0x1ac)])lucide['createIcons']();},'renderLuckLevels':()=>{const _0x5c61c4=_0x50ee68,_0x37aaac=currentUserDoc[_0x5c61c4(0x195)](),_0x2b081b=document[_0x5c61c4(0x1af)]('luck-1-content'),_0x259cd3=document[_0x5c61c4(0x1af)](_0x5c61c4(0x130)),_0x2ba544=document['getElementById'](_0x5c61c4(0x150)),_0x493238=document[_0x5c61c4(0x1af)](_0x5c61c4(0x1aa));if(_0x37aaac[_0x5c61c4(0x175)]){const _0x1e2196=_0x37aaac[_0x5c61c4(0x175)][_0x5c61c4(0x1a2)]?_0x37aaac[_0x5c61c4(0x175)]['toDate']():new Date(_0x37aaac['DateLogin']),_0x1f78cb=_0x37aaac['Reward']||(_0x37aaac[_0x5c61c4(0x190)]?parseInt(String(_0x37aaac[_0x5c61c4(0x190)])[_0x5c61c4(0x19d)](/[^0-9]/g,'')):0x0);_0x259cd3['innerHTML']='<i\x20data-lucide=\x22check-circle-2\x22\x20class=\x22w-6\x20h-6\x20text-white\x22></i>',_0x2b081b['innerHTML']=_0x5c61c4(0x139)+(typeof _0x1f78cb===_0x5c61c4(0x1b8)?_0x1f78cb[_0x5c61c4(0x127)]():_0x1f78cb)+_0x5c61c4(0x173)+_0x1e2196['toLocaleString'](_0x5c61c4(0x164),{'dateStyle':'short','timeStyle':_0x5c61c4(0x151)})+'</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',document[_0x5c61c4(0x1af)](_0x5c61c4(0x149))[_0x5c61c4(0x1b1)][_0x5c61c4(0x198)]('card-luck-played');}else _0x259cd3[_0x5c61c4(0x12b)]=_0x5c61c4(0x197),_0x2b081b[_0x5c61c4(0x12b)]=_0x5c61c4(0x14e);if(_0x37aaac[_0x5c61c4(0x12e)]){const _0x2a4ad6=_0x37aaac['DateReward'][_0x5c61c4(0x1a2)]?_0x37aaac[_0x5c61c4(0x12e)][_0x5c61c4(0x1a2)]():new Date(_0x37aaac[_0x5c61c4(0x12e)]),_0x37b43b=_0x37aaac[_0x5c61c4(0x16b)]||_0x5c61c4(0x168);_0x493238['innerHTML']=_0x5c61c4(0x133),_0x2ba544['innerHTML']='\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22bg-[#f68b1f]\x20p-5\x20rounded-[24px]\x20border\x20border-orange-200\x20flex\x20items-center\x20justify-between\x20text-white\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-xs\x20text-white/80\x20mb-1\x22>สถานะ:\x20สุ่มโชคชั้นที่\x202\x20แล้ว</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-xl\x20font-black\x22>'+_0x37b43b+_0x5c61c4(0x158)+_0x2a4ad6[_0x5c61c4(0x127)](_0x5c61c4(0x164),{'dateStyle':_0x5c61c4(0x151),'timeStyle':'short'})+'</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',document['getElementById'](_0x5c61c4(0x135))[_0x5c61c4(0x1b1)]['add'](_0x5c61c4(0x1c1));}else _0x493238[_0x5c61c4(0x12b)]=_0x5c61c4(0x1ab),_0x2ba544['innerHTML']=_0x5c61c4(0x13d);if(window[_0x5c61c4(0x1ac)])lucide[_0x5c61c4(0x141)]();},'startLuck':_0x55f31c=>{const _0x2b0fb9=_0x50ee68;activeLuckType=_0x55f31c;const _0x39e3d1=document[_0x2b0fb9(0x1af)](_0x2b0fb9(0x1ad));_0x39e3d1[_0x2b0fb9(0x1b1)][_0x2b0fb9(0x1bc)](_0x2b0fb9(0x16c)),setTimeout(()=>_0x39e3d1['classList'][_0x2b0fb9(0x19d)](_0x2b0fb9(0x1b5),_0x2b0fb9(0x15a)),0xa),document[_0x2b0fb9(0x1af)]('modal-card')['classList'][_0x2b0fb9(0x19d)](_0x2b0fb9(0x1c2),_0x2b0fb9(0x12a)),document['getElementById'](_0x2b0fb9(0x159))[_0x2b0fb9(0x1bd)]=_0x55f31c===0x1?_0x2b0fb9(0x15f):_0x2b0fb9(0x1bb),document['getElementById'](_0x2b0fb9(0x126))[_0x2b0fb9(0x1b1)][_0x2b0fb9(0x1bc)](_0x2b0fb9(0x16c)),document[_0x2b0fb9(0x1af)](_0x2b0fb9(0x1a8))[_0x2b0fb9(0x1b1)][_0x2b0fb9(0x198)](_0x2b0fb9(0x16c)),setTimeout(async()=>{await app['processLuck'](_0x55f31c);},0xbb8);},'processLuck':async _0x46b9e2=>{const _0x5ec0f7=_0x50ee68,_0x10cc8e=currentUserDoc['data']();let _0x3a712c='',_0x55b1f7='';const _0x2e8fe7=document['getElementById'](_0x5ec0f7(0x185));try{if(_0x46b9e2===0x1){const _0x49b808=_0x10cc8e[_0x5ec0f7(0x12f)]||(_0x10cc8e[_0x5ec0f7(0x190)]?parseInt(String(_0x10cc8e[_0x5ec0f7(0x190)])[_0x5ec0f7(0x19d)](/[^0-9]/g,'')):0x0);_0x3a712c=typeof _0x49b808===_0x5ec0f7(0x1b8)?_0x49b808[_0x5ec0f7(0x127)]()+_0x5ec0f7(0x183):_0x49b808,_0x55b1f7='โชคชั้นที่\x201:\x20อั่งเปาพนักงาน',await updateDoc(currentUserDoc[_0x5ec0f7(0x1bf)],{'DateLogin':serverTimestamp(),'status':_0x5ec0f7(0x17f),'deviceID':app[_0x5ec0f7(0x13f)]}),app['fireConfetti'](),_0x2e8fe7[_0x5ec0f7(0x182)]='w-full\x20bg-slate-500\x20text-white\x20text-xm\x20font-black\x20py-4\x20rounded-[28px]\x20active:scale-95\x20transition\x20shadow-2xl';}else{const _0x4b7312=_0x10cc8e[_0x5ec0f7(0x12f)],_0x140a46=await getDocs(collection(db,CARDS_PATH)),_0x2df2e3=_0x140a46[_0x5ec0f7(0x186)][_0x5ec0f7(0x146)](_0x33c0e3=>{const _0x497341=_0x5ec0f7,_0x2fc041=_0x33c0e3[_0x497341(0x195)]();return String(_0x2fc041['Reward'])===String(_0x4b7312)&&(!_0x2fc041[_0x497341(0x18e)]||_0x2fc041[_0x497341(0x18e)]==='');});if(_0x2df2e3[_0x5ec0f7(0x16d)]>0x0){const _0x4ef80a=_0x2df2e3[Math['floor'](Math[_0x5ec0f7(0x1a0)]()*_0x2df2e3[_0x5ec0f7(0x16d)])],_0xa8eb4d=_0x4ef80a['data']();_0x3a712c=_0xa8eb4d[_0x5ec0f7(0x17e)]||_0x5ec0f7(0x137);const _0x4c90ba=_0xa8eb4d['CardNo']||_0x4ef80a['id'];await updateDoc(_0x4ef80a['ref'],{'Datetime':serverTimestamp(),'EmpName':_0x10cc8e[_0x5ec0f7(0x178)]||_0x5ec0f7(0x1a9),'citizenId':_0x10cc8e[_0x5ec0f7(0x13e)]||'','WinnerDevice':app[_0x5ec0f7(0x13f)]}),await updateDoc(currentUserDoc['ref'],{'CardNo':_0x4c90ba,'StatusReward':_0xa8eb4d[_0x5ec0f7(0x17e)]||_0x5ec0f7(0x137),'DateReward':serverTimestamp(),'status_luck2':_0x5ec0f7(0x1a4),'deviceID':app[_0x5ec0f7(0x13f)]});if(_0x3a712c!=='ไม่ได้รางวัล')app[_0x5ec0f7(0x134)]();}else _0x3a712c=_0x5ec0f7(0x137),await updateDoc(currentUserDoc[_0x5ec0f7(0x1bf)],{'StatusReward':_0x5ec0f7(0x137),'DateReward':serverTimestamp(),'status_luck2':'Luck\x202\x20Attempted'});_0x55b1f7=_0x5ec0f7(0x16f),_0x2e8fe7[_0x5ec0f7(0x182)]=_0x5ec0f7(0x171);}const _0x3018a=document[_0x5ec0f7(0x1af)](_0x5ec0f7(0x14d)),_0x26e6c1=document[_0x5ec0f7(0x1af)](_0x5ec0f7(0x16a)),_0x2a442c=document['getElementById'](_0x5ec0f7(0x165));_0x3a712c===_0x5ec0f7(0x137)?(_0x3018a[_0x5ec0f7(0x1bd)]=_0x5ec0f7(0x177),_0x3018a['className']=_0x5ec0f7(0x16e),_0x2a442c[_0x5ec0f7(0x182)]=_0x5ec0f7(0x14f),_0x26e6c1[_0x5ec0f7(0x12b)]=_0x5ec0f7(0x12d)):(_0x3018a[_0x5ec0f7(0x1bd)]=_0x5ec0f7(0x1a6),_0x3018a['className']=_0x5ec0f7(0x1be),_0x2a442c[_0x5ec0f7(0x182)]=_0x5ec0f7(0x142),_0x26e6c1[_0x5ec0f7(0x12b)]=_0x5ec0f7(0x160));document[_0x5ec0f7(0x1af)](_0x5ec0f7(0x126))[_0x5ec0f7(0x1b1)][_0x5ec0f7(0x198)](_0x5ec0f7(0x16c)),document[_0x5ec0f7(0x1af)](_0x5ec0f7(0x1a8))[_0x5ec0f7(0x1b1)][_0x5ec0f7(0x1bc)]('hidden'),document[_0x5ec0f7(0x1af)]('modal-reward')['innerText']=_0x3a712c,document[_0x5ec0f7(0x1af)](_0x5ec0f7(0x147))[_0x5ec0f7(0x1bd)]=_0x55b1f7;if(window[_0x5ec0f7(0x1ac)])lucide[_0x5ec0f7(0x141)]();}catch(_0x30e9a1){console[_0x5ec0f7(0x155)](_0x30e9a1),app[_0x5ec0f7(0x192)](),Swal['fire'](_0x5ec0f7(0x18b),_0x5ec0f7(0x129),_0x5ec0f7(0x155));}},'closeModal':async()=>{const _0x2fb06f=_0x50ee68,_0x14d009=document['getElementById'](_0x2fb06f(0x1ad));_0x14d009[_0x2fb06f(0x1b1)][_0x2fb06f(0x19d)](_0x2fb06f(0x15a),_0x2fb06f(0x1b5)),document['getElementById'](_0x2fb06f(0x184))[_0x2fb06f(0x1b1)][_0x2fb06f(0x19d)](_0x2fb06f(0x12a),'scale-90'),setTimeout(async()=>{const _0x581c22=_0x2fb06f;_0x14d009['classList'][_0x581c22(0x198)](_0x581c22(0x16c));const _0x308bd1=await getDoc(currentUserDoc['ref']);currentUserDoc=_0x308bd1,app[_0x581c22(0x1c0)]();},0x12c);},'fireConfetti':()=>{const _0x5e372d=_0x50ee68;confetti({'particleCount':0x96,'spread':0x46,'origin':{'y':0.6},'zIndex':0x1869f,'colors':[_0x5e372d(0x132),_0x5e372d(0x170),_0x5e372d(0x13a),_0x5e372d(0x1b6)]});}};window[_0x50ee68(0x154)]=app,app['init']();function _0x52e3(){const _0x1b59b8=['join','closeModal','showAgreement','69548AUliYG','data','4818690LNDKzm','<span\x20class=\x22bg-red-100\x20text-red-600\x20text-xs\x20font-black\x20px-3\x20py-1\x20rounded-full\x20uppercase\x20tracking-widest\x22></span>','add','text-white','width','1070273157855','value','replace','Agreement','user-display-name','random','fire','toDate','ttb-register','Luck\x202\x20Claimed','substring','ยินดีด้วย!','bg-[#0056ff]','modal-result','ไม่ระบุชื่อ','luck-2-badge','<span\x20class=\x22bg-blue-100\x20text-blue-600\x20text-xs\x20font-black\x20px-3\x20py-1\x20rounded-full\x20uppercase\x20tracking-widest\x22></span>','lucide','view-random-modal','ไม่สามารถบันทึกการยอมรับได้','getElementById','cursor-not-allowed','classList','6465872YQDzLg','bg-slate-400','find','opacity-0','#d32f2f','/public/data/Outsources_log','number','<i\x20data-lucide=\x22check-circle\x22\x20class=\x22w-7\x20h-7\x20text-green-500\x22></i>','กรุณาตรวจสอบเลขบัตรประชาชน\x20หรือติดต่อฝ่ายบุคคล','กำลังเขย่าซองโชคชั้นที่\x202','remove','innerText','text-2xl\x20font-black\x20text-slate-800\x20mb-2','ref','renderLuckLevels','card-luck-played','scale-90','ยอมรับข้อตกลง','view-agreement','สำเร็จ','modal-anim','toLocaleString','disabled','เกิดข้อผิดพลาดในการประมวลผล','scale-100','innerHTML','padStart','<center><img\x20src=\x22./images/sad.png\x22\x20style=\x22width:90%;\x20height:\x20auto;\x22\x20onerror=\x22this.style.display=\x27none\x27\x22></center><br>','DateReward','Reward','luck-1-badge','height','#002d63','<i\x20data-lucide=\x22check-circle-2\x22\x20class=\x22w-6\x20h-6\x20text-white\x22></i>','fireConfetti','luck-2-container','Log\x20error:','ไม่ได้รางวัล','490905uviqyu','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22bg-[#f68b1f]\x20p-5\x20rounded-[24px]\x20border\x20border-orange-200\x20flex\x20items-center\x20justify-between\x20text-white\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-xs\x20text-white/80\x20mb-1\x22>สถานะ:\x20สุ่มโชคชั้นที่\x201\x20แล้ว</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-2xl\x20font-black\x22>','#FFD700','<i\x20data-lucide=\x22shield\x22\x20class=\x22w-7\x20h-7\x20text-slate-300\x22></i>','text-white/70','<button\x20onclick=\x22app.startLuck(2)\x22\x20class=\x22w-full\x20bg-[#0056ff]\x20text-white\x20font-black\x20py-4\x20rounded-[20px]\x20flex\x20items-center\x20justify-center\x20gap-2\x20active:scale-95\x20transition\x20text-base\x20shadow-xl\x22>คลิก\x20เปิดซองอั่งเปา\x20ลุ้นรับโชคชั้นที่\x202</button>','citizenId','deviceId','language','createIcons','text-3xl\x20font-black\x20text-red-600\x20tracking-tighter','style','Outsources','showDashboard','filter','modal-desc','undefined','luck-1-container','165GktsWy','1013AmiVDw','saveLog','modal-title','<button\x20onclick=\x22app.startLuck(1)\x22\x20class=\x22w-full\x20bg-[#0056ff]\x20text-white\x20font-black\x20py-4\x20rounded-[20px]\x20flex\x20items-center\x20justify-center\x20gap-2\x20active:scale-95\x20transition\x20text-base\x20shadow-xl\x22>คลิก\x20เปิดซองอั่งเปา\x20ลุ้นรับโชคชั้นที่\x201</button>','text-2xl\x20font-black\x20text-slate-500\x20tracking-tight','luck-2-content','short','standalone-app','1:1070273157855:web:5c8120e1df27e233d8676a','app','error','ไม่พบข้อมูล','คุณสมาชิก','</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22text-right\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-[10px]\x20font-bold\x20text-white/70\x20uppercase\x22>วันและเวลาที่สุ่ม</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-xs\x20font-bold\x22>','anim-status','opacity-100','btn-check','ไม่สำเร็จ','ttb-register.firebasestorage.app','view-ceo','กำลังเปิดซองโชคชั้นที่\x201','<center><img\x20src=\x22./images/y2026@@.png\x22\x20style=\x22width:90%;\x20height:\x20auto;\x22\x20onerror=\x22this.style.display=\x27none\x27\x22></center><br>','310xjdJau','artifacts/','view-dashboard','th-TH','modal-reward','Outsources_card','AIzaSyAgWMzWcZPzyzoBu5eQzj2y59nKsxTWurQ','คุณไม่ได้รางวัล','400jLwvVC','modal-icon-container','StatusReward','hidden','length','text-2xl\x20font-black\x20text-slate-400\x20mb-2','โชคชั้นที่\x202:\x20การ์ดรางวัลพิเศษ','#f04e23','w-full\x20btn-brand-blue\x20text-white\x20text-xm\x20font-black\x20py-4\x20rounded-[28px]\x20active:scale-95\x20transition\x20shadow-2xl','encode','\x20<span\x20class=\x22text-sm\x20font-bold\x20text-white/90\x22>บาท</span></p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22text-right\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-[10px]\x20font-bold\x20text-white/70\x20uppercase\x22>วันและเวลาที่สุ่ม</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-xs\x20font-bold\x22>','validation-icon','DateLogin','digest','เสียใจด้วย','EmpName','toString','citizen-id','from','SHA-256','focus','rewardname','Luck\x201\x20Claimed','view-welcome','parse','className','\x20บาท','modal-card','modal-close-btn','docs','2148713ZSdqSi','/public/data/Outsources_card','ไม่สามารถเชื่อมต่อระบบได้','3242190gwrPBW','Error','view-register','map','Datetime','/public/data/Outsources','EmpID'];_0x52e3=function(){return _0x1b59b8;};return _0x52e3();}
     </script>
 </body>
 </html>
